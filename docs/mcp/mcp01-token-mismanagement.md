@@ -6,9 +6,7 @@
 >
 > Nelson is a developer building an MCP server that connects to his company’s customer database. To test quickly, he hardcodes the database password directly in his code:
 >
-> ```text
-> connection_string = ‘Server=prod;Password=SuperSecret123’
-> ```
+> ``` connection_string = ‘Server=prod;Password=SuperSecret123’ ```
 >
 > He commits the code to GitHub. Within hours, automated bots scanning public repositories find the credential. By morning, attackers have downloaded the entire customer database with names, emails and purchase history, and are demanding ransom.
 >

@@ -4,7 +4,7 @@
 
 > **Real-World Scenario**: The Feature That Never Left
 >
-> The data science team needs to demo an AI Agent at a conference next week. Under time pressure, they spin up a Container App running an MCP server with minimal configuration: no authentication, public internet access, and an admin password of conference123. The demo goes well, everyone moves on to other projects, and the server is forgotten.
+> The data science team needs to demo an AI Agent at a conference next week. Under time pressure, they spin up a Container App running an MCP server with minimal configuration: no authentication, public internet access, and an admin password of ```conference123```. The demo goes well, everyone moves on to other projects, and the server is forgotten.
 >
 > Three months later, an external researcher doing internet scans finds this server, gains access, and discovers it has database credentials for internal systems. The ‘temporary’ demo server has been quietly exposing the company’s infrastructure for months.
 >
