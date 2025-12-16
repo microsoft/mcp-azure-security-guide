@@ -6,6 +6,7 @@ repo_name: GitHub
 
 theme:
   name: material
+  custom_dir: docs/overrides
   features:
     - navigation.sections
     - navigation.expand
@@ -48,8 +49,16 @@ plugins:
   - search
   - glightbox
 
+extra:
+  social:
+    - icon: fontawesome/solid/globe
+      link: https://microsoft.github.io/mcp-azure-security-guide/
+
 markdown_extensions:
   - admonition
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - toc:
       permalink: true
   - tables
