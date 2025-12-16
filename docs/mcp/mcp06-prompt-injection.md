@@ -2,6 +2,8 @@
 
 ### Azure Implementation: FULL
 
+![MCP06 Scenario](../images/mcp06-scenario.png)
+
 > **Real-World Scenario**: The Poisoned GitHub Issue
 >
 > An MCP server helps developers by reading GitHub issues and summarizes them. An attacker creates a new issue with the title “Bug: Application crashes on startup” but the body contains:

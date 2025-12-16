@@ -2,6 +2,8 @@
 
 ### Azure Implementation: FULL
 
+![MCP05 Scenario](../images/mcp05-scenario.png)
+
 > **Real-World Scenario**: The Innocent Search Request
 >
 > An MCP server provides a tool for searching log files. A user asks: “Search the logs for errors from yesterday.”

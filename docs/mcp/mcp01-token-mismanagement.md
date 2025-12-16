@@ -2,6 +2,8 @@
 
 ### Azure Implementation: FULL
 
+![MCP01 Token Management Scenario](../images/mcp01-scenario.png)
+
 > **Real-World Scenario**: The Accidental GitHub Leak
 >
 > Nelson is a developer building an MCP server that connects to his company’s customer database. To test quickly, he hardcodes the database password directly in his code:

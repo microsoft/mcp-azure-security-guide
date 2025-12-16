@@ -2,6 +2,8 @@
 
 ### Azure Implementation: PARTIAL
 
+![MCP10 Scenario](../images/mcp10-scenario.png)
+
 > **Real-World Scenario**: The Cross-Tenant Leak
 >
 > A SaaS company operates a multi-tenant MCP server where multiple customers share the same infrastructure. A sales representative from Company A requests a summary of their sales pipeline. Due to a flaw in session handling, Company A’s context—including customer names, deal sizes, and pricing—is mistakenly associated with Company B’s session ID.

@@ -2,6 +2,8 @@
 
 ### Azure Implementation: PARTIAL
 
+![MCP02 Scenario](../images/mcp02-scenario.png)
+
 > **Real-World Scenario**: The Feature That Never Left
 >
 > Noah’s team builds an MCP server to help developers check code quality. Initially, it only needs read-only access to GitHub repositories. Six months later, a new feature requires write access to update README files. A developer grants write permissions, the feature launches, and the team moves on.

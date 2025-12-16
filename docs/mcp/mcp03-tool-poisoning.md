@@ -2,6 +2,8 @@
 
 ### Azure Implementation: NEW GUIDANCE
 
+![MCP03 Scenario](../images/mcp03-scenario.png)
+
 > **Real-World Scenario**: The Helpful Tool with Hidden Instructions
 >
 > A developer finds an open-source MCP server on GitHub called “DocSummarizer” that promises to summarize uploaded documents. The tool’s description looks innocent but buried in the metadata is a hidden instruction:

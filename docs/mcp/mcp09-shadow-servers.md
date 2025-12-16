@@ -2,6 +2,8 @@
 
 ### Azure Implementation: NEW GUIDANCE
 
+![MCP09 Scenario](../images/mcp09-scenario.png)
+
 > **Real-World Scenario**: The Feature That Never Left
 >
 > The data science team needs to demo an AI Agent at a conference next week. Under time pressure, they spin up a Container App running an MCP server with minimal configuration: no authentication, public internet access, and an admin password of ```conference123```. The demo goes well, everyone moves on to other projects, and the server is forgotten.

@@ -2,6 +2,8 @@
 
 ### Azure Implementation: NEW GUIDANCE
 
+![MCP04 Scenario](../images/mcp04-scenario.png)
+
 > **Real-World Scenario**: The Compromised Dependency
 >
 > Your team builds an MCP server using popular open-source libraries. One of those libraries is a small utility package with thousands of weekly downloads that is maintained by a single developer. An attacker compromises that developers’s npm account and publishes a new version containing malicious code that runs during installation. The code silently copies environment variables (including your Azure credentials) to an external server. Within hours, attackers are using your credentials to spin up cryptocurrency miners in your Azure subscription.
