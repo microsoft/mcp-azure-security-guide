@@ -789,6 +789,7 @@
 
 <h1 id="mcp07-insufficient-authentication-authorization">MCP07: Insufficient Authentication &amp; Authorization<a class="headerlink" href="#mcp07-insufficient-authentication-authorization" title="Permanent link">¶</a></h1>
 <h3 id="azure-implementation-full">Azure Implementation: FULL<a class="headerlink" href="#azure-implementation-full" title="Permanent link">¶</a></h3>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/mcp07-scenario.png" data-desc-position="bottom"><img alt="MCP07 Scenario" src="../../images/mcp07-scenario.png"></a></p>
 <blockquote>
 <p><strong>Real-World Scenario</strong>: The Wrong Audience</p>
 <p>A company runs two MCP servers: one for HR (with access to employee data) and one for Finance (with access to accounting systems). Both use OAuth tokens from the same identity provider. An attacker obtains a valid token intended for the HR server through social engineering. They then present this token to the Finance server. Because the Finance server only checks that the token is valid, and not that it was issued specifically for Finance, the attacker gains unauthorized access to financial data using an HR credential.</p>

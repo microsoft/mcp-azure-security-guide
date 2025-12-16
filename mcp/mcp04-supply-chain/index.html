@@ -789,6 +789,7 @@
 
 <h1 id="mcp04-supply-chain-attacks">MCP04: Supply Chain Attacks<a class="headerlink" href="#mcp04-supply-chain-attacks" title="Permanent link">¶</a></h1>
 <h3 id="azure-implementation-new-guidance">Azure Implementation: NEW GUIDANCE<a class="headerlink" href="#azure-implementation-new-guidance" title="Permanent link">¶</a></h3>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/mcp04-scenario.png" data-desc-position="bottom"><img alt="MCP04 Scenario" src="../../images/mcp04-scenario.png"></a></p>
 <blockquote>
 <p><strong>Real-World Scenario</strong>: The Compromised Dependency</p>
 <p>Your team builds an MCP server using popular open-source libraries. One of those libraries is a small utility package with thousands of weekly downloads that is maintained by a single developer. An attacker compromises that developers’s npm account and publishes a new version containing malicious code that runs during installation. The code silently copies environment variables (including your Azure credentials) to an external server. Within hours, attackers are using your credentials to spin up cryptocurrency miners in your Azure subscription.</p>

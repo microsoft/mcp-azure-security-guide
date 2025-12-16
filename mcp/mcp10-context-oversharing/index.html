@@ -787,6 +787,7 @@
 
 <h1 id="mcp10-context-injection-over-sharing">MCP10: Context Injection &amp; Over-Sharing<a class="headerlink" href="#mcp10-context-injection-over-sharing" title="Permanent link">¶</a></h1>
 <h3 id="azure-implementation-partial">Azure Implementation: PARTIAL<a class="headerlink" href="#azure-implementation-partial" title="Permanent link">¶</a></h3>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/mcp10-scenario.png" data-desc-position="bottom"><img alt="MCP10 Scenario" src="../../images/mcp10-scenario.png"></a></p>
 <blockquote>
 <p><strong>Real-World Scenario</strong>: The Cross-Tenant Leak</p>
 <p>A SaaS company operates a multi-tenant MCP server where multiple customers share the same infrastructure. A sales representative from Company A requests a summary of their sales pipeline. Due to a flaw in session handling, Company A’s context—including customer names, deal sizes, and pricing—is mistakenly associated with Company B’s session ID.</p>
