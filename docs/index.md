@@ -2,6 +2,8 @@
 
 Aligned with MCP Specification [2025-11-2025](https://modelcontextprotocol.io/specification/2025-11-25) | [OWASP MCP Top 10](https://owasp.org/www-project-mcp-top-10/)
 
+![MCP05 Scenario](./images/owasp-mcp-guide.png)
+
 ## What is the Model Context Protocol (MCP)?
 
 Before diving into security, let’s understand what we’re protecting.
