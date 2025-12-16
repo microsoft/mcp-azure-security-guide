@@ -11,6 +11,9 @@
 *.sln.docstates
 *.env
 
+# MkDocs build output
+site/
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
