@@ -1,0 +1,1875 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Practical security guidance for MCP-based AI systems">
+      
+      
+        <meta name="author" content="David Barkol">
+      
+      
+      
+        <link rel="prev" href="../migration-guidance/">
+      
+      
+        <link rel="next" href="../../mcp/mcp01-token-mismanagement/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>Enterprise Patterns &amp; Lessons Learned - OWASP MCP Top 10 Security Guidance for Azure</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <!-- Primary Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="OWASP MCP Top 10 Security Guidance for Azure">
+  <meta property="og:description" content="Practical security guidance for implementing Model Context Protocol (MCP) systems on Azure, aligned with the OWASP MCP Top 10.">
+  <meta property="og:url" content="https://microsoft.github.io/mcp-azure-security-guide/">
+  <meta property="og:image" content="https://microsoft.github.io/mcp-azure-security-guide/images/owasp-mcp-guide.png?v=2">
+  <meta property="og:image:secure_url" content="https://microsoft.github.io/mcp-azure-security-guide/images/owasp-mcp-guide.png?v=2">
+  
+  <!-- LinkedIn-specific (safe defaults) -->
+  <meta property="og:image:width" content="835">
+  <meta property="og:image:height" content="461">
+  <meta property="og:image:type" content="image/png">
+  
+  <!-- Twitter Card -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="OWASP MCP Top 10 Security Guidance for Azure">
+  <meta property="twitter:description" content="Practical security guidance for implementing Model Context Protocol (MCP) systems on Azure, aligned with the OWASP MCP Top 10.">
+  <meta property="twitter:image" content="https://microsoft.github.io/mcp-azure-security-guide/images/owasp-mcp-guide.png">
+
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#enterprise-patterns-lessons-learned" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OWASP MCP Top 10 Security Guidance for Azure" class="md-header__button md-logo" aria-label="OWASP MCP Top 10 Security Guidance for Azure" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OWASP MCP Top 10 Security Guidance for Azure
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Enterprise Patterns &amp; Lessons Learned
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/microsoft/mcp-azure-security-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OWASP MCP Top 10 Security Guidance for Azure" class="md-nav__button md-logo" aria-label="OWASP MCP Top 10 Security Guidance for Azure" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    OWASP MCP Top 10 Security Guidance for Azure
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/microsoft/mcp-azure-security-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP Adoption Strategy
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MCP Adoption Strategy
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../when-to-use-mcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    When to Use MCP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migration-guidance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migration Guidance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Patterns &amp; Lessons Learned
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Patterns &amp; Lessons Learned
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-exploration-to-structured-adoption" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From Exploration to Structured Adoption
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="From Exploration to Structured Adoption">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-early-exploration-where-most-organizations-are-today" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1: Early Exploration (Where Most Organizations Are Today)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-security-first-adoption-emerging-best-practice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2: Security-First Adoption (Emerging Best Practice)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-ai-ready-platform-strategy-future-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 3: AI-Ready Platform Strategy (Future State)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#emerging-adoption-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Emerging Adoption Patterns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Emerging Adoption Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-centralized-mcp-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Centralized MCP Gateway
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-scoped-mcp-servers-by-business-unit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Scoped MCP Servers by Business Unit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-tenant-based-isolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Tenant-Based Isolation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-internal-mcp-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Internal MCP Catalog
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-mistakes-and-lessons-learned" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Mistakes and Lessons Learned
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-identity-and-governance-challenge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Identity and Governance Challenge
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Identity and Governance Challenge">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-identity-matters-more-than-you-think" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Identity Matters More Than You Think
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layered-control-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layered Control Strategy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary: Key Takeaways
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OWASP MCP Top 10
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    OWASP MCP Top 10
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mcp/mcp01-token-mismanagement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 - Token Mismanagement &amp; Secret Exposure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mcp/mcp02-privilege-escalation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2 - Privilege Escalation via Scope Creep
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mcp/mcp03-tool-poisoning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3 - Tool Poisoning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mcp/mcp04-supply-chain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4 - Software Supply Chain Attacks &amp; Dependency Tampering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mcp/mcp05-command-injection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5 - Command Injection &amp; Execution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mcp/mcp06-prompt-injection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6 - Prompt Injection via Contextual Payloads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mcp/mcp07-authz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7 - Insufficient Authentication &amp; Authorization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mcp/mcp08-telemetry/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8 - Lack of Audit &amp; Telemetry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mcp/mcp09-shadow-servers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9 - Shadow MCP Servers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mcp/mcp10-context-oversharing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 - Context Injection &amp; Over-Sharing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-exploration-to-structured-adoption" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From Exploration to Structured Adoption
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="From Exploration to Structured Adoption">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-early-exploration-where-most-organizations-are-today" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1: Early Exploration (Where Most Organizations Are Today)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-security-first-adoption-emerging-best-practice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2: Security-First Adoption (Emerging Best Practice)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-ai-ready-platform-strategy-future-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 3: AI-Ready Platform Strategy (Future State)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#emerging-adoption-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Emerging Adoption Patterns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Emerging Adoption Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-centralized-mcp-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Centralized MCP Gateway
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-scoped-mcp-servers-by-business-unit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Scoped MCP Servers by Business Unit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-tenant-based-isolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Tenant-Based Isolation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-internal-mcp-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Internal MCP Catalog
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-mistakes-and-lessons-learned" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Mistakes and Lessons Learned
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-identity-and-governance-challenge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Identity and Governance Challenge
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Identity and Governance Challenge">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-identity-matters-more-than-you-think" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Identity Matters More Than You Think
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layered-control-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layered Control Strategy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary: Key Takeaways
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="enterprise-patterns-lessons-learned">Enterprise Patterns &amp; Lessons Learned<a class="headerlink" href="#enterprise-patterns-lessons-learned" title="Permanent link">¶</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">¶</a></h2>
+<p>The Model Context Protocol is moving from experimental technology to enterprise adoption. This page captures emerging patterns, common mistakes, and hard-won lessons from organizations deploying MCP at scale.</p>
+<blockquote>
+<p><strong>Key Insight</strong>: We're seeing early adopters treat MCP like an API gateway challenge—but it's really an <strong>identity and governance challenge</strong>.</p>
+<p>Successful companies are layering controls: gateway + capability + data + audit. Security is now "full lifecycle"—from install to runtime.</p>
+</blockquote>
+<hr>
+<h2 id="from-exploration-to-structured-adoption">From Exploration to Structured Adoption<a class="headerlink" href="#from-exploration-to-structured-adoption" title="Permanent link">¶</a></h2>
+<h3 id="phase-1-early-exploration-where-most-organizations-are-today">Phase 1: Early Exploration (Where Most Organizations Are Today)<a class="headerlink" href="#phase-1-early-exploration-where-most-organizations-are-today" title="Permanent link">¶</a></h3>
+<p><strong>Characteristics</strong>:</p>
+<ul>
+<li>Individual developers or teams experimenting with MCP servers</li>
+<li>No centralized governance or approval process</li>
+<li>Focus on "Can we make this work?" rather than "Should we deploy this?"</li>
+<li>Shadow servers proliferating across teams</li>
+</ul>
+<p><strong>Risks</strong>:</p>
+<ul>
+<li>Token leakage, over-permissioned tools, inconsistent security posture</li>
+<li>Multiple teams solving the same problem in different ways</li>
+<li>No visibility into what MCP servers are deployed or how they're being used</li>
+</ul>
+<p><strong>Azure Context</strong>: Teams spinning up Azure Functions or Container Apps as MCP servers without going through standard approval processes.</p>
+<hr>
+<h3 id="phase-2-security-first-adoption-emerging-best-practice">Phase 2: Security-First Adoption (Emerging Best Practice)<a class="headerlink" href="#phase-2-security-first-adoption-emerging-best-practice" title="Permanent link">¶</a></h3>
+<p><strong>Characteristics</strong>:</p>
+<ul>
+<li>Enterprises start with <strong>read-only use cases</strong> and expand once governance patterns are proven</li>
+<li>Centralized approval process for new MCP servers</li>
+<li>Clear separation between read and write operations</li>
+<li>Human-in-the-loop workflows for sensitive actions</li>
+</ul>
+<p><strong>Example Pattern</strong>:</p>
+<div class="highlight"><pre><span></span><code>Week 1-4:   Deploy read-only MCP servers (reports, dashboards, document retrieval)
+Week 5-8:   Monitor usage, validate security controls, collect feedback
+Week 9-12:  Introduce write operations with approval workflows (if necessary)
+Week 13+:   Gradually expand based on demonstrated safety
+</code></pre></div>
+<p><strong>Azure Implementation</strong>:</p>
+<ul>
+<li><strong>Read-only servers</strong>: Azure Functions with Managed Identity (Reader role on data sources)</li>
+<li><strong>Write operations</strong>: Azure Logic Apps for approval workflows, Conditional Access for restricted operations</li>
+<li><strong>Monitoring</strong>: Application Insights with custom metrics for tool invocations</li>
+</ul>
+<hr>
+<h3 id="phase-3-ai-ready-platform-strategy-future-state">Phase 3: AI-Ready Platform Strategy (Future State)<a class="headerlink" href="#phase-3-ai-ready-platform-strategy-future-state" title="Permanent link">¶</a></h3>
+<p><strong>Characteristics</strong>:</p>
+<ul>
+<li>MCP servers as a new layer above existing APIs rather than replacement</li>
+<li>Centralized MCP gateway</li>
+<li>Federated model: Multiple business units expose their data/tools via scoped MCP servers, each governed by a central policy</li>
+<li>Internal MCP registry where agents can safely discover allowed capabilities</li>
+</ul>
+<p><strong>Architecture</strong>:</p>
+<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────────────────┐
+│                    AI Agent Layer                           │
+│  (GitHub Copilot, Copilot Studio, Custom Agents)            │
+└────────────────────────┬────────────────────────────────────┘
+                         │
+                         ▼
+┌─────────────────────────────────────────────────────────────┐
+│              Centralized MCP Gateway                        │
+│  - Discovery  - Authentication  - Rate Limiting             │
+│  - Monitoring - Policy Enforcement                          │
+└────────────────────────┬────────────────────────────────────┘
+                         │
+         ┌───────────────┼───────────────┬──────────────┐
+         │               │               │              │
+         ▼               ▼               ▼              ▼
+    ┌────────┐      ┌────────┐     ┌────────┐    ┌────────┐
+    │ Sales  │      │ Finance│     │   HR   │    │  IT    │
+    │  MCP   │      │  MCP   │     │  MCP   │    │  MCP   │
+    │ Servers│      │ Servers│     │ Servers│    │ Servers│
+    └────────┘      └────────┘     └────────┘    └────────┘
+</code></pre></div>
+<p><strong>Azure Implementation</strong>:</p>
+<ul>
+<li><strong>Gateway</strong>: Azure API Management with MCP routing policies</li>
+<li><strong>Registry</strong>: Azure API Center or custom catalog</li>
+<li><strong>Federation</strong>: Each business unit deploys scoped servers with consistent Entra ID integration</li>
+</ul>
+<hr>
+<h2 id="emerging-adoption-patterns">Emerging Adoption Patterns<a class="headerlink" href="#emerging-adoption-patterns" title="Permanent link">¶</a></h2>
+<h3 id="1-centralized-mcp-gateway">1. Centralized MCP Gateway<a class="headerlink" href="#1-centralized-mcp-gateway" title="Permanent link">¶</a></h3>
+<p><strong>What</strong>: A single entry point for all MCP traffic.</p>
+<p><strong>Why</strong>: Provides a control plane for authentication, authorization, rate limiting, monitoring, and policy enforcement across all MCP servers.</p>
+<p><strong>Azure Implementation</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Azure Service</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gateway</td>
+<td>Azure API Management</td>
+<td>Route MCP requests, apply policies, rate limiting</td>
+</tr>
+<tr>
+<td>Identity</td>
+<td>Microsoft Entra ID</td>
+<td>Authenticate clients, issue tokens</td>
+</tr>
+<tr>
+<td>Discovery</td>
+<td>Azure API Center</td>
+<td>Catalog of approved MCP servers</td>
+</tr>
+<tr>
+<td>Monitoring</td>
+<td>Application Insights</td>
+<td>Track usage, errors, latency</td>
+</tr>
+<tr>
+<td>Network</td>
+<td>Azure Firewall + NSGs</td>
+<td>Control egress, block unauthorized destinations</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Benefits</strong>:</p>
+<ul>
+<li>Centralized visibility and control</li>
+<li>Consistent security posture across all MCP servers</li>
+<li>Easier to add new servers without reconfiguring clients</li>
+</ul>
+<p><strong>Considerations</strong>:</p>
+<ul>
+<li>Gateway becomes a single point of failure (requires HA deployment)</li>
+<li>Need to balance governance with developer agility</li>
+<li>Policy enforcement must be fast to avoid latency</li>
+</ul>
+<hr>
+<h3 id="2-scoped-mcp-servers-by-business-unit">2. Scoped MCP Servers by Business Unit<a class="headerlink" href="#2-scoped-mcp-servers-by-business-unit" title="Permanent link">¶</a></h3>
+<p><strong>What</strong>: Each department or business unit deploys its own set of MCP servers with domain-specific tools.</p>
+<p><strong>Why</strong>: Allows teams to move at their own pace while maintaining central governance. Reduces blast radius if a server is compromised.</p>
+<p><strong>Azure Implementation</strong>:</p>
+<ul>
+<li><strong>Sales</strong>: MCP server exposing CRM data (read-only), opportunity creation (write with approval)</li>
+<li><strong>Finance</strong>: MCP server for expense reports, budget queries, invoice generation</li>
+<li><strong>HR</strong>: MCP server for employee directory, PTO requests, policy documents</li>
+<li><strong>IT</strong>: MCP server for ticket creation, status checks, KB articles</li>
+</ul>
+<p>Each server deployed in its own:</p>
+<ul>
+<li><strong>Resource Group</strong>: With role-based access control</li>
+<li><strong>Virtual Network</strong>: With peering to shared services</li>
+<li><strong>Managed Identity</strong>: With least-privilege access to data sources</li>
+<li><strong>Monitoring</strong>: With central Log Analytics workspace for aggregation</li>
+</ul>
+<p><strong>Benefits</strong>:</p>
+<ul>
+<li>Domain expertise: Each team controls their own tools</li>
+<li>Isolation: Compromised server doesn't affect other business units</li>
+<li>Flexibility: Teams can evolve at different paces</li>
+</ul>
+<p><strong>Considerations</strong>:</p>
+<ul>
+<li>Need coordination on authentication and standards</li>
+<li>Risk of fragmentation if not governed centrally</li>
+<li>Cross-domain workflows may be complex</li>
+</ul>
+<hr>
+<h3 id="3-tenant-based-isolation">3. Tenant-Based Isolation<a class="headerlink" href="#3-tenant-based-isolation" title="Permanent link">¶</a></h3>
+<p><strong>What</strong>: Multi-tenant MCP deployment where each customer or environment (dev/staging/prod) has isolated servers.</p>
+<p><strong>Why</strong>: Critical for SaaS providers or organizations with strict data residency requirements.</p>
+<p><strong>Azure Implementation</strong>:</p>
+<ul>
+<li>
+<p><strong>Pattern A: Separate Azure Subscriptions per Tenant</strong></p>
+<ul>
+<li>Complete isolation, separate billing</li>
+<li>Use Azure Lighthouse for centralized management</li>
+</ul>
+</li>
+<li>
+<p><strong>Pattern B: Shared Infrastructure with Data Isolation</strong></p>
+<ul>
+<li>Single MCP server farm</li>
+<li>Tenant ID passed with every request</li>
+<li>Row-level security in database</li>
+<li>Managed identities scoped to tenant resources</li>
+</ul>
+</li>
+</ul>
+<p><strong>Benefits</strong>:</p>
+<ul>
+<li>Strong security boundaries</li>
+<li>Compliance with data residency and sovereignty requirements</li>
+<li>Easier to onboard/offboard customers</li>
+</ul>
+<p><strong>Considerations</strong>:</p>
+<ul>
+<li>Increased operational complexity</li>
+<li>Higher cost (especially with separate subscriptions)</li>
+<li>Need robust tenant ID validation</li>
+</ul>
+<hr>
+<h3 id="4-internal-mcp-catalog">4. Internal MCP Catalog<a class="headerlink" href="#4-internal-mcp-catalog" title="Permanent link">¶</a></h3>
+<p><strong>What</strong>: A centralized registry of approved MCP servers, similar to an internal package repository or app store.</p>
+<p><strong>Why</strong>: Enables discovery for agents and developers while maintaining governance. Only vetted, secure servers are listed.</p>
+<blockquote>
+<p><strong>Note</strong>: This is an evolving area. Standards for MCP server discovery and cataloging are still emerging. The patterns below reflect early approaches organizations are exploring.</p>
+</blockquote>
+<p><strong>Azure Implementation Options</strong>:</p>
+<p><strong>Option A: Azure API Center</strong></p>
+<ul>
+<li>Leverage Microsoft's API governance platform to catalog MCP servers alongside traditional APIs</li>
+<li>Provides built-in support for metadata, documentation, versioning, and lifecycle management</li>
+<li>Can integrate with existing API governance processes</li>
+</ul>
+<p><strong>Option B: Custom Catalog</strong></p>
+<ul>
+<li>Build a purpose-built registry tailored to your organization's specific needs</li>
+<li>Allows flexibility in metadata schema, approval workflows, and integration points</li>
+<li>Requires more development and maintenance effort</li>
+</ul>
+<p><strong>Key Capabilities</strong> (regardless of approach):</p>
+<ul>
+<li><strong>Discovery</strong>: Agents and developers can browse approved MCP servers</li>
+<li><strong>Governance</strong>: Central approval process before servers are listed</li>
+<li><strong>Metadata</strong>: Version tracking, ownership, sensitivity classification, approved clients</li>
+<li><strong>Lifecycle</strong>: Support for deprecation, retirement, and migration paths</li>
+</ul>
+<p><strong>Benefits</strong>:</p>
+<ul>
+<li>Agents can discover what tools are available without manual configuration</li>
+<li>Prevents proliferation of shadow servers</li>
+<li>Centralized security posture visibility</li>
+<li>Clear ownership and accountability</li>
+</ul>
+<p><strong>Considerations</strong>:</p>
+<ul>
+<li>Requires organizational buy-in and ongoing maintenance</li>
+<li>Need clear approval process, SLAs, and governance model</li>
+<li>Must be discoverable but not become a bottleneck for innovation</li>
+<li>Enforcement mechanisms needed to prevent bypass</li>
+</ul>
+<hr>
+<h2 id="common-mistakes-and-lessons-learned">Common Mistakes and Lessons Learned<a class="headerlink" href="#common-mistakes-and-lessons-learned" title="Permanent link">¶</a></h2>
+<details class="danger">
+<summary>1. Exposing Too Much Too Soon</summary>
+<p><strong>Mistake</strong>: Wrapping an entire API (50+ endpoints) as MCP tools without considering security, sensitivity, or agent usability.</p>
+<p><strong>Why It's a Problem</strong>:</p>
+<ul>
+<li>Increased attack surface: Every endpoint is now accessible to agents</li>
+<li>Agents can't effectively choose between too many tools</li>
+<li>No time to validate governance controls before exposing sensitive operations</li>
+</ul>
+<p><strong>Lesson Learned</strong>: Start small, expand gradually. Begin with 3-5 read-only tools, monitor for 2-4 weeks, validate security, then add more.</p>
+<p><strong>Azure Mitigation</strong>:</p>
+<ul>
+<li>Use staged rollouts: Deploy to dev/test environments first</li>
+<li>Apply Azure Policy to require approval for new MCP server deployments</li>
+<li>Monitor with Application Insights to detect unusual patterns early</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<ul>
+<li>❌ Week 1: Expose 50 CRM endpoints as MCP tools</li>
+<li>✅ Week 1: Expose 3 read-only tools (get customer, search accounts, view opportunities)</li>
+<li>✅ Week 3: Add 2 more tools after monitoring shows no issues</li>
+<li>✅ Week 6: Introduce first write operation with human approval workflow</li>
+</ul>
+<p><strong>Related Security Risks</strong>: <a href="../../mcp/mcp02-privilege-escalation/">MCP02: Privilege Escalation</a>, <a href="../../mcp/mcp07-authz/">MCP07: Insufficient Authorization</a></p>
+</details>
+<details class="danger">
+<summary>2. Mixing Read and Write Operations in the Same Server</summary>
+<p><strong>Mistake</strong>: Combining safe read operations with sensitive write operations in a single MCP server without separate policies.</p>
+<p><strong>Why It's a Problem</strong>:</p>
+<ul>
+<li>A compromised token or prompt injection could escalate from reading data to modifying it</li>
+<li>Can't apply different authentication or approval workflows</li>
+<li>Harder to audit and monitor risk</li>
+</ul>
+<p><strong>Lesson Learned</strong>: Split into Reader and Writer MCP servers with distinct policies, authentication scopes, and approval paths. Human-in-the-loop for write operations.</p>
+<p><strong>Azure Implementation</strong>:</p>
+<ul>
+<li><strong>Reader Server</strong>: Azure Function with Managed Identity (Reader role), no approval required</li>
+<li><strong>Writer Server</strong>: Azure Container App with approval workflow via Azure Logic Apps, requires elevated Entra ID role</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<ul>
+<li>❌ Single server: <code>crm-mcp-server</code> (get customer, update customer, delete customer)</li>
+<li>✅ Separate servers:</li>
+<li><code>crm-reader-mcp</code> (get customer, search, view opportunities)</li>
+<li><code>crm-writer-mcp</code> (update customer, create opportunity) — requires approval via Logic App</li>
+</ul>
+<p><strong>Related Security Risks</strong>: <a href="../../mcp/mcp02-privilege-escalation/">MCP02: Privilege Escalation</a>, <a href="../../mcp/mcp05-command-injection/">MCP05: Command Injection</a></p>
+</details>
+<details class="danger">
+<summary>3. No Versioning Strategy</summary>
+<p><strong>Mistake</strong>: Deploying MCP servers without version tracking, using "latest" tags, or making breaking changes without migration path.</p>
+<p><strong>Why It's a Problem</strong>:</p>
+<ul>
+<li>Agents may break when tool schemas change unexpectedly</li>
+<li>No rollback path if a new version introduces bugs</li>
+<li>Difficult to coordinate updates across multiple clients</li>
+</ul>
+<p><strong>Lesson Learned</strong>: Treat MCP servers like APIs—version everything. Use semantic versioning, maintain backward compatibility, and provide deprecation notices.</p>
+<p><strong>Azure Implementation</strong>:</p>
+<ul>
+<li>Tag container images with semantic versions (<code>crm-mcp:1.2.0</code>, NOT <code>crm-mcp:latest</code>)</li>
+<li>Use <strong>Azure Container Registry</strong> with image scanning and vulnerability detection</li>
+<li>Deploy multiple versions side-by-side in <strong>Azure Container Apps</strong> with traffic splitting</li>
+<li>Document version history in <strong>Azure API Center</strong></li>
+</ul>
+<p><strong>Best Practices</strong>:</p>
+<ul>
+<li>Increment major version for breaking changes (tool removed, schema changed)</li>
+<li>Increment minor version for new tools or optional parameters</li>
+<li>Increment patch version for bug fixes</li>
+<li>Provide migration guides for major version upgrades</li>
+</ul>
+<p><strong>Related Security Risks</strong>: <a href="../../mcp/mcp04-supply-chain/">MCP04: Supply Chain Attacks</a></p>
+</details>
+<details class="danger">
+<summary>4. Ignoring Data Sensitivity Classifications</summary>
+<p><strong>Mistake</strong>: Treating all data the same and not considering sensitivity classifications when designing MCP tools.</p>
+<p><strong>Why It's a Problem</strong>:</p>
+<ul>
+<li>Public data and trade secrets exposed through the same tool</li>
+<li>No way to apply different access controls based on data sensitivity</li>
+<li>Compliance violations (GDPR, HIPAA, PCI-DSS)</li>
+</ul>
+<p><strong>Lesson Learned</strong>: Label tools and data sources by sensitivity. Apply stricter controls to high-sensitivity operations. Separate MCP servers by classification if needed.</p>
+<p><strong>Azure Implementation</strong>:</p>
+<ul>
+<li>Use <strong>Microsoft Purview</strong> to classify data sources</li>
+<li>Tag MCP servers with sensitivity labels (public, internal, confidential, restricted)</li>
+<li>Apply <strong>Conditional Access policies</strong> based on labels:</li>
+<li>Public: Available to all authenticated users</li>
+<li>Internal: Requires MFA</li>
+<li>Confidential: Requires privileged role + approval</li>
+<li>Restricted: Human-in-the-loop, audit log reviewed</li>
+</ul>
+<p><strong>Example Classification</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Data Classification</th>
+<th>Access Control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>get_public_docs</code></td>
+<td>Public</td>
+<td>Any authenticated user</td>
+</tr>
+<tr>
+<td><code>search_kb_articles</code></td>
+<td>Internal</td>
+<td>Entra ID, MFA</td>
+</tr>
+<tr>
+<td><code>get_customer_pii</code></td>
+<td>Confidential</td>
+<td>Privileged role, logged</td>
+</tr>
+<tr>
+<td><code>export_financial_data</code></td>
+<td>Restricted</td>
+<td>Approval workflow, audit</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Related Security Risks</strong>: <a href="../../mcp/mcp10-context-oversharing/">MCP10: Context Oversharing</a>, <a href="../../mcp/mcp08-telemetry/">MCP08: Lack of Audit &amp; Telemetry</a></p>
+</details>
+<details class="danger">
+<summary>5. Weak Network Boundaries</summary>
+<p><strong>Mistake</strong>: Allowing MCP servers to make unrestricted outbound connections, enabling data exfiltration or command-and-control communication.</p>
+<p><strong>Why It's a Problem</strong>:</p>
+<ul>
+<li>Compromised server can send data to attacker-controlled endpoints</li>
+<li>Tool poisoning or prompt injection can trigger malicious outbound calls</li>
+<li>No visibility into unexpected network behavior</li>
+</ul>
+<p><strong>Lesson Learned</strong>: Default deny egress, allowlist only required destinations. Use Azure Firewall, NSGs, and private endpoints to enforce boundaries.</p>
+<p><strong>Azure Implementation</strong>:</p>
+<ul>
+<li>Deploy MCP servers in <strong>Virtual Networks</strong> with strict NSG rules</li>
+<li>Use <strong>Azure Firewall</strong> or <strong>NAT Gateway</strong> to control egress</li>
+<li>Allowlist approved destinations:<ul>
+<li>Azure services (Cosmos DB, Storage) via <strong>Private Link</strong></li>
+<li>External APIs via FQDN-based firewall rules</li>
+</ul>
+</li>
+<li>Block all other outbound traffic by default</li>
+<li>Monitor <strong>NSG Flow Logs</strong> for unexpected connection attempts</li>
+</ul>
+<p><strong>Example Policy</strong>:</p>
+<div class="highlight"><pre><span></span><code>Default: Deny all outbound
+
+Allow:
+  - *.database.windows.net (Azure SQL)
+  - *.documents.azure.com (Cosmos DB)
+  - api.openai.com (if using OpenAI)
+  - login.microsoftonline.com (Entra ID)
+
+Deny:
+  - All other destinations
+
+Alert:
+  - Any blocked connection attempt
+</code></pre></div>
+<p><strong>Related Security Risks</strong>: <a href="../../mcp/mcp03-tool-poisoning/">MCP03: Tool Poisoning</a>, <a href="../../mcp/mcp06-prompt-injection/">MCP06: Prompt Injection</a></p>
+</details>
+<details class="danger">
+<summary>6. Skipping Sensitivity Testing</summary>
+<p><strong>Mistake</strong>: Treating MCP enablement as purely functional; skipping threat modeling, pen testing, and prompt injection testing.</p>
+<p><strong>Why It's a Problem</strong>:</p>
+<ul>
+<li>Vulnerabilities discovered in production after agents are already using the tools</li>
+<li>No baseline for what "normal" vs "malicious" behavior looks like</li>
+<li>Reactive rather than proactive security posture</li>
+</ul>
+<p><strong>Lesson Learned</strong>: Include MCP in AppSec and red team programs. Test for prompt injection, data exfiltration, and privilege escalation before production deployment.</p>
+<p><strong>Azure Implementation</strong>:</p>
+<ul>
+<li><strong>Threat Modeling</strong>: Use Microsoft Threat Modeling Tool to map MCP architecture</li>
+<li><strong>Penetration Testing</strong>: Include MCP servers in regular pen test scope</li>
+<li><strong>Prompt Injection Testing</strong>: Use adversarial prompts to attempt:</li>
+<li>Hidden instructions in tool descriptions</li>
+<li>Data exfiltration via tool arguments</li>
+<li>Unauthorized command execution</li>
+<li><strong>Automated Scanning</strong>: Integrate security scans in CI/CD pipeline (Azure DevOps, GitHub Actions)</li>
+</ul>
+<p><strong>Testing Checklist</strong>:</p>
+<ul>
+<li>[ ] Prompt injection: Can hidden instructions manipulate behavior?</li>
+<li>[ ] Token leakage: Are secrets exposed in logs or errors?</li>
+<li>[ ] Privilege escalation: Can agents access unauthorized resources?</li>
+<li>[ ] Data exfiltration: Can agents send data to external endpoints?</li>
+<li>[ ] Command injection: Can agents execute arbitrary code?</li>
+<li>[ ] Tool poisoning: Can malicious tool descriptions be introduced?</li>
+</ul>
+<p><strong>Related Security Risks</strong>: All OWASP MCP Top 10, especially <a href="../../mcp/mcp06-prompt-injection/">MCP06: Prompt Injection</a> and <a href="../../mcp/mcp03-tool-poisoning/">MCP03: Tool Poisoning</a></p>
+</details>
+<hr>
+<h2 id="the-identity-and-governance-challenge">The Identity and Governance Challenge<a class="headerlink" href="#the-identity-and-governance-challenge" title="Permanent link">¶</a></h2>
+<h3 id="why-identity-matters-more-than-you-think">Why Identity Matters More Than You Think<a class="headerlink" href="#why-identity-matters-more-than-you-think" title="Permanent link">¶</a></h3>
+<p>Traditional APIs have predictable clients—web apps, mobile apps, backend services. MCP servers have unpredictable agents whose behavior is influenced by:</p>
+<ul>
+<li>User prompts (potentially malicious)</li>
+<li>Tool descriptions (potentially poisoned)</li>
+<li>Context from other tools (potentially tainted)</li>
+</ul>
+<p>This means authentication alone isn't enough. You need:</p>
+<ol>
+<li><strong>Identity</strong>: Who/what is making the request? (User + Agent + Client)</li>
+<li><strong>Authorization</strong>: What is this identity allowed to do?</li>
+<li><strong>Context</strong>: What data has the agent seen? What tools has it used?</li>
+<li><strong>Intent</strong>: What is the agent trying to accomplish?</li>
+<li><strong>Approval</strong>: For sensitive operations, is there human oversight?</li>
+</ol>
+<h3 id="layered-control-strategy">Layered Control Strategy<a class="headerlink" href="#layered-control-strategy" title="Permanent link">¶</a></h3>
+<p>Successful enterprises implement <strong>defense-in-depth</strong> with multiple layers:</p>
+<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────────┐
+│ Layer 1: Gateway Controls                           │
+│ - Entra ID authentication                           │
+│ - Rate limiting                                     │
+│ - IP restrictions                                   │
+└─────────────────────────────────────────────────────┘
+                      ▼
+┌─────────────────────────────────────────────────────┐
+│ Layer 2: Capability Controls                        │
+│ - Tool-level authorization                          │
+│ - Data sensitivity classification                   │
+│ - Human-in-the-loop for write operations            │
+└─────────────────────────────────────────────────────┘
+                      ▼
+┌─────────────────────────────────────────────────────┐
+│ Layer 3: Data Controls                              │
+│ - Row-level security                                │
+│ - Purview data classification                       │
+│ - Private Link for data access                      │
+└─────────────────────────────────────────────────────┘
+                      ▼
+┌─────────────────────────────────────────────────────┐
+│ Layer 4: Audit &amp; Monitoring                         │
+│ - Application Insights                              │
+│ - Log Analytics                                     │
+│ - Sentinel for threat detection                     │
+└─────────────────────────────────────────────────────┘
+</code></pre></div>
+<p><strong>No single layer is sufficient.</strong> Defense-in-depth ensures that if one layer fails, others still provide protection.</p>
+<hr>
+<h2 id="summary-key-takeaways">Summary: Key Takeaways<a class="headerlink" href="#summary-key-takeaways" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Key Lesson</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Adoption</strong></td>
+<td>Start with read-only, expand gradually, prove governance works</td>
+</tr>
+<tr>
+<td><strong>Architecture</strong></td>
+<td>Separate read/write servers, use centralized gateway, maintain catalog</td>
+</tr>
+<tr>
+<td><strong>Security</strong></td>
+<td>Identity + governance, not just authentication. Layer controls.</td>
+</tr>
+<tr>
+<td><strong>Operations</strong></td>
+<td>Version everything, monitor continuously, test for prompt injection</td>
+</tr>
+<tr>
+<td><strong>Organization</strong></td>
+<td>Federated model with central policy, not centralized control</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">¶</a></h2>
+<ul>
+<li><strong>Need help deciding if MCP is right?</strong> → <a href="../when-to-use-mcp/">When to Use MCP</a></li>
+<li><strong>Ready to implement?</strong> → <a href="../migration-guidance/">Migration Guidance</a></li>
+<li><strong>Want comprehensive security guidance?</strong> → <a href="../../#owasp-mcp-top-10">OWASP MCP Top 10</a></li>
+<li><strong>Specific security risks</strong>: See linked MCP threats throughout this page</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://microsoft.github.io/mcp-azure-security-guide/" target="_blank" rel="noopener" title="microsoft.github.io" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M351.9 280H161c2.9 64.5 17.2 123.9 37.5 167.4 11.4 24.5 23.7 41.8 35.1 52.4 11.2 10.5 18.9 12.2 22.9 12.2s11.7-1.7 22.9-12.2c11.4-10.6 23.7-28 35.1-52.4 20.3-43.5 34.6-102.9 37.5-167.4zm-191-48h190.9c-2.8-64.5-17.1-123.9-37.4-167.4-11.4-24.4-23.7-41.8-35.1-52.4C268.1 1.7 260.4 0 256.4 0s-11.7 1.7-22.9 12.2c-11.4 10.6-23.7 28-35.1 52.4-20.3 43.5-34.6 102.9-37.5 167.4m-48 0c3.5-85.6 25.6-165.1 57.9-217.3C78.7 47.3 10.9 131.2 1.5 232zM1.5 280c9.4 100.8 77.2 184.7 169.3 217.3-32.3-52.2-54.4-131.7-57.9-217.3zm398.4 0c-3.5 85.6-25.6 165.1-57.9 217.3 92.1-32.7 159.9-116.5 169.3-217.3zm111.4-48C501.9 131.2 434.1 47.3 342 14.7c32.3 52.2 54.4 131.7 57.9 217.3z"></path></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "content.code.copy", "search.highlight"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
