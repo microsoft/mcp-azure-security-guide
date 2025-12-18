@@ -47,3 +47,11 @@ This combines identity validation and network enforcement for true defense-in-de
 - Deploy MCP servers in private subnets with no public Ips
 - Use NSGs to allow inbound traffic only from APIM subnet
 - Also validate JWT audience inside your MCP server code (defense-in-depth)
+---
+
+## Next Steps
+
+- **Related risks**: [MCP01: Token Mismanagement](mcp01-token-mismanagement.md) | [MCP02: Privilege Escalation](mcp02-privilege-escalation.md)
+- **Monitoring**: [MCP08: Lack of Audit & Telemetry](mcp08-telemetry.md) to track authentication failures
+- **Strategic guidance**: [Enterprise Patterns & Lessons Learned](../adoption/enterprise-patterns.md#the-identity-and-governance-challenge) for identity architecture patterns
+- **Back to**: [OWASP MCP Top 10](../index.md#owasp-mcp-top-10)

@@ -40,3 +40,12 @@ Tools such as Dependabot or Renovate automatically propose dependency updates ac
 - Use private Azure Artifacts feeds for vetted packages
 - Enable Defender for Cloud DevOps Security on all repositories
 - Set up automated dependency updates with security-focused auto-merge policies
+
+---
+
+## Next Steps
+
+- **Related risks**: [MCP03: Tool Poisoning](mcp03-tool-poisoning.md) | [MCP09: Shadow MCP Servers](mcp09-shadow-servers.md)
+- **Monitoring**: [MCP08: Lack of Audit & Telemetry](mcp08-telemetry.md) to track dependency changes
+- **Strategic guidance**: [Enterprise Patterns & Lessons Learned](../adoption/enterprise-patterns.md) for version management best practices
+- **Back to**: [OWASP MCP Top 10](../index.md#owasp-mcp-top-10)

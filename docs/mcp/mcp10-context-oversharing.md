@@ -48,3 +48,12 @@ For workloads with strict isolation requirements:
 - Use tenant-scoped keys and TTLs for all session and context storage
 - Enforce tenant isolation at the storage and network layers
 - Assume application bugs will happen and design isolation accordingly
+
+---
+
+## Next Steps
+
+- **Related risks**: [MCP01: Token Mismanagement](mcp01-token-mismanagement.md) | [MCP02: Privilege Escalation](mcp02-privilege-escalation.md)
+- **Monitoring**: [MCP08: Lack of Audit & Telemetry](mcp08-telemetry.md) to detect context boundary violations
+- **Strategic guidance**: [Enterprise Patterns & Lessons Learned](../adoption/enterprise-patterns.md) for data classification practices
+- **Back to**: [OWASP MCP Top 10](../index.md#owasp-mcp-top-10)

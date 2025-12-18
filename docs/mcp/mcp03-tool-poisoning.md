@@ -53,3 +53,11 @@ Use Application Insights and Azure Monitor to observe tool behavior at runtime. 
 - Control egress traffic and only allow connections to known, approved destinations
 - Never user ‘latest’ tags and pin tools to specific, verified versions
 - Monitor runtime behavior for unexpected network calls or data access patterns
+---
+
+## Next Steps
+
+- **Related risks**: [MCP04: Supply Chain Attacks](mcp04-supply-chain.md) | [MCP06: Prompt Injection](mcp06-prompt-injection.md)
+- **Monitoring**: [MCP08: Lack of Audit & Telemetry](mcp08-telemetry.md) to detect suspicious tool behavior
+- **Strategic guidance**: [Enterprise Patterns & Lessons Learned](../adoption/enterprise-patterns.md#4-internal-mcp-catalog) for maintaining an internal tool registry
+- **Back to**: [OWASP MCP Top 10](../index.md#owasp-mcp-top-10)

@@ -43,3 +43,11 @@ MCP servers must clearly separate trusted instructions (system prompts, tool sch
 - Store system prompts in secure repositories, not in code
 - User proper message arrays where applicable (```\[{role: ‘System’ ..}, {role: ‘user’..}```)
 - Never construct prompts using string concatenation with user input
+---
+
+## Next Steps
+
+- **Related risks**: [MCP05: Command Injection](mcp05-command-injection.md) | [MCP03: Tool Poisoning](mcp03-tool-poisoning.md)
+- **Monitoring**: [MCP08: Lack of Audit & Telemetry](mcp08-telemetry.md) to detect injection patterns
+- **Strategic guidance**: [Enterprise Patterns & Lessons Learned](../adoption/enterprise-patterns.md) for prompt injection testing
+- **Back to**: [OWASP MCP Top 10](../index.md#owasp-mcp-top-10)

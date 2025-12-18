@@ -45,3 +45,12 @@ Azure AI Content Safety can be used as an additional signal to detect suspicious
 - Use parametrized commands in code
 - Deploy distroless containers without shell utilities
 - Apply AppArmor profiles restricting exec/spawn capabilities
+
+---
+
+## Next Steps
+
+- **Related risks**: [MCP06: Prompt Injection](mcp06-prompt-injection.md) | [MCP03: Tool Poisoning](mcp03-tool-poisoning.md)
+- **Monitoring**: [MCP08: Lack of Audit & Telemetry](mcp08-telemetry.md) to detect injection attempts
+- **Strategic guidance**: [Enterprise Patterns & Lessons Learned](../adoption/enterprise-patterns.md) for security testing practices
+- **Back to**: [OWASP MCP Top 10](../index.md#owasp-mcp-top-10)

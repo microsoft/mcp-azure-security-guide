@@ -63,3 +63,12 @@ Azure AI Content Safety can be used as a last-resort signal to detect accidental
 - Store unavoidable secrets in Azure Key Vault
 - Enable automatic secret rotation and audit logging
 - Use response inspection as a safety net, not a primary control
+
+---
+
+## Next Steps
+
+- **Related risks**: [MCP07: Insufficient Authentication & Authorization](mcp07-authz.md) | [MCP04: Supply Chain Attacks](mcp04-supply-chain.md)
+- **Monitoring**: [MCP08: Lack of Audit & Telemetry](mcp08-telemetry.md) to detect secret exposure attempts
+- **Strategic guidance**: [Enterprise Patterns & Lessons Learned](../adoption/enterprise-patterns.md) for managing secrets at scale
+- **Back to**: [OWASP MCP Top 10](../index.md#owasp-mcp-top-10)

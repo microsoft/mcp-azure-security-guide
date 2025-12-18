@@ -47,3 +47,11 @@ Privileged Identity Management (PIM) requires administrators to explicitly activ
 - Use APIM to validate token scopes match the specific operation being performed
 - Conduct routine access reviews using [Entra ID access reviews](https://learn.microsoft.com/en-us/entra/id-governance/access-reviews-overview)
 - Enable PIM for any administrative operations requiring elevated access
+---
+
+## Next Steps
+
+- **Related risks**: [MCP07: Insufficient Authentication & Authorization](mcp07-authz.md) | [MCP01: Token Mismanagement](mcp01-token-mismanagement.md)
+- **Monitoring**: [MCP08: Lack of Audit & Telemetry](mcp08-telemetry.md) to detect privilege escalation attempts
+- **Strategic guidance**: [Enterprise Patterns & Lessons Learned](../adoption/enterprise-patterns.md) for separating read/write operations
+- **Back to**: [OWASP MCP Top 10](../index.md#owasp-mcp-top-10)

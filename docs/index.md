@@ -42,6 +42,16 @@ This guide provides Azure implementation guidance across three areas:
 | PARTIAL | Core services available with custom work needed | MCP02 (Scope creep), MCP10 (Contexts sharing) |
 | NEW | Emerging patterns and custom solutions needed | MCP03 (Tool poisoning), MCP04 (Supply chain), MCP09 (Shadow servers) |
 
+## MCP Adoption Strategy
+
+Before diving into security, it's important to understand when and how to adopt MCP in your organization. This guide includes strategic guidance for:
+
+- **[When to Use MCP](adoption/when-to-use-mcp.md)**: Decision framework for determining when MCP adds value vs. when traditional APIs are more appropriate
+- **[Migration Guidance](adoption/migration-guidance.md)**: Practical patterns for wrapping existing APIs and transitioning to MCP
+- **[Enterprise Patterns & Lessons Learned](adoption/enterprise-patterns.md)**: Real-world adoption patterns, common mistakes, and proven strategies from organizations deploying MCP at scale
+
+These strategic guides complement the security guidance by helping you make informed architectural decisions before implementing MCP servers.
+
 ## OWASP MCP Top 10
 
 - [MCP01: Token Mismanagement and Secret Exposure](mcp/mcp01-token-mismanagement.md)

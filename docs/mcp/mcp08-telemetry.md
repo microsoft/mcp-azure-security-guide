@@ -40,3 +40,12 @@ NSG Flow Logs and Traffic Analytics capture network-level behavior, including ou
 - Instrument MCP servers with OpenTelemetry and MCP-specific context
 - Enable NSG Flow Logs and Traffic Analytics for network visibility
 - Create alerts for suspicious patterns such as off-hours access, auth failures, an anonymous tool usage
+
+---
+
+## Next Steps
+
+- **Related risks**: All OWASP MCP Top 10 risks benefit from proper telemetry and monitoring
+- **Incident response**: Use logs to investigate [MCP01: Token Mismanagement](mcp01-token-mismanagement.md) and [MCP07: Authorization](mcp07-authz.md) incidents
+- **Strategic guidance**: [Enterprise Patterns & Lessons Learned](../adoption/enterprise-patterns.md#layered-control-strategy) for comprehensive monitoring strategies
+- **Back to**: [OWASP MCP Top 10](../index.md#owasp-mcp-top-10)

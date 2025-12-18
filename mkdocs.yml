@@ -8,8 +8,6 @@ theme:
   name: material
   custom_dir: docs/overrides
   features:
-    - navigation.sections
-    - navigation.expand
     - navigation.top
     - content.code.copy
     - search.highlight
@@ -33,6 +31,10 @@ theme:
 
 nav:
   - Home: index.md
+  - MCP Adoption Strategy:
+      - When to Use MCP: adoption/when-to-use-mcp.md
+      - Migration Guidance: adoption/migration-guidance.md
+      - Enterprise Patterns & Lessons Learned: adoption/enterprise-patterns.md
   - OWASP MCP Top 10:
       - 1 - Token Mismanagement & Secret Exposure: mcp/mcp01-token-mismanagement.md
       - 2 - Privilege Escalation via Scope Creep: mcp/mcp02-privilege-escalation.md
@@ -56,6 +58,8 @@ extra:
 
 markdown_extensions:
   - admonition
+  - pymdownx.details
+  - pymdownx.superfences
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
