@@ -1048,6 +1048,7 @@
 <h1 id="owasp-mcp-top-10-security-guidance-for-azure">OWASP MCP Top 10 Security Guidance for Azure<a class="headerlink" href="#owasp-mcp-top-10-security-guidance-for-azure" title="Permanent link">¶</a></h1>
 <p>Aligned with MCP Specification <a href="https://modelcontextprotocol.io/specification/2025-11-25">2025-11-2025</a> | <a href="https://owasp.org/www-project-mcp-top-10/">OWASP MCP Top 10</a></p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/owasp-mcp-guide.png" data-desc-position="bottom"><img alt="MCP05 Scenario" src="images/owasp-mcp-guide.png"></a></p>
+<p>This guide provides comprehensive security and adoption guidance for implementing the Model Context Protocol (MCP) on Microsoft Azure. It combines the OWASP MCP Top 10 security framework with practical Azure implementation patterns, migration strategies, and lessons learned from enterprise deployments. Whether you're evaluating MCP, migrating existing APIs, or scaling to production, you'll find actionable guidance for building secure, governed MCP systems on Azure.</p>
 <h2 id="what-is-the-model-context-protocol-mcp">What is the Model Context Protocol (MCP)?<a class="headerlink" href="#what-is-the-model-context-protocol-mcp" title="Permanent link">¶</a></h2>
 <p>Before diving into security, let’s understand what we’re protecting.</p>
 <p>The Model Context Protocol (MCP) is a standardized way for AI assistants (Like VS Code, Claude, ChatGPT or custom AI Agents) to connect to tools and data sources. Think of MCP as a translator that lets AI systems and applications talk to databases, APIs, file systems, and other services in a consistent, predictable way.</p>
@@ -1093,14 +1094,14 @@
 </tbody>
 </table>
 <h2 id="mcp-adoption-strategy">MCP Adoption Strategy<a class="headerlink" href="#mcp-adoption-strategy" title="Permanent link">¶</a></h2>
-<p>Before diving into security, it's important to understand when and how to adopt MCP in your organization. This guide includes strategic guidance for:</p>
+<p>Understanding when and how to adopt MCP helps you make informed architectural decisions before implementing security controls:</p>
 <ul>
 <li><strong><a href="adoption/when-to-use-mcp/">When to Use MCP</a></strong>: Decision framework for determining when MCP adds value vs. when traditional APIs are more appropriate</li>
 <li><strong><a href="adoption/migration-guidance/">Migration Guidance</a></strong>: Practical patterns for wrapping existing APIs and transitioning to MCP</li>
 <li><strong><a href="adoption/enterprise-patterns/">Enterprise Patterns &amp; Lessons Learned</a></strong>: Real-world adoption patterns, common mistakes, and proven strategies from organizations deploying MCP at scale</li>
 </ul>
-<p>These strategic guides complement the security guidance by helping you make informed architectural decisions before implementing MCP servers.</p>
 <h2 id="owasp-mcp-top-10">OWASP MCP Top 10<a class="headerlink" href="#owasp-mcp-top-10" title="Permanent link">¶</a></h2>
+<p>The ten most critical security risks for MCP implementations, with Azure-specific mitigation guidance for each:</p>
 <ul>
 <li><a href="mcp/mcp01-token-mismanagement/">MCP01: Token Mismanagement and Secret Exposure</a></li>
 <li><a href="mcp/mcp02-privilege-escalation/">MCP02: Privilege Escalation via Scope Creep</a></li>
