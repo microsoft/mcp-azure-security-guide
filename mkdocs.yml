@@ -7,6 +7,9 @@ repo_name: GitHub
 theme:
   name: material
   custom_dir: docs/overrides
+  icon:
+    logo: material/shield-check
+    favicon: material/shield-check
   features:
     - navigation.top
     - content.code.copy
