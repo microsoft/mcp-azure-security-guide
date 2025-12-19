@@ -4,6 +4,8 @@ Aligned with MCP Specification [2025-11-2025](https://modelcontextprotocol.io/sp
 
 ![MCP05 Scenario](./images/owasp-mcp-guide.png)
 
+This guide provides comprehensive security and adoption guidance for implementing the Model Context Protocol (MCP) on Microsoft Azure. It combines the OWASP MCP Top 10 security framework with practical Azure implementation patterns, migration strategies, and lessons learned from enterprise deployments. Whether you're evaluating MCP, migrating existing APIs, or scaling to production, you'll find actionable guidance for building secure, governed MCP systems on Azure.
+
 ## What is the Model Context Protocol (MCP)?
 
 Before diving into security, let’s understand what we’re protecting.
@@ -44,15 +46,15 @@ This guide provides Azure implementation guidance across three areas:
 
 ## MCP Adoption Strategy
 
-Before diving into security, it's important to understand when and how to adopt MCP in your organization. This guide includes strategic guidance for:
+Understanding when and how to adopt MCP helps you make informed architectural decisions before implementing security controls:
 
 - **[When to Use MCP](adoption/when-to-use-mcp.md)**: Decision framework for determining when MCP adds value vs. when traditional APIs are more appropriate
 - **[Migration Guidance](adoption/migration-guidance.md)**: Practical patterns for wrapping existing APIs and transitioning to MCP
 - **[Enterprise Patterns & Lessons Learned](adoption/enterprise-patterns.md)**: Real-world adoption patterns, common mistakes, and proven strategies from organizations deploying MCP at scale
 
-These strategic guides complement the security guidance by helping you make informed architectural decisions before implementing MCP servers.
-
 ## OWASP MCP Top 10
+
+The ten most critical security risks for MCP implementations, with Azure-specific mitigation guidance for each:
 
 - [MCP01: Token Mismanagement and Secret Exposure](mcp/mcp01-token-mismanagement.md)
 - [MCP02: Privilege Escalation via Scope Creep](mcp/mcp02-privilege-escalation.md)
