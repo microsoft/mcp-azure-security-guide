@@ -12,249 +12,233 @@ The Model Context Protocol is moving from experimental technology to enterprise 
 
 ## From Exploration to Structured Adoption
 
-### Phase 1: Early Exploration (Where Most Organizations Are Today)
+Organizations typically move through three distinct phases as they mature their MCP adoption. Understanding where you are today helps you plan the right security controls and governance patterns for your current stage.
 
-**Characteristics**:
+??? info "Phase 1: Early Exploration (Where Most Organizations Are Today)"
 
-- Individual developers or teams experimenting with MCP servers
-- No centralized governance or approval process
-- Focus on "Can we make this work?" rather than "Should we deploy this?"
-- Shadow servers proliferating across teams
+    **Characteristics**:
 
-**Risks**:
+    - Individual developers or teams experimenting with MCP servers
+    - No centralized governance or approval process
+    - Focus on "Can we make this work?" rather than "Should we deploy this?"
+    - Shadow servers proliferating across teams
 
-- Token leakage, over-permissioned tools, inconsistent security posture
-- Multiple teams solving the same problem in different ways
-- No visibility into what MCP servers are deployed or how they're being used
+    **Risks**:
 
-**Azure Context**: Teams spinning up Azure Functions or Container Apps as MCP servers without going through standard approval processes.
+    - Token leakage, over-permissioned tools, inconsistent security posture
+    - Multiple teams solving the same problem in different ways
+    - No visibility into what MCP servers are deployed or how they're being used
 
----
+    **Azure Context**: Teams spinning up Azure Functions or Container Apps as MCP servers without going through standard approval processes.
 
-### Phase 2: Security-First Adoption (Emerging Best Practice)
+??? info "Phase 2: Security-First Adoption (Emerging Best Practice)"
 
-**Characteristics**:
+    **Characteristics**:
 
-- Enterprises start with **read-only use cases** and expand once governance patterns are proven
-- Centralized approval process for new MCP servers
-- Clear separation between read and write operations
-- Human-in-the-loop workflows for sensitive actions
+    - Enterprises start with **read-only use cases** and expand once governance patterns are proven
+    - Centralized approval process for new MCP servers
+    - Clear separation between read and write operations
+    - Human-in-the-loop workflows for sensitive actions
 
-**Example Pattern**:
+    **Example Pattern**:
 
-```
-Week 1-4:   Deploy read-only MCP servers (reports, dashboards, document retrieval)
-Week 5-8:   Monitor usage, validate security controls, collect feedback
-Week 9-12:  Introduce write operations with approval workflows (if necessary)
-Week 13+:   Gradually expand based on demonstrated safety
-```
+    ```
+    Week 1-4:   Deploy read-only MCP servers (reports, dashboards, document retrieval)
+    Week 5-8:   Monitor usage, validate security controls, collect feedback
+    Week 9-12:  Introduce write operations with approval workflows (if necessary)
+    Week 13+:   Gradually expand based on demonstrated safety
+    ```
 
-**Azure Implementation**:
+    **Azure Implementation**:
 
-- **Read-only servers**: Azure Functions with Managed Identity (Reader role on data sources)
-- **Write operations**: Azure Logic Apps for approval workflows, Conditional Access for restricted operations
-- **Monitoring**: Application Insights with custom metrics for tool invocations
+    - **Read-only servers**: Azure Functions with Managed Identity (Reader role on data sources)
+    - **Write operations**: Azure Logic Apps for approval workflows, Conditional Access for restricted operations
+    - **Monitoring**: Application Insights with custom metrics for tool invocations
 
----
+??? info "Phase 3: AI-Ready Platform Strategy (Future State)"
 
-### Phase 3: AI-Ready Platform Strategy (Future State)
+    **Characteristics**:
 
-**Characteristics**:
+    - MCP servers as a new layer above existing APIs rather than replacement
+    - Centralized MCP gateway
+    - Federated model: Multiple business units expose their data/tools via scoped MCP servers, each governed by a central policy
+    - Internal MCP registry where agents can safely discover allowed capabilities
 
-- MCP servers as a new layer above existing APIs rather than replacement
-- Centralized MCP gateway
-- Federated model: Multiple business units expose their data/tools via scoped MCP servers, each governed by a central policy
-- Internal MCP registry where agents can safely discover allowed capabilities
+    **Architecture**:
 
-**Architecture**:
+    ```
+    ┌─────────────────────────────────────────────────────────────┐
+    │                    AI Agent Layer                           │
+    │  (GitHub Copilot, Copilot Studio, Custom Agents)            │
+    └────────────────────────┬────────────────────────────────────┘
+                             │
+                             ▼
+    ┌─────────────────────────────────────────────────────────────┐
+    │              Centralized MCP Gateway                        │
+    │  - Discovery  - Authentication  - Rate Limiting             │
+    │  - Monitoring - Policy Enforcement                          │
+    └────────────────────────┬────────────────────────────────────┘
+                             │
+             ┌───────────────┼───────────────┬──────────────┐
+             │               │               │              │
+             ▼               ▼               ▼              ▼
+        ┌────────┐      ┌────────┐     ┌────────┐    ┌────────┐
+        │ Sales  │      │ Finance│     │   HR   │    │  IT    │
+        │  MCP   │      │  MCP   │     │  MCP   │    │  MCP   │
+        │ Servers│      │ Servers│     │ Servers│    │ Servers│
+        └────────┘      └────────┘     └────────┘    └────────┘
+    ```
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    AI Agent Layer                           │
-│  (GitHub Copilot, Copilot Studio, Custom Agents)            │
-└────────────────────────┬────────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────────┐
-│              Centralized MCP Gateway                        │
-│  - Discovery  - Authentication  - Rate Limiting             │
-│  - Monitoring - Policy Enforcement                          │
-└────────────────────────┬────────────────────────────────────┘
-                         │
-         ┌───────────────┼───────────────┬──────────────┐
-         │               │               │              │
-         ▼               ▼               ▼              ▼
-    ┌────────┐      ┌────────┐     ┌────────┐    ┌────────┐
-    │ Sales  │      │ Finance│     │   HR   │    │  IT    │
-    │  MCP   │      │  MCP   │     │  MCP   │    │  MCP   │
-    │ Servers│      │ Servers│     │ Servers│    │ Servers│
-    └────────┘      └────────┘     └────────┘    └────────┘
-```
+    **Azure Implementation**:
 
-**Azure Implementation**:
-
-- **Gateway**: Azure API Management with MCP routing policies
-- **Registry**: Azure API Center or custom catalog
-- **Federation**: Each business unit deploys scoped servers with consistent Entra ID integration
+    - **Gateway**: Azure API Management with MCP routing policies
+    - **Registry**: Azure API Center or custom catalog
+    - **Federation**: Each business unit deploys scoped servers with consistent Entra ID integration
 
 ---
 
 ## Emerging Adoption Patterns
 
-### 1. Centralized MCP Gateway
+We're seeing four primary architectural patterns emerge from early enterprise deployments. Each addresses different organizational needs around governance, isolation, and scale. Choose the patterns that match your security requirements and organizational structure.
 
-**What**: A single entry point for all MCP traffic.
+??? example "1. Centralized MCP Gateway"
 
-**Why**: Provides a control plane for authentication, authorization, rate limiting, monitoring, and policy enforcement across all MCP servers.
+    **What**: A single entry point for all MCP traffic.
 
-**Azure Implementation**:
+    **Why**: Provides a control plane for authentication, authorization, rate limiting, monitoring, and policy enforcement across all MCP servers.
 
-| Component | Azure Service | Purpose |
-|-----------|---------------|---------|
-| Gateway | Azure API Management | Route MCP requests, apply policies, rate limiting |
-| Identity | Microsoft Entra ID | Authenticate clients, issue tokens |
-| Discovery | Azure API Center | Catalog of approved MCP servers |
-| Monitoring | Application Insights | Track usage, errors, latency |
-| Network | Azure Firewall + NSGs | Control egress, block unauthorized destinations |
+    **Azure Implementation**:
 
-**Benefits**:
+    | Component | Azure Service | Purpose |
+    |-----------|---------------|---------|
+    | Gateway | Azure API Management | Route MCP requests, apply policies, rate limiting |
+    | Identity | Microsoft Entra ID | Authenticate clients, issue tokens |
+    | Discovery | Azure API Center | Catalog of approved MCP servers |
+    | Monitoring | Application Insights | Track usage, errors, latency |
+    | Network | Azure Firewall + NSGs | Control egress, block unauthorized destinations |
 
-- Centralized visibility and control
-- Consistent security posture across all MCP servers
-- Easier to add new servers without reconfiguring clients
+    **Benefits**:
 
-**Considerations**:
+    - Centralized visibility and control
+    - Consistent security posture across all MCP servers
+    - Easier to add new servers without reconfiguring clients
 
-- Gateway becomes a single point of failure (requires HA deployment)
-- Need to balance governance with developer agility
-- Policy enforcement must be fast to avoid latency
+    **Considerations**:
 
----
+    - Gateway becomes a single point of failure (requires HA deployment)
+    - Need to balance governance with developer agility
+    - Policy enforcement must be fast to avoid latency
 
-### 2. Scoped MCP Servers by Business Unit
+??? example "2. Scoped MCP Servers by Business Unit"
 
-**What**: Each department or business unit deploys its own set of MCP servers with domain-specific tools.
+    **What**: Each department or business unit deploys its own set of MCP servers with domain-specific tools.
 
-**Why**: Allows teams to move at their own pace while maintaining central governance. Reduces blast radius if a server is compromised.
+    **Why**: Allows teams to move at their own pace while maintaining central governance. Reduces blast radius if a server is compromised.
 
-**Azure Implementation**:
+    **Azure Implementation**:
 
-- **Sales**: MCP server exposing CRM data (read-only), opportunity creation (write with approval)
-- **Finance**: MCP server for expense reports, budget queries, invoice generation
-- **HR**: MCP server for employee directory, PTO requests, policy documents
-- **IT**: MCP server for ticket creation, status checks, KB articles
+    - **Sales**: MCP server exposing CRM data (read-only), opportunity creation (write with approval)
+    - **Finance**: MCP server for expense reports, budget queries, invoice generation
+    - **HR**: MCP server for employee directory, PTO requests, policy documents
+    - **IT**: MCP server for ticket creation, status checks, KB articles
 
-Each server deployed in its own:
+    Each server deployed in its own:
 
-- **Resource Group**: With role-based access control
-- **Virtual Network**: With peering to shared services
-- **Managed Identity**: With least-privilege access to data sources
-- **Monitoring**: With central Log Analytics workspace for aggregation
+    - **Resource Group**: With role-based access control
+    - **Virtual Network**: With peering to shared services
+    - **Managed Identity**: With least-privilege access to data sources
+    - **Monitoring**: With central Log Analytics workspace for aggregation
 
-**Benefits**:
+    **Benefits**:
 
-- Domain expertise: Each team controls their own tools
-- Isolation: Compromised server doesn't affect other business units
-- Flexibility: Teams can evolve at different paces
+    - Domain expertise: Each team controls their own tools
+    - Isolation: Compromised server doesn't affect other business units
+    - Flexibility: Teams can evolve at different paces
 
-**Considerations**:
+    **Considerations**:
 
-- Need coordination on authentication and standards
-- Risk of fragmentation if not governed centrally
-- Cross-domain workflows may be complex
+    - Need coordination on authentication and standards
+    - Risk of fragmentation if not governed centrally
+    - Cross-domain workflows may be complex
 
----
+??? example "3. Tenant-Based Isolation"
 
-### 3. Tenant-Based Isolation
+    **What**: Multi-tenant MCP deployment where each customer or environment (dev/staging/prod) has isolated servers.
 
-**What**: Multi-tenant MCP deployment where each customer or environment (dev/staging/prod) has isolated servers.
+    **Why**: Critical for SaaS providers or organizations with strict data residency requirements.
 
-**Why**: Critical for SaaS providers or organizations with strict data residency requirements.
+    **Azure Implementation**:
 
-**Azure Implementation**:
+    - **Pattern A: Separate Azure Subscriptions per Tenant**
+        - Complete isolation, separate billing
+        - Use Azure Lighthouse for centralized management
+      
+    - **Pattern B: Shared Infrastructure with Data Isolation**
+        - Single MCP server farm
+        - Tenant ID passed with every request
+        - Row-level security in database
+        - Managed identities scoped to tenant resources
 
-- **Pattern A: Separate Azure Subscriptions per Tenant**
-    - Complete isolation, separate billing
-    - Use Azure Lighthouse for centralized management
-  
-- **Pattern B: Shared Infrastructure with Data Isolation**
-    - Single MCP server farm
-    - Tenant ID passed with every request
-    - Row-level security in database
-    - Managed identities scoped to tenant resources
+    **Benefits**:
 
-**Benefits**:
+    - Strong security boundaries
+    - Compliance with data residency and sovereignty requirements
+    - Easier to onboard/offboard customers
 
-- Strong security boundaries
-- Compliance with data residency and sovereignty requirements
-- Easier to onboard/offboard customers
+    **Considerations**:
 
-**Considerations**:
+    - Increased operational complexity
+    - Higher cost (especially with separate subscriptions)
+    - Need robust tenant ID validation
 
-- Increased operational complexity
-- Higher cost (especially with separate subscriptions)
-- Need robust tenant ID validation
+??? example "4. Internal MCP Catalog"
 
----
+    **What**: A centralized registry of approved MCP servers, similar to an internal package repository or app store.
 
-### 4. Internal MCP Catalog
+    **Why**: Enables discovery for agents and developers while maintaining governance. Only vetted, secure servers are listed.
 
-**What**: A centralized registry of approved MCP servers, similar to an internal package repository or app store.
+    > **Note**: This is an evolving area. Standards for MCP server discovery and cataloging are still emerging. The patterns below reflect early approaches organizations are exploring.
 
-**Why**: Enables discovery for agents and developers while maintaining governance. Only vetted, secure servers are listed.
+    **Azure Implementation Options**:
 
-> **Note**: This is an evolving area. Standards for MCP server discovery and cataloging are still emerging. The patterns below reflect early approaches organizations are exploring.
+    **Option A: Azure API Center**
 
-**Azure Implementation Options**:
+    - Leverage Microsoft's API governance platform to catalog MCP servers alongside traditional APIs
+    - Provides built-in support for metadata, documentation, versioning, and lifecycle management
+    - Can integrate with existing API governance processes
 
-**Option A: Azure API Center**
+    **Option B: Custom Catalog**
 
-- Leverage Microsoft's API governance platform to catalog MCP servers alongside traditional APIs
-- Provides built-in support for metadata, documentation, versioning, and lifecycle management
-- Can integrate with existing API governance processes
+    - Build a purpose-built registry tailored to your organization's specific needs
+    - Allows flexibility in metadata schema, approval workflows, and integration points
+    - Requires more development and maintenance effort
 
-**Option B: Custom Catalog**
+    **Key Capabilities** (regardless of approach):
 
-- Build a purpose-built registry tailored to your organization's specific needs
-- Allows flexibility in metadata schema, approval workflows, and integration points
-- Requires more development and maintenance effort
+    - **Discovery**: Agents and developers can browse approved MCP servers
+    - **Governance**: Central approval process before servers are listed
+    - **Metadata**: Version tracking, ownership, sensitivity classification, approved clients
+    - **Lifecycle**: Support for deprecation, retirement, and migration paths
 
-**Key Capabilities** (regardless of approach):
+    **Benefits**:
 
-- **Discovery**: Agents and developers can browse approved MCP servers
-- **Governance**: Central approval process before servers are listed
-- **Metadata**: Version tracking, ownership, sensitivity classification, approved clients
-- **Lifecycle**: Support for deprecation, retirement, and migration paths
+    - Agents can discover what tools are available without manual configuration
+    - Prevents proliferation of shadow servers
+    - Centralized security posture visibility
+    - Clear ownership and accountability
 
-**Benefits**:
+    **Considerations**:
 
-- Agents can discover what tools are available without manual configuration
-- Prevents proliferation of shadow servers
-- Centralized security posture visibility
-- Clear ownership and accountability
-
-**Considerations**:
-
-- Requires organizational buy-in and ongoing maintenance
-- Need clear approval process, SLAs, and governance model
-- Must be discoverable but not become a bottleneck for innovation
-- Enforcement mechanisms needed to prevent bypass
+    - Requires organizational buy-in and ongoing maintenance
+    - Need clear approval process, SLAs, and governance model
+    - Must be discoverable but not become a bottleneck for innovation
+    - Enforcement mechanisms needed to prevent bypass
 
 ---
 
 ## Lessons from Early Adopters
 
-As organizations move MCP from experimentation to production, we're seeing common patterns of missteps, and more importantly, the hard-won lessons that lead to successful deployments. These insights come from early adopters who've navigated the challenges of securing MCP at scale.
-
-The good news: **most of these mistakes are preventable** with the right architectural patterns and governance. The sections below detail what we're seeing go wrong, why it matters, and how to fix it with Azure-specific implementation guidance.
-
-Each lesson includes:
-
-- **The Mistake**: What organizations are doing that creates risk
-- **Why It's a Problem**: The security, operational, or compliance impact
-- **Lesson Learned**: The principle or practice to adopt instead
-- **Azure Implementation**: Concrete steps using Azure services
-- **Related Security Risks**: Links to relevant OWASP MCP Top 10 entries
+Early adopters have identified common pitfalls when moving MCP to production and the patterns that lead to successful, secure deployments. Each lesson includes the mistake, why it matters, and concrete Azure implementation guidance to avoid it.
 
 ---
 
@@ -874,57 +858,59 @@ Each lesson includes:
 
 ## The Identity and Governance Challenge
 
-### Why Identity Matters More Than You Think
+MCP security requires more than traditional API authentication. Successful enterprises implement defense-in-depth with multiple control layers. No single layer is sufficient against unpredictable agent behavior.
 
-Traditional APIs have predictable clients—web apps, mobile apps, backend services. MCP servers have unpredictable agents whose behavior is influenced by:
+??? abstract "Why Identity Matters More Than You Think"
 
-- User prompts (potentially malicious)
-- Tool descriptions (potentially poisoned)
-- Context from other tools (potentially tainted)
+    Traditional APIs have predictable clients—web apps, mobile apps, backend services. MCP servers have unpredictable agents whose behavior is influenced by:
 
-This means authentication alone isn't enough. You need:
+    - User prompts (potentially malicious)
+    - Tool descriptions (potentially poisoned)
+    - Context from other tools (potentially tainted)
 
-1. **Identity**: Who/what is making the request? (User + Agent + Client)
-2. **Authorization**: What is this identity allowed to do?
-3. **Context**: What data has the agent seen? What tools has it used?
-4. **Intent**: What is the agent trying to accomplish?
-5. **Approval**: For sensitive operations, is there human oversight?
+    This means authentication alone isn't enough. You need:
 
-### Layered Control Strategy
+    1. **Identity**: Who/what is making the request? (User + Agent + Client)
+    2. **Authorization**: What is this identity allowed to do?
+    3. **Context**: What data has the agent seen? What tools has it used?
+    4. **Intent**: What is the agent trying to accomplish?
+    5. **Approval**: For sensitive operations, is there human oversight?
 
-Successful enterprises implement **defense-in-depth** with multiple layers:
+??? abstract "Layered Control Strategy"
 
-```
-┌─────────────────────────────────────────────────────┐
-│ Layer 1: Gateway Controls                           │
-│ - Entra ID authentication                           │
-│ - Rate limiting                                     │
-│ - IP restrictions                                   │
-└─────────────────────────────────────────────────────┘
-                      ▼
-┌─────────────────────────────────────────────────────┐
-│ Layer 2: Capability Controls                        │
-│ - Tool-level authorization                          │
-│ - Data sensitivity classification                   │
-│ - Human-in-the-loop for write operations            │
-└─────────────────────────────────────────────────────┘
-                      ▼
-┌─────────────────────────────────────────────────────┐
-│ Layer 3: Data Controls                              │
-│ - Row-level security                                │
-│ - Purview data classification                       │
-│ - Private Link for data access                      │
-└─────────────────────────────────────────────────────┘
-                      ▼
-┌─────────────────────────────────────────────────────┐
-│ Layer 4: Audit & Monitoring                         │
-│ - Application Insights                              │
-│ - Log Analytics                                     │
-│ - Sentinel for threat detection                     │
-└─────────────────────────────────────────────────────┘
-```
+    Successful enterprises implement **defense-in-depth** with multiple layers:
 
-**No single layer is sufficient.** Defense-in-depth ensures that if one layer fails, others still provide protection.
+    ```
+    ┌─────────────────────────────────────────────────────┐
+    │ Layer 1: Gateway Controls                           │
+    │ - Entra ID authentication                           │
+    │ - Rate limiting                                     │
+    │ - IP restrictions                                   │
+    └─────────────────────────────────────────────────────┘
+                          ▼
+    ┌─────────────────────────────────────────────────────┐
+    │ Layer 2: Capability Controls                        │
+    │ - Tool-level authorization                          │
+    │ - Data sensitivity classification                   │
+    │ - Human-in-the-loop for write operations            │
+    └─────────────────────────────────────────────────────┘
+                          ▼
+    ┌─────────────────────────────────────────────────────┐
+    │ Layer 3: Data Controls                              │
+    │ - Row-level security                                │
+    │ - Purview data classification                       │
+    │ - Private Link for data access                      │
+    └─────────────────────────────────────────────────────┘
+                          ▼
+    ┌─────────────────────────────────────────────────────┐
+    │ Layer 4: Audit & Monitoring                         │
+    │ - Application Insights                              │
+    │ - Log Analytics                                     │
+    │ - Sentinel for threat detection                     │
+    └─────────────────────────────────────────────────────┘
+    ```
+
+    **No single layer is sufficient.** Defense-in-depth ensures that if one layer fails, others still provide protection.
 
 ---
 

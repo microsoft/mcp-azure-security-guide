@@ -249,45 +249,47 @@ Different starting points require different approaches. The table below maps you
 
 ## Azure-Specific Considerations
 
-### 1. Authentication & Identity
+When migrating existing APIs to MCP on Azure, these four areas require special attention. Each presents common challenges and Azure-native solutions.
 
-**Challenge**: Existing APIs may use API keys, JWT tokens, or custom auth schemes. 
+??? tip "1. Authentication & Identity"
 
-**Solution**:
+    **Challenge**: Existing APIs may use API keys, JWT tokens, or custom auth schemes. 
 
-- Use **Azure API Management** to translate between authentication schemes
-- Backend API uses service principals or managed identities
-- MCP clients authenticate with Entra ID, APIM handles token exchange
+    **Solution**:
 
-### 2. Rate Limiting & Quotas
+    - Use **Azure API Management** to translate between authentication schemes
+    - Backend API uses service principals or managed identities
+    - MCP clients authenticate with Entra ID, APIM handles token exchange
 
-**Challenge**: AI agents can generate high request volumes, potentially overwhelming backend APIs.
+??? tip "2. Rate Limiting & Quotas"
 
-**Solution**:
+    **Challenge**: AI agents can generate high request volumes, potentially overwhelming backend APIs.
 
-- Apply rate limiting policies in APIM based on client identity
-- Use caching features in APIM (traditional and semantic) to cache frequent queries
-- Monitor with Application Insights and set alerts for anomalies
+    **Solution**:
 
-### 3. Data Transformation
+    - Apply rate limiting policies in APIM based on client identity
+    - Use caching features in APIM (traditional and semantic) to cache frequent queries
+    - Monitor with Application Insights and set alerts for anomalies
 
-**Challenge**: Backend APIs may return verbose, nested, or legacy formats that aren't agent-friendly.
+??? tip "3. Data Transformation"
 
-**Solution**:
+    **Challenge**: Backend APIs may return verbose, nested, or legacy formats that aren't agent-friendly.
 
-- Use APIM transformation policies to simplify responses
-- MCP server can perform schema mapping (e.g., flatten nested objects)
-- Return only fields relevant to the agent use case
+    **Solution**:
 
-### 4. Versioning & Rollout
+    - Use APIM transformation policies to simplify responses
+    - MCP server can perform schema mapping (e.g., flatten nested objects)
+    - Return only fields relevant to the agent use case
 
-**Challenge**: Backend APIs evolve over time. How to manage MCP tool versions?
+??? tip "4. Versioning & Rollout"
 
-**Solution**:
+    **Challenge**: Backend APIs evolve over time. How to manage MCP tool versions?
 
-- Use API versioning in APIM (`/v1/`, `/v2/`)
-- MCP server can expose multiple tool versions (`get_order_v1`, `get_order_v2`)
-- Gradually deprecate old versions with client notifications
+    **Solution**:
+
+    - Use API versioning in APIM (`/v1/`, `/v2/`)
+    - MCP server can expose multiple tool versions (`get_order_v1`, `get_order_v2`)
+    - Gradually deprecate old versions with client notifications
 
 ---
 
