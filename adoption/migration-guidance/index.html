@@ -603,56 +603,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Azure-Specific Considerations">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-authentication-identity" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Authentication &amp; Identity
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-rate-limiting-quotas" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Rate Limiting &amp; Quotas
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-data-transformation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Data Transformation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-versioning-rollout" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Versioning &amp; Rollout
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -1235,56 +1185,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Azure-Specific Considerations">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-authentication-identity" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Authentication &amp; Identity
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-rate-limiting-quotas" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Rate Limiting &amp; Quotas
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-data-transformation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Data Transformation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-versioning-rollout" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Versioning &amp; Rollout
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -1595,7 +1495,9 @@
 </details>
 <hr>
 <h2 id="azure-specific-considerations">Azure-Specific Considerations<a class="headerlink" href="#azure-specific-considerations" title="Permanent link">¶</a></h2>
-<h3 id="1-authentication-identity">1. Authentication &amp; Identity<a class="headerlink" href="#1-authentication-identity" title="Permanent link">¶</a></h3>
+<p>When migrating existing APIs to MCP on Azure, these four areas require special attention. Each presents common challenges and Azure-native solutions.</p>
+<details class="tip">
+<summary>1. Authentication &amp; Identity</summary>
 <p><strong>Challenge</strong>: Existing APIs may use API keys, JWT tokens, or custom auth schemes. </p>
 <p><strong>Solution</strong>:</p>
 <ul>
@@ -1603,7 +1505,9 @@
 <li>Backend API uses service principals or managed identities</li>
 <li>MCP clients authenticate with Entra ID, APIM handles token exchange</li>
 </ul>
-<h3 id="2-rate-limiting-quotas">2. Rate Limiting &amp; Quotas<a class="headerlink" href="#2-rate-limiting-quotas" title="Permanent link">¶</a></h3>
+</details>
+<details class="tip">
+<summary>2. Rate Limiting &amp; Quotas</summary>
 <p><strong>Challenge</strong>: AI agents can generate high request volumes, potentially overwhelming backend APIs.</p>
 <p><strong>Solution</strong>:</p>
 <ul>
@@ -1611,7 +1515,9 @@
 <li>Use caching features in APIM (traditional and semantic) to cache frequent queries</li>
 <li>Monitor with Application Insights and set alerts for anomalies</li>
 </ul>
-<h3 id="3-data-transformation">3. Data Transformation<a class="headerlink" href="#3-data-transformation" title="Permanent link">¶</a></h3>
+</details>
+<details class="tip">
+<summary>3. Data Transformation</summary>
 <p><strong>Challenge</strong>: Backend APIs may return verbose, nested, or legacy formats that aren't agent-friendly.</p>
 <p><strong>Solution</strong>:</p>
 <ul>
@@ -1619,7 +1525,9 @@
 <li>MCP server can perform schema mapping (e.g., flatten nested objects)</li>
 <li>Return only fields relevant to the agent use case</li>
 </ul>
-<h3 id="4-versioning-rollout">4. Versioning &amp; Rollout<a class="headerlink" href="#4-versioning-rollout" title="Permanent link">¶</a></h3>
+</details>
+<details class="tip">
+<summary>4. Versioning &amp; Rollout</summary>
 <p><strong>Challenge</strong>: Backend APIs evolve over time. How to manage MCP tool versions?</p>
 <p><strong>Solution</strong>:</p>
 <ul>
@@ -1627,6 +1535,7 @@
 <li>MCP server can expose multiple tool versions (<code>get_order_v1</code>, <code>get_order_v2</code>)</li>
 <li>Gradually deprecate old versions with client notifications</li>
 </ul>
+</details>
 <hr>
 <h2 id="migration-checklist">Migration Checklist<a class="headerlink" href="#migration-checklist" title="Permanent link">¶</a></h2>
 <ul>
