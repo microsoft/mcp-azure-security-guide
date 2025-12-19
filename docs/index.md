@@ -65,7 +65,7 @@ These strategic guides complement the security guidance by helping you make info
 - [MCP09: Shadow MCP Servers](mcp/mcp09-shadow-servers.md)
 - [MCP10: Context Injection and Over-Sharing](mcp/mcp10-context-oversharing.md)
 
-## Final Thoughts
+## Putting It All Together
 
 Securing MCP deployments is not a one-time task and it’s an ongoing engineering practice. As the MCP specification evolves and new attack patterns emerge, these controls should be revisited and reinforced regularly. Effective MCP security is built on defense in depth: overlapping layers of protection designed so that when one control fails, others limit impact and preserve trust.
 
@@ -74,3 +74,9 @@ Network isolation plays a foundational role in this model. It is the security la
 Security and usability are not opposing goals. Well-designed MCP security with clear identity boundaries, strong isolation, comprehensive telemetry, and automated guardrails, results in systems that are easier to operate, easier to audit, and easier to evolve safely. The same controls that protect against attackers also reduce operational risk and improve reliability.
 
 In MCP systems, trust is built through architecture. When security is treated as a first-class design constraint rather than an afterthought, MCP deployments can scale with confidence across teams, tenants, and time.
+
+## Contributors
+
+This guide was created and maintained by:
+
+- [:fontawesome-brands-github: David Barkol](https://github.com/dbarkol) - Author
