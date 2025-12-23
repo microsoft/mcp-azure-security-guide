@@ -37,6 +37,8 @@ nav:
   - MCP Adoption Strategy:
       - When to Use MCP: adoption/when-to-use-mcp.md
       - Migration Guidance: adoption/migration-guidance.md
+      - Development Best Practices: adoption/development-best-practices.md
+      - Deployment Patterns: adoption/deployment-architecture.md
       - Enterprise Patterns & Lessons Learned: adoption/enterprise-patterns.md
   - OWASP MCP Top 10:
       - 1 - Token Mismanagement & Secret Exposure: mcp/mcp01-token-mismanagement.md
