@@ -10,10 +10,10 @@
       
       
       
-        <link rel="prev" href="../when-to-use-mcp/">
+        <link rel="prev" href="../development-best-practices/">
       
       
-        <link rel="next" href="../development-best-practices/">
+        <link rel="next" href="../enterprise-patterns/">
       
       
         
@@ -24,7 +24,7 @@
     
     
       
-        <title>Migration Guidance - OWASP MCP Top 10 Security Guidance for Azure</title>
+        <title>Deployment Patterns - OWASP MCP Top 10 Security Guidance for Azure</title>
       
     
     
@@ -104,7 +104,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#migration-guidance-for-existing-apis" class="md-skip">
+        <a href="#deployment-patterns-for-mcp-servers" class="md-skip">
           Skip to content
         </a>
       
@@ -140,7 +140,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Migration Guidance
+              Deployment Patterns
             
           </span>
         </div>
@@ -387,37 +387,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Migration Guidance
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../migration-guidance/" class="md-nav__link">
         
   
   
@@ -433,204 +406,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Overview
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#migration-scenarios" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Migration Scenarios
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pattern-1-openapi-wrapper" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Pattern 1: OpenAPI Wrapper
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Pattern 1: OpenAPI Wrapper">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#architecture" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Architecture
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pattern-2-selective-exposure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Pattern 2: Selective Exposure
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Pattern 2: Selective Exposure">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#architecture_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Architecture
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pattern-3-mcp-first-design" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Pattern 3: MCP-First Design
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Pattern 3: MCP-First Design">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#architecture_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Architecture
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#considerations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Considerations
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pattern-4-legacy-api-modernization" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Pattern 4: Legacy API Modernization
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Pattern 4: Legacy API Modernization">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#recommendation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Recommendation
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#azure-specific-considerations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Azure-Specific Considerations
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#migration-checklist" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Migration Checklist
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#next-steps" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Next Steps
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -668,10 +443,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../deployment-architecture/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment Patterns
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -687,6 +489,159 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transport-comparison-stdio-vs-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transport Comparison: Stdio vs HTTP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Transport Comparison: Stdio vs HTTP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stdio-challenges-in-enterprise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stdio Challenges in Enterprise
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use-each-transport" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to Use Each Transport
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#remote-mcp-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remote MCP Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Remote MCP Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Benefits
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#azure-deployment-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure Deployment Patterns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operational-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operational Considerations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-security-topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related Security Topics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1099,33 +1054,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#migration-scenarios" class="md-nav__link">
+  <a href="#transport-comparison-stdio-vs-http" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Migration Scenarios
+        Transport Comparison: Stdio vs HTTP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Transport Comparison: Stdio vs HTTP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stdio-challenges-in-enterprise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stdio Challenges in Enterprise
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#pattern-1-openapi-wrapper" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Pattern 1: OpenAPI Wrapper
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Pattern 1: OpenAPI Wrapper">
-      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#architecture" class="md-nav__link">
+  <a href="#when-to-use-each-transport" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Architecture
+        When to Use Each Transport
       
     </span>
   </a>
@@ -1138,22 +1093,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pattern-2-selective-exposure" class="md-nav__link">
+  <a href="#remote-mcp-architecture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pattern 2: Selective Exposure
+        Remote MCP Architecture
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Pattern 2: Selective Exposure">
+    <nav class="md-nav" aria-label="Remote MCP Architecture">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#architecture_1" class="md-nav__link">
+  <a href="#key-benefits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Architecture
+        Key Benefits
       
     </span>
   </a>
@@ -1166,77 +1121,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pattern-3-mcp-first-design" class="md-nav__link">
+  <a href="#azure-deployment-patterns" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pattern 3: MCP-First Design
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Pattern 3: MCP-First Design">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#architecture_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Architecture
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#considerations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Considerations
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pattern-4-legacy-api-modernization" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Pattern 4: Legacy API Modernization
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Pattern 4: Legacy API Modernization">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#recommendation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Recommendation
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#azure-specific-considerations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Azure-Specific Considerations
+        Azure Deployment Patterns
       
     </span>
   </a>
@@ -1244,10 +1132,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#migration-checklist" class="md-nav__link">
+  <a href="#operational-considerations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Migration Checklist
+        Operational Considerations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-security-topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related Security Topics
       
     </span>
   </a>
@@ -1285,332 +1195,333 @@
   
 
 
-<h1 id="migration-guidance-for-existing-apis">Migration Guidance for Existing APIs<a class="headerlink" href="#migration-guidance-for-existing-apis" title="Permanent link">¶</a></h1>
+<h1 id="deployment-patterns-for-mcp-servers">Deployment Patterns for MCP Servers<a class="headerlink" href="#deployment-patterns-for-mcp-servers" title="Permanent link">¶</a></h1>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">¶</a></h2>
-<p>Most organizations already have APIs, microservices, and integration endpoints. The question isn't whether to replace them with MCP—it's <strong>when and how to expose existing capabilities through MCP</strong> while maintaining existing integrations.</p>
-<p>This page provides practical patterns for migrating or wrapping existing APIs to support MCP-based AI agent workflows.</p>
-<blockquote>
-<p><strong>Key Principle</strong>: MCP as an Adapter, Not a Replacement</p>
-<p>Think of MCP as a translation layer that makes existing APIs consumable by AI agents. Your REST APIs, GraphQL endpoints, and microservices continue to operate as they do today. MCP servers sit in front of them, translating agent requests into API calls and responses back into agent-friendly formats.</p>
-</blockquote>
+<p>This page provides technical guidance for deploying MCP servers in enterprise Azure environments. We cover transport options, implementation patterns, and operational considerations to help you build secure, scalable, and governable MCP infrastructure.</p>
+<div class="admonition tip">
+<p class="admonition-title">Deployment Recommendation: Use Remote HTTP-Based MCP Servers</p>
+<p>While local stdio MCP servers are convenient for prototyping, they create credential sprawl, bypass enterprise identity and policy controls, and provide zero visibility. Remote MCP servers integrate with Microsoft Entra ID, enforce centralized policies via Azure API Management, and provide comprehensive monitoring.</p>
+<p><strong>Reserve stdio servers only for prototyping or truly local operations</strong> (filesystem access, IDE integrations). For production use cases involving network APIs or organizational data, deploy remote MCP servers.</p>
+</div>
+<p>For organizational patterns and governance approaches, see <a href="../enterprise-patterns/">Enterprise Patterns &amp; Lessons Learned</a>.</p>
 <hr>
-<h2 id="migration-scenarios">Migration Scenarios<a class="headerlink" href="#migration-scenarios" title="Permanent link">¶</a></h2>
-<p>Different starting points require different approaches. The table below maps your current state to a recommended migration pattern.</p>
+<h2 id="transport-comparison-stdio-vs-http">Transport Comparison: Stdio vs HTTP<a class="headerlink" href="#transport-comparison-stdio-vs-http" title="Permanent link">¶</a></h2>
+<p>MCP supports two primary transports. Understanding their tradeoffs is essential for choosing the right deployment pattern.</p>
 <table>
 <thead>
 <tr>
-<th><strong>Current State</strong></th>
-<th><strong>Recommended Approach</strong></th>
-<th><strong>Effort</strong></th>
-<th><strong>Key Considerations</strong></th>
+<th>Aspect</th>
+<th>Stdio (Local)</th>
+<th>HTTP (Remote)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Existing OpenAPI spec</strong></td>
-<td>Build MCP adapter using spec as source of truth</td>
-<td><strong>Low</strong></td>
-<td>Use tools to auto-generate MCP tool descriptions from OpenAPI schema</td>
+<td><strong>Deployment</strong></td>
+<td>Runs as local process on workstation</td>
+<td>Deployed as centralized service</td>
 </tr>
 <tr>
-<td><strong>Selective endpoints</strong></td>
-<td>Expose only AI-safe operations via filtered manifest</td>
-<td><strong>Medium</strong></td>
-<td>Decide which operations are read-only, which require approval, which are excluded</td>
+<td><strong>Authentication</strong></td>
+<td>Static API keys/PATs in config files</td>
+<td>Microsoft Entra ID + OAuth</td>
 </tr>
 <tr>
-<td><strong>New API for agents</strong></td>
-<td>Design MCP-first with clear tool semantics</td>
-<td><strong>Medium</strong></td>
-<td>Opportunity to optimize for agent usability from the start</td>
+<td><strong>Identity</strong></td>
+<td>No user attribution</td>
+<td>Full user identity and device context</td>
 </tr>
 <tr>
-<td><strong>Legacy APIs with inconsistent schemas</strong></td>
-<td>Hold off until modernized or standardized</td>
-<td><strong>High</strong></td>
-<td>Fix the API design first; MCP won't solve poor API quality</td>
+<td><strong>Policy Enforcement</strong></td>
+<td>None (each workstation independent)</td>
+<td>Centralized via API Management</td>
+</tr>
+<tr>
+<td><strong>Monitoring</strong></td>
+<td>None</td>
+<td>Comprehensive (Application Insights, Log Analytics)</td>
+</tr>
+<tr>
+<td><strong>Credential Management</strong></td>
+<td>Manual distribution and rotation</td>
+<td>Managed Identity, automatic token refresh</td>
+</tr>
+<tr>
+<td><strong>Governance</strong></td>
+<td>Ungoverned (users install arbitrary servers)</td>
+<td>Controlled (approved servers only)</td>
+</tr>
+<tr>
+<td><strong>Best For</strong></td>
+<td>Prototyping, local file operations</td>
+<td>Production, network API access, enterprise data</td>
+</tr>
+</tbody>
+</table>
+<h3 id="stdio-challenges-in-enterprise">Stdio Challenges in Enterprise<a class="headerlink" href="#stdio-challenges-in-enterprise" title="Permanent link">¶</a></h3>
+<p>Local stdio servers create several enterprise challenges:</p>
+<ul>
+<li><strong>Credential sprawl</strong>: API keys stored in plaintext on every workstation (<a href="../../mcp/mcp01-token-mismanagement/">MCP01</a>)</li>
+<li><strong>No attribution</strong>: Cannot link actions to users or devices (<a href="../../mcp/mcp07-authz/">MCP07</a>)</li>
+<li><strong>Policy bypass</strong>: Cannot enforce DLP, rate limiting, or access controls (<a href="../../mcp/mcp07-authz/">MCP07</a>)</li>
+<li><strong>Zero visibility</strong>: No logs or monitoring (<a href="../../mcp/mcp08-telemetry/">MCP08</a>)</li>
+<li><strong>Supply chain risk</strong>: Unvetted packages installed via <code>npx</code>, <code>uvx</code>, or Docker (<a href="../../mcp/mcp04-supply-chain/">MCP04</a>)</li>
+</ul>
+<p>According to <a href="https://astrix.security/learn/blog/state-of-mcp-server-security-2025/">Astrix Security's State of MCP report</a>, 88% of MCP servers require credentials, and 53% rely on long-lived static secrets, which makes stdio inappropriate for most enterprise scenarios.</p>
+<h3 id="when-to-use-each-transport">When to Use Each Transport<a class="headerlink" href="#when-to-use-each-transport" title="Permanent link">¶</a></h3>
+<p><strong>Use stdio for</strong>:</p>
+<p>✅ Prototyping and learning<br>
+✅ Local filesystem operations<br>
+✅ IDE integrations (no network calls)<br>
+✅ Personal tools with no org data  </p>
+<p><strong>Use HTTP for</strong>:</p>
+<p>✅ Production deployments<br>
+✅ Network API access<br>
+✅ Organizational data access<br>
+✅ Multi-user scenarios<br>
+✅ Compliance requirements  </p>
+<hr>
+<h2 id="remote-mcp-architecture">Remote MCP Architecture<a class="headerlink" href="#remote-mcp-architecture" title="Permanent link">¶</a></h2>
+<p>Remote MCP servers run as Azure services behind a gateway that handles authentication, policy, and routing:</p>
+<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────┐
+│          AI Agent (Claude Desktop, VS Code      │
+│       GitHub Copilot, Copilot Studio)           │
+└────────────────────┬────────────────────────────┘
+                     │ HTTP + OAuth/OIDC
+                     │ (No local credentials)
+                     ▼
+┌─────────────────────────────────────────────────┐
+│         Centralized MCP Gateway                 │
+│      (Azure API Management)                     │
+│  • Microsoft Entra ID authentication            │
+│  • Rate limiting and throttling                 │
+│  • Policy enforcement (data loss prevention)    │
+│  • Centralized monitoring and logging           │
+└────────────────────┬────────────────────────────┘
+                     │
+        ┌────────────┼────────────┐
+        ▼            ▼            ▼
+    ┌────────┐  ┌────────┐   ┌────────┐
+    │ Sales  │  │Finance │   │   HR   │
+    │  MCP   │  │  MCP   │   │  MCP   │
+    │ Server │  │ Server │   │ Server │
+    └───┬────┘  └───┬────┘   └───┬────┘
+        │           │            │
+        │ Managed   │ Managed    │ Managed
+        │ Identity  │ Identity   │ Identity
+        ▼           ▼            ▼
+     [Azure      [Azure       [Azure
+      Services]   Services]    Services]
+</code></pre></div>
+<h3 id="key-benefits">Key Benefits<a class="headerlink" href="#key-benefits" title="Permanent link">¶</a></h3>
+<p>This architecture solves the fundamental problems of stdio deployments while enabling enterprise-grade security and operations:</p>
+<table>
+<thead>
+<tr>
+<th>Benefit</th>
+<th>How Remote Architecture Delivers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Identity-based access</strong></td>
+<td>Entra ID authentication + Conditional Access, no static credentials</td>
+</tr>
+<tr>
+<td><strong>Centralized policy</strong></td>
+<td>API Management enforces rate limits, DLP, time/location restrictions</td>
+</tr>
+<tr>
+<td><strong>Complete visibility</strong></td>
+<td>All requests logged to Application Insights and Log Analytics</td>
+</tr>
+<tr>
+<td><strong>Governance</strong></td>
+<td>Only approved servers accessible, version control enforced</td>
+</tr>
+<tr>
+<td><strong>Operational control</strong></td>
+<td>CI/CD pipelines, blue/green deployments, centralized updates</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h2 id="pattern-1-openapi-wrapper">Pattern 1: OpenAPI Wrapper<a class="headerlink" href="#pattern-1-openapi-wrapper" title="Permanent link">¶</a></h2>
-<p><strong>When to use</strong>: You have a well-documented REST API with an OpenAPI specification and want to expose some or all of its endpoints to AI agents.</p>
-<details class="info">
-<summary>How It Works</summary>
-<ol>
-<li><strong>Parse the OpenAPI spec</strong> to extract endpoints, parameters, and response schemas</li>
-<li><strong>Generate MCP tool descriptions</strong> that map each endpoint to a tool with natural-language semantics</li>
-<li><strong>Deploy an MCP server</strong> that translates tool invocations into HTTP API calls</li>
-<li><strong>Apply filtering and governance</strong> to control which endpoints are exposed</li>
-</ol>
-<h3 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">¶</a></h3>
-<div class="highlight"><pre><span></span><code>┌──────────────┐       ┌──────────────────┐       ┌──────────────────┐
-│  AI Agent    │──────▶│  MCP Server      │──────▶│  REST API        │
-│              │       │  (Adapter)       │       │  (Existing)      │
-└──────────────┘       └──────────────────┘       └──────────────────┘
-                              │
-                              │ Reads
-                              ▼
-                       ┌──────────────────┐
-                       │  OpenAPI Spec    │
-                       │  (Single Source  │
-                       │   of Truth)      │
-                       └──────────────────┘
+<h2 id="azure-deployment-patterns">Azure Deployment Patterns<a class="headerlink" href="#azure-deployment-patterns" title="Permanent link">¶</a></h2>
+<p>The following patterns show how to implement remote MCP servers on Azure, from simple single-server deployments to complex multi-tenant architectures. Choose the pattern that matches your scale and governance requirements.</p>
+<details class="example">
+<summary>Pattern 1: Single Remote MCP Server</summary>
+<p>Deploy a single remote MCP server with Entra ID authentication and basic monitoring.</p>
+<p><strong>Architecture</strong>:</p>
+<div class="highlight"><pre><span></span><code>┌──────────┐       ┌──────────────┐        ┌──────────────────┐
+│   User   │──────▶│  Entra ID    │──────▶ │  API Management  │
+│  Agent   │       │   (OAuth)    │        │  • Auth policies │
+└──────────┘       └──────────────┘        │  • Rate limiting │
+                                           └────────┬─────────┘
+                                                    │
+                                                    ▼
+                                           ┌────────────────────┐
+                                           │   Container App    │
+                                           │   (MCP Server)     │
+                                           └─────────┬──────────┘
+                                                     │ Managed
+                                                     │ Identity
+                                                     ▼
+                                           ┌────────────────────┐
+                                           │  Azure Services    │
+                                           │  (Cosmos, Storage) │
+                                           └────────────────────┘
 </code></pre></div>
+<p><strong>Components</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Azure Service</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MCP Server</td>
+<td>Container Apps</td>
+<td>HTTP transport, web endpoint</td>
+</tr>
+<tr>
+<td>Authentication</td>
+<td>Entra ID</td>
+<td>OAuth 2.0, JWT validation</td>
+</tr>
+<tr>
+<td>Gateway</td>
+<td>API Management</td>
+<td>Routing, policies, rate limiting</td>
+</tr>
+<tr>
+<td>Identity</td>
+<td>Managed Identity</td>
+<td>Server-to-service auth (no secrets)</td>
+</tr>
+<tr>
+<td>Monitoring</td>
+<td>Application Insights</td>
+<td>Logs, metrics, alerts</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Benefits</strong>: Simple setup, eliminates credential sprawl, basic observability.</p>
 </details>
 <details class="example">
-<summary>Azure Implementation</summary>
-<p><strong>Azure API Management as MCP Gateway</strong></p>
-<p>Use APIM policies to:</p>
-<ul>
-<li>Expose a subset of APIs as MCP tools</li>
-<li>Add rate limiting, caching, and transformation</li>
-<li>Enforce authentication and authorization at the gateway layer</li>
-<li>Route to backend APIs with header injection</li>
-</ul>
-</details>
-<details class="tip">
-<summary>Benefits &amp; Considerations</summary>
-<p><strong>Benefits</strong>:</p>
-<ul>
-<li><strong>Low effort</strong>: Automated generation from existing documentation</li>
-<li><strong>Single source of truth</strong>: OpenAPI spec remains authoritative</li>
-<li><strong>Gradual rollout</strong>: Start with a few endpoints, expand over time</li>
-</ul>
-<p><strong>Considerations</strong>:</p>
-<ul>
-<li>Not all REST operations map cleanly to agent tools (e.g., streaming, file uploads)</li>
-<li>Need to add natural-language descriptions if OpenAPI spec is sparse</li>
-<li>Agent may not understand complex parameter dependencies</li>
-</ul>
-</details>
-<hr>
-<h2 id="pattern-2-selective-exposure">Pattern 2: Selective Exposure<a class="headerlink" href="#pattern-2-selective-exposure" title="Permanent link">¶</a></h2>
-<p><strong>When to use</strong>: Your API has dozens of endpoints, but only a few are appropriate or safe for AI agents. You want to expose a curated subset with additional governance.</p>
-<details class="info">
-<summary>How It Works</summary>
-<ol>
-<li><strong>Identify AI-safe operations</strong>: Read-only, non-destructive, well-documented</li>
-<li><strong>Create an MCP server</strong> that exposes only these operations</li>
-<li><strong>Apply security controls</strong>: Separate authentication, stricter rate limits, approval workflows for sensitive operations</li>
-<li><strong>Monitor and expand</strong>: Add more operations as confidence grows</li>
-</ol>
-<h3 id="architecture_1">Architecture<a class="headerlink" href="#architecture_1" title="Permanent link">¶</a></h3>
-<div class="highlight"><pre><span></span><code>┌──────────────────┐
-│   Full REST API  │
-│   50 endpoints   │
-└────────┬─────────┘
-         │
-         │ Filters &amp; Governance
-         │
-         ▼
-┌──────────────────┐       ┌──────────────────┐
-│  MCP Server      │◀──────│  AI Agent        │
-│  (Filtered)      │       │                  │
-│  - 5 read tools  │       └──────────────────┘
-│  - 2 write tools │
-│    (w/ approval) │
-└──────────────────┘
+<summary>Pattern 2: Gateway with Multiple Servers</summary>
+<p>Deploy a centralized gateway that routes to multiple backend MCP servers. This pattern is detailed in <a href="../enterprise-patterns/#emerging-adoption-patterns">Enterprise Patterns - Centralized MCP Gateway</a>.</p>
+<p><strong>Architecture</strong>:</p>
+<div class="highlight"><pre><span></span><code>                  ┌─── API Management ───┐
+User → Entra ID → │  • Auth &amp; Policy     │ ──┬─→ Sales MCP
+                  │  • Rate Limiting     │   ├─→ Finance MCP
+                  │  • Monitoring        │   ├─→ HR MCP
+                  └──────────────────────┘   └─→ IT MCP
 </code></pre></div>
+<p><strong>Benefits</strong>: Centralized control, consistent policies, simplified client config.</p>
+<p>See <a href="../enterprise-patterns/#emerging-adoption-patterns">detailed gateway pattern</a> in Enterprise Patterns.</p>
 </details>
 <details class="example">
-<summary>Azure Implementation</summary>
-<p><strong>Governance-First Architecture</strong></p>
-<p>This pattern emphasizes <strong>policy-driven filtering</strong> rather than automatic generation:</p>
+<summary>Pattern 3: Multi-Tenant Deployment</summary>
+<p>Deploy MCP servers that serve multiple tenants with data isolation.</p>
+<p><strong>Architecture Options</strong>:</p>
 <ul>
-<li>Maintain an authoritative registry of approved tools with governance metadata</li>
-<li>MCP server dynamically loads and exposes only tools that pass governance checks</li>
-<li>Each tool declaration includes metadata: operation type (read/write), sensitivity level, and approval requirements</li>
-</ul>
-<p><strong>Identity &amp; Authorization Strategy</strong></p>
-<p>Implement defense-in-depth with layered access controls:</p>
-<ul>
-<li><strong>Entra ID App Roles &amp; Scopes</strong>: Define granular permissions (<code>Orders.Read</code>, <code>Orders.Write</code>) for tool-level authorization</li>
-<li><strong>Token Validation</strong>: MCP server validates both audience (was token issued for this server?) and scopes/roles (does token have required permissions for this operation?)</li>
-<li><strong>Human Approval Workflows</strong>: Route sensitive operations through approval gates before execution</li>
-</ul>
-<p><strong>Key Differentiator</strong>: Unlike Pattern 1's automated approach, this pattern gives security teams explicit control over each exposed operation with runtime policy enforcement and approval gates.</p>
-</details>
-<details class="tip">
-<summary>Benefits &amp; Considerations</summary>
-<p><strong>Benefits</strong>:</p>
-<ul>
-<li><strong>Granular control</strong>: Choose exactly what agents can access</li>
-<li><strong>Risk mitigation</strong>: Start with safe operations, expand carefully</li>
-<li><strong>Human-in-the-loop</strong>: Approval workflows for sensitive actions</li>
-</ul>
-<p><strong>Considerations</strong>:</p>
-<ul>
-<li>Requires ongoing maintenance as API evolves</li>
-<li>Agents may request unavailable operations and get frustrated</li>
-<li>Need clear documentation explaining what's available and why</li>
-</ul>
-</details>
-<hr>
-<h2 id="pattern-3-mcp-first-design">Pattern 3: MCP-First Design<a class="headerlink" href="#pattern-3-mcp-first-design" title="Permanent link">¶</a></h2>
-<p><strong>When to use</strong>: You're building a new API specifically for AI agents or re-architecting an existing API.</p>
-<details class="info">
-<summary>How It Works</summary>
-<ol>
-<li><strong>Start with agent use cases</strong>: What tasks should the agent accomplish?</li>
-<li><strong>Design tools with clear semantics</strong>: Each tool has a single, well-defined purpose</li>
-<li><strong>Build the MCP server first</strong>: Implement the tool interface</li>
-<li><strong>Deploy through Azure API Management</strong>: Use APIM as a gateway for both MCP and REST clients</li>
-<li><strong>Optionally expose REST API</strong>: If needed for traditional clients, add REST endpoints alongside MCP</li>
-</ol>
-<h3 id="architecture_2">Architecture<a class="headerlink" href="#architecture_2" title="Permanent link">¶</a></h3>
-<div class="highlight"><pre><span></span><code>┌──────────────────────────────────────┐
-│   MCP-First API Design               │
-│                                      │
-│  ┌────────────────────────────────┐  │
-│  │  MCP Server (Primary Interface)│  │
-│  │  - get_order                   │  │
-│  │  - create_order                │  │
-│  │  - cancel_order                │  │
-│  └────────────┬───────────────────┘  │
-│               │                      │
-│               ▼                      │
-│  ┌────────────────────────────────┐  │
-│  │  Business Logic Layer          │  │
-│  └────────────┬───────────────────┘  │
-│               │                      │
-│               ▼                      │
-│  ┌────────────────────────────────┐  │
-│  │  Data Layer (Cosmos DB, SQL)   │  │
-│  └────────────────────────────────┘  │
-└──────────────────────────────────────┘
-</code></pre></div>
-</details>
-<details class="example">
-<summary>Azure Implementation</summary>
-<p><strong>Design Principles for Agent-Optimized Tools</strong></p>
-<ul>
-<li><strong>Clear naming</strong>: Use simple, action-oriented tool names that describe what the tool does</li>
-<li><strong>Natural language descriptions</strong>: Write descriptions that help LLMs understand when and how to use each tool</li>
-<li><strong>Consistent schemas</strong>: Define predictable input/output formats using JSON Schema</li>
-<li><strong>Single responsibility</strong>: Each tool should accomplish one well-defined task</li>
-</ul>
-<p><strong>Azure API Management as Gateway</strong></p>
-<p>Always deploy MCP servers behind Azure API Management, regardless of whether you need REST support:</p>
-<ul>
-<li><strong>MCP-only scenarios</strong>: APIM acts as a passthrough gateway, providing security, rate limiting, monitoring, and token validation without protocol translation</li>
-<li><strong>Hybrid scenarios</strong>: APIM exposes both MCP and REST interfaces to the same backend, applying consistent policies across protocols</li>
-</ul>
-<p><strong>Security &amp; Identity Architecture</strong></p>
-<ul>
-<li><strong>Microsoft Entra ID</strong>: Authenticate both the MCP server and connecting clients</li>
-<li><strong>APIM policy enforcement</strong>: Validate tokens, enforce rate limits, and apply conditional access at the gateway</li>
-<li><strong>Managed identities</strong>: Use for backend data access (databases, storage, other Azure services)</li>
-<li><strong>Application Insights</strong>: Centralize logging and telemetry for both APIM and backend services</li>
-</ul>
-</details>
-<details class="tip">
-<summary>Benefits &amp; Considerations</summary>
-<ul>
-<li><strong>Optimized for agents</strong>: No retrofitting or translation overhead</li>
-<li><strong>Simpler architecture</strong>: Single interface to maintain</li>
-<li><strong>Better agent experience</strong>: Tools designed for natural-language invocation</li>
-</ul>
-<h3 id="considerations">Considerations<a class="headerlink" href="#considerations" title="Permanent link">¶</a></h3>
-<ul>
-<li>Requires team buy-in to MCP-first approach</li>
-<li>May need to support REST clients eventually</li>
-<li>Fewer established patterns and examples (emerging space)</li>
-</ul>
-</details>
-<hr>
-<h2 id="pattern-4-legacy-api-modernization">Pattern 4: Legacy API Modernization<a class="headerlink" href="#pattern-4-legacy-api-modernization" title="Permanent link">¶</a></h2>
-<p><strong>When to use</strong>: Your API is a legacy system with inconsistent schemas, poor documentation, or complex interdependencies.</p>
-<h3 id="recommendation">Recommendation<a class="headerlink" href="#recommendation" title="Permanent link">¶</a></h3>
-<details class="danger">
-<summary>Do NOT attempt to MCP-enable directly</summary>
-<p><strong>Instead</strong>: </p>
-<ol>
 <li>
-<p><strong>Modernize the API first</strong>:</p>
+<p><strong>Separate Subscriptions</strong>: Complete isolation per tenant, managed via Azure Lighthouse</p>
 <ul>
-<li>Standardize schemas (use JSON Schema or OpenAPI)</li>
-<li>Add comprehensive documentation</li>
-<li>Simplify complex operations</li>
-<li>Improve error handling</li>
+<li>Use when: Strict compliance, separate billing, complete isolation required</li>
 </ul>
 </li>
 <li>
-<p><strong>Then apply Pattern 1 or 2</strong>: Once the API is clean and well-documented, wrap it with an MCP adapter</p>
-</li>
-<li>
-<p><strong>Or build a facade</strong>: Create a new MCP-first API (Pattern 3) that internally calls the legacy system</p>
-</li>
-</ol>
-<p><strong>Why This Approach?</strong></p>
+<p><strong>Shared Infrastructure</strong>: Single server farm with tenant-aware routing and row-level security</p>
 <ul>
-<li><strong>MCP won't fix API quality issues</strong>: An LLM can't understand a poorly designed API better than a human can</li>
-<li><strong>Security risks</strong>: Inconsistent APIs are harder to govern and easier to exploit</li>
-<li><strong>Wasted effort</strong>: You'll spend more time debugging agent behavior than improving the underlying system</li>
+<li>Use when: Cost efficiency matters, strong data isolation can be enforced</li>
 </ul>
+</li>
+</ul>
+<p><strong>Implementation Considerations</strong>:</p>
+<ul>
+<li>Pass tenant ID in JWT claims</li>
+<li>Validate tenant ID on every request</li>
+<li>Use row-level security in databases</li>
+<li>Implement tenant-scoped Managed Identities</li>
+<li>Monitor for cross-tenant leakage</li>
+</ul>
+<p><strong>Benefits</strong>: Scales to many tenants, supports SaaS models, enforces data residency.</p>
 </details>
 <hr>
-<h2 id="azure-specific-considerations">Azure-Specific Considerations<a class="headerlink" href="#azure-specific-considerations" title="Permanent link">¶</a></h2>
-<p>When migrating existing APIs to MCP on Azure, these four areas require special attention. Each presents common challenges and Azure-native solutions.</p>
-<details class="tip">
-<summary>1. Authentication &amp; Identity</summary>
-<p><strong>Challenge</strong>: Existing APIs may use API keys, JWT tokens, or custom auth schemes. </p>
-<p><strong>Solution</strong>:</p>
-<ul>
-<li>Use <strong>Azure API Management</strong> to translate between authentication schemes</li>
-<li>Backend API uses service principals or managed identities</li>
-<li>MCP clients authenticate with Entra ID, APIM handles token exchange</li>
-</ul>
-</details>
-<details class="tip">
-<summary>2. Rate Limiting &amp; Quotas</summary>
-<p><strong>Challenge</strong>: AI agents can generate high request volumes, potentially overwhelming backend APIs.</p>
-<p><strong>Solution</strong>:</p>
-<ul>
-<li>Apply rate limiting policies in APIM based on client identity</li>
-<li>Use caching features in APIM (traditional and semantic) to cache frequent queries</li>
-<li>Monitor with Application Insights and set alerts for anomalies</li>
-</ul>
-</details>
-<details class="tip">
-<summary>3. Data Transformation</summary>
-<p><strong>Challenge</strong>: Backend APIs may return verbose, nested, or legacy formats that aren't agent-friendly.</p>
-<p><strong>Solution</strong>:</p>
-<ul>
-<li>Use APIM transformation policies to simplify responses</li>
-<li>MCP server can perform schema mapping (e.g., flatten nested objects)</li>
-<li>Return only fields relevant to the agent use case</li>
-</ul>
-</details>
-<details class="tip">
-<summary>4. Versioning &amp; Rollout</summary>
-<p><strong>Challenge</strong>: Backend APIs evolve over time. How to manage MCP tool versions?</p>
-<p><strong>Solution</strong>:</p>
-<ul>
-<li>Use API versioning in APIM (<code>/v1/</code>, <code>/v2/</code>)</li>
-<li>MCP server can expose multiple tool versions (<code>get_order_v1</code>, <code>get_order_v2</code>)</li>
-<li>Gradually deprecate old versions with client notifications</li>
-</ul>
-</details>
+<h2 id="operational-considerations">Operational Considerations<a class="headerlink" href="#operational-considerations" title="Permanent link">¶</a></h2>
+<p>Remote MCP deployments introduce operational complexity that should be planned for:</p>
+<table>
+<thead>
+<tr>
+<th>Consideration</th>
+<th>Impact</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Infrastructure complexity</strong></td>
+<td>Requires deployment pipelines, monitoring, HA</td>
+<td>Use managed services (Container Apps, APIM), start simple</td>
+</tr>
+<tr>
+<td><strong>Multi-tenant security</strong></td>
+<td>Risk of confused deputy, cross-user data leakage</td>
+<td>Implement on-behalf-of flows, row-level security, extensive testing</td>
+</tr>
+<tr>
+<td><strong>Versioning</strong></td>
+<td>Centralized upgrades affect all users</td>
+<td>Blue/green deployments, feature flags, API versioning</td>
+</tr>
+<tr>
+<td><strong>Discovery</strong></td>
+<td>No standard mechanism for agents to find servers</td>
+<td>Deploy internal registry (Azure API Center), document catalog</td>
+</tr>
+<tr>
+<td><strong>Network latency</strong></td>
+<td>Remote calls slower than local stdio</td>
+<td>Design tools to minimize round-trips, use regional deployment, cache where appropriate</td>
+</tr>
+</tbody>
+</table>
 <hr>
-<h2 id="migration-checklist">Migration Checklist<a class="headerlink" href="#migration-checklist" title="Permanent link">¶</a></h2>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">¶</a></h2>
+<p>For enterprise MCP deployments:</p>
+<p>✅ <strong>Default to remote HTTP servers</strong> - Integrate with Entra ID, enforce centralized policy, enable complete monitoring<br>
+✅ <strong>Deploy behind API Management</strong> - Centralized gateway for authentication, rate limiting, and routing<br>
+✅ <strong>Design experience-oriented tools</strong> - See <a href="../development-best-practices/">Development Best Practices</a> for tool design guidance<br>
+✅ <strong>Start with read-only</strong> - Prove security controls before adding write capabilities<br>
+✅ <strong>Use stdio only for local operations</strong> - Prototyping, filesystem access, no network APIs  </p>
+<div class="admonition tip">
+<p class="admonition-title">Getting Started with Remote MCP</p>
+<p><strong>Phase 1: Pilot</strong> - Deploy single remote server for read-only use case<br>
+<strong>Phase 2: Governance</strong> - Establish approval process and server catalog<br>
+<strong>Phase 3: Gateway</strong> - Build centralized APIM infrastructure with monitoring<br>
+<strong>Phase 4: Scale</strong> - Migrate existing servers and expand approved catalog<br>
+<strong>Phase 5: Mature</strong> - Enable write operations with appropriate controls</p>
+</div>
+<hr>
+<h2 id="related-security-topics">Related Security Topics<a class="headerlink" href="#related-security-topics" title="Permanent link">¶</a></h2>
 <ul>
-<li>[ ] <strong>Assess current API quality</strong>: Is it well-documented? Consistent? Secure?</li>
-<li>[ ] <strong>Identify AI-safe operations</strong>: Which endpoints are read-only or low-risk?</li>
-<li>[ ] <strong>Choose migration pattern</strong>: OpenAPI wrapper, selective exposure, or MCP-first?</li>
-<li>[ ] <strong>Implement authentication</strong>: Integrate with Microsoft Entra ID</li>
-<li>[ ] <strong>Add governance controls</strong>: Rate limiting, monitoring, approval workflows</li>
-<li>[ ] <strong>Test with sample agents</strong>: Validate tool descriptions and behavior</li>
-<li>[ ] <strong>Deploy incrementally</strong>: Start with 1-2 tools, expand based on feedback</li>
-<li>[ ] <strong>Monitor and iterate</strong>: Use Application Insights to track usage and errors</li>
-<li>[ ] <strong>Document for developers</strong>: Explain what's available and how to use it</li>
+<li><a href="../../mcp/mcp01-token-mismanagement/">MCP01 - Token Mismanagement</a> - Credential security</li>
+<li><a href="../../mcp/mcp07-authz/">MCP07 - Insufficient Authentication &amp; Authorization</a> - Identity and access control</li>
+<li><a href="../../mcp/mcp08-telemetry/">MCP08 - Lack of Audit &amp; Telemetry</a> - Monitoring and logging</li>
+<li><a href="../../mcp/mcp09-shadow-servers/">MCP09 - Shadow MCP Servers</a> - Preventing unauthorized deployments</li>
 </ul>
 <hr>
 <h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">¶</a></h2>
 <ul>
-<li><strong>Need help deciding?</strong> → <a href="../when-to-use-mcp/">When to Use MCP</a> for decision framework</li>
-<li><strong>Want to learn from real-world examples?</strong> → <a href="../enterprise-patterns/">Enterprise Patterns &amp; Lessons Learned</a></li>
-<li><strong>Ready to secure your implementation?</strong> → <a href="../../#owasp-mcp-top-10">OWASP MCP Top 10</a></li>
+<li><strong>Understanding deployment trade-offs?</strong> → Review transport comparison and architecture diagrams above</li>
+<li><strong>Need tool design guidance?</strong> → <a href="../development-best-practices/">Development Best Practices</a> for building effective tools</li>
+<li><strong>Ready for governance?</strong> → <a href="../enterprise-patterns/">Enterprise Patterns</a> for organizational controls</li>
+<li><strong>Wrapping existing APIs?</strong> → <a href="../migration-guidance/">Migration Guidance</a> for adapter patterns</li>
+<li><strong>Securing your deployment?</strong> → <a href="../../#owasp-mcp-top-10">OWASP MCP Top 10</a> for security guidance</li>
 </ul>
 
 

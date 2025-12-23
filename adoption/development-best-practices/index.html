@@ -1,0 +1,2173 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Practical security guidance for MCP-based AI systems">
+      
+      
+        <meta name="author" content="David Barkol">
+      
+      
+      
+        <link rel="prev" href="../migration-guidance/">
+      
+      
+        <link rel="next" href="../deployment-architecture/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>Development Best Practices - OWASP MCP Top 10 Security Guidance for Azure</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <!-- Primary Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="OWASP MCP Top 10 Security Guidance for Azure">
+  <meta property="og:description" content="Practical security guidance for implementing Model Context Protocol (MCP) systems on Azure, aligned with the OWASP MCP Top 10.">
+  <meta property="og:url" content="https://microsoft.github.io/mcp-azure-security-guide/">
+  <meta property="og:image" content="https://microsoft.github.io/mcp-azure-security-guide/images/owasp-mcp-guide.png?v=2">
+  <meta property="og:image:secure_url" content="https://microsoft.github.io/mcp-azure-security-guide/images/owasp-mcp-guide.png?v=2">
+  
+  <!-- LinkedIn-specific (safe defaults) -->
+  <meta property="og:image:width" content="835">
+  <meta property="og:image:height" content="461">
+  <meta property="og:image:type" content="image/png">
+  
+  <!-- Twitter Card -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="OWASP MCP Top 10 Security Guidance for Azure">
+  <meta property="twitter:description" content="Practical security guidance for implementing Model Context Protocol (MCP) systems on Azure, aligned with the OWASP MCP Top 10.">
+  <meta property="twitter:image" content="https://microsoft.github.io/mcp-azure-security-guide/images/owasp-mcp-guide.png">
+
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#development-best-practices-for-mcp-servers" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OWASP MCP Top 10 Security Guidance for Azure" class="md-header__button md-logo" aria-label="OWASP MCP Top 10 Security Guidance for Azure" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m10 17-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9m-6-8L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5z"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OWASP MCP Top 10 Security Guidance for Azure
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Development Best Practices
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/microsoft/mcp-azure-security-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OWASP MCP Top 10 Security Guidance for Azure" class="md-nav__button md-logo" aria-label="OWASP MCP Top 10 Security Guidance for Azure" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m10 17-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9m-6-8L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5z"></path></svg>
+
+    </a>
+    OWASP MCP Top 10 Security Guidance for Azure
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/microsoft/mcp-azure-security-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP Adoption Strategy
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MCP Adoption Strategy
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../when-to-use-mcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    When to Use MCP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migration-guidance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migration Guidance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development Best Practices
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development Best Practices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tool-design-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tool Design Principles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tool Design Principles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#experience-oriented-vs-system-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Experience-Oriented vs System APIs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-design-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Design Guidelines
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-anti-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Anti-Patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schema Design
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Schema Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input-schema-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Input Schema (Required)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-schema-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output Schema (Optional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-content-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output Content Guidelines
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error Handling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Handling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#two-types-of-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two Types of Errors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#writing-effective-error-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Writing Effective Error Messages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Considerations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#include-tracing-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Include Tracing Information
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-mcp-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing MCP Servers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing MCP Servers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#three-layers-of-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three Layers of Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unit-tests-tool-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unit Tests: Tool Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protocol-tests-mcp-compliance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protocol Tests: MCP Compliance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agent-tests-real-world-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent Tests: Real-World Usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing Strategy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference Documentation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reference Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mcp-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MCP Specification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tool-design-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tool Design Best Practices
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deployment-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment Patterns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../enterprise-patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enterprise Patterns &amp; Lessons Learned
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OWASP MCP Top 10
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    OWASP MCP Top 10
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mcp/mcp01-token-mismanagement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 - Token Mismanagement &amp; Secret Exposure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mcp/mcp02-privilege-escalation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2 - Privilege Escalation via Scope Creep
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mcp/mcp03-tool-poisoning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3 - Tool Poisoning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mcp/mcp04-supply-chain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4 - Software Supply Chain Attacks &amp; Dependency Tampering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mcp/mcp05-command-injection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5 - Command Injection &amp; Execution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mcp/mcp06-prompt-injection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6 - Prompt Injection via Contextual Payloads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mcp/mcp07-authz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7 - Insufficient Authentication &amp; Authorization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mcp/mcp08-telemetry/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8 - Lack of Audit &amp; Telemetry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mcp/mcp09-shadow-servers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9 - Shadow MCP Servers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mcp/mcp10-context-oversharing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 - Context Injection &amp; Over-Sharing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tool-design-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tool Design Principles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tool Design Principles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#experience-oriented-vs-system-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Experience-Oriented vs System APIs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-design-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Design Guidelines
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-anti-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Anti-Patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schema Design
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Schema Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input-schema-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Input Schema (Required)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-schema-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output Schema (Optional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-content-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output Content Guidelines
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error Handling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Handling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#two-types-of-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two Types of Errors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#writing-effective-error-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Writing Effective Error Messages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Considerations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#include-tracing-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Include Tracing Information
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-mcp-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing MCP Servers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing MCP Servers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#three-layers-of-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three Layers of Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unit-tests-tool-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unit Tests: Tool Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protocol-tests-mcp-compliance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protocol Tests: MCP Compliance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agent-tests-real-world-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent Tests: Real-World Usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing Strategy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference Documentation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reference Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mcp-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MCP Specification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tool-design-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tool Design Best Practices
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="development-best-practices-for-mcp-servers">Development Best Practices for MCP Servers<a class="headerlink" href="#development-best-practices-for-mcp-servers" title="Permanent link">¶</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">¶</a></h2>
+<p>Building effective MCP servers requires different thinking than traditional API development. This page provides practical guidance for designing, implementing, and testing MCP tools that agents can successfully use.</p>
+<hr>
+<h2 id="tool-design-principles">Tool Design Principles<a class="headerlink" href="#tool-design-principles" title="Permanent link">¶</a></h2>
+<p>The quality of your MCP tools directly impacts agent performance and user experience. Well-designed tools enable agents to accomplish tasks efficiently, while poorly designed tools lead to confusion, errors, and frustrated users.</p>
+<p>This section covers the core principles for designing tools that agents can understand and use effectively.</p>
+<div class="admonition tip">
+<p class="admonition-title">Key Principle: Design for Agent Experience, Not API Completeness</p>
+<p>Traditional APIs expose endpoints for flexibility. MCP tools should expose <strong>tasks</strong> that accomplish specific goals. Think "what does the user want to accomplish?" rather than "what operations does the system support?"</p>
+</div>
+<h3 id="experience-oriented-vs-system-apis">Experience-Oriented vs System APIs<a class="headerlink" href="#experience-oriented-vs-system-apis" title="Permanent link">¶</a></h3>
+<p>The most common mistake when building MCP servers is treating them like REST APIs: exposing every operation as a separate tool. This overwhelms LLMs and leads to poor agent performance.</p>
+<p>❌ <strong>Avoid</strong>: Auto-generating tools from OpenAPI specs that expose every endpoint<br>
+✅ <strong>Prefer</strong>: Task-oriented tools that encapsulate multi-step workflows</p>
+<p><strong>Examples</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>System API Approach</th>
+<th>Experience-Oriented Approach</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>create_ticket</code>, <code>add_comment</code>, <code>assign_ticket</code>, <code>notify_user</code></td>
+<td><code>file_support_request</code> (does all 4 steps internally)</td>
+</tr>
+<tr>
+<td><code>list_deployments</code>, <code>get_deployment</code>, <code>get_logs</code></td>
+<td><code>summarize_recent_deployments</code> (aggregates and analyzes)</td>
+</tr>
+<tr>
+<td><code>search_orders</code>, <code>get_order_details</code>, <code>get_customer_info</code></td>
+<td><code>lookup_order</code> (combines all 3, returns complete context)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Why this matters</strong>: Each tool invocation consumes tokens and requires the LLM to reason about next steps. Combining related operations into single tools reduces complexity and improves reliability.</p>
+<h3 id="key-design-guidelines">Key Design Guidelines<a class="headerlink" href="#key-design-guidelines" title="Permanent link">¶</a></h3>
+<p>These five guidelines translate the core principle into concrete practices. Apply them when designing any MCP tool to maximize agent success.</p>
+<details class="tip">
+<summary>1. Limit Tool Count</summary>
+<p><strong>Why</strong>: LLMs perform significantly worse when choosing from large tool sets. Keep servers focused and specialized with a manageable number of tools.</p>
+<p><strong>If you have many operations</strong>:</p>
+<ul>
+<li>Split into multiple domain-specific servers (Sales, Finance, IT)</li>
+<li>Group related operations into composite tools</li>
+<li>Use tool parameters to handle variations (e.g., <code>status</code> parameter instead of <code>get_active_orders</code>, <code>get_pending_orders</code>)</li>
+</ul>
+<p><strong>Rule of thumb</strong>: If you're exposing more than 10-15 tools from a single server, consider whether they can be consolidated or split across multiple servers.</p>
+</details>
+<details class="tip">
+<summary>2. Task-Focused Naming</summary>
+<p><strong>Why</strong>: Tool names should describe what the user accomplishes, not what the system does.</p>
+<p><strong>Examples</strong>:</p>
+<ul>
+<li>❌ <code>execute_sql_query</code> → ✅ <code>analyze_sales_trends</code></li>
+<li>❌ <code>get_tickets_by_status</code> → ✅ <code>find_open_support_issues</code></li>
+<li>❌ <code>update_record</code> → ✅ <code>change_customer_address</code></li>
+</ul>
+</details>
+<details class="tip">
+<summary>3. Return Decision-Ready Data</summary>
+<p><strong>Why</strong>: Agents should get actionable summaries, not raw data dumps they need to process.</p>
+<p><strong>Pattern</strong>: Instead of returning 100 rows of deployment logs, return:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3 deployments in last 24h: 2 successful, 1 failed"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"failed_deployment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"api-v2.1.3"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Health check timeout"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"recommendation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Check database connection pool settings"</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"recent_deployments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<details class="tip">
+<summary>4. Embed Guardrails Server-Side</summary>
+<p><strong>Why</strong>: Don't rely on LLMs to enforce business rules. Validate and constrain operations in your server implementation.</p>
+<p><strong>Examples</strong>:</p>
+<ul>
+<li>Validate refund amounts don't exceed order total</li>
+<li>Prevent account deletion if balance &gt; 0</li>
+<li>Require manager approval for expenses &gt; $5000</li>
+<li>Enforce data residency rules based on tenant</li>
+</ul>
+</details>
+<details class="tip">
+<summary>5. Write Clear Descriptions</summary>
+<p><strong>Why</strong>: The description is the LLM's primary signal for when and how to use each tool.</p>
+<p><strong>Template</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file_support_request"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Creates a new support ticket with customer details, issue description, and priority. Automatically assigns to appropriate team based on category. Use when customer reports a problem or needs help."</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"inputSchema"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Best Practices</strong>:</p>
+<ul>
+<li>Start with the action verb ("Creates", "Retrieves", "Updates")</li>
+<li>Explain what happens automatically</li>
+<li>State when the tool should be used</li>
+<li>Keep to 2-3 sentences maximum</li>
+</ul>
+</details>
+<h3 id="common-anti-patterns">Common Anti-Patterns<a class="headerlink" href="#common-anti-patterns" title="Permanent link">¶</a></h3>
+<p>Learn from these common mistakes:</p>
+<details class="warning">
+<summary>Exposing Raw Database Queries</summary>
+<p><strong>Anti-Pattern</strong>: <code>execute_sql(query: string)</code> tool</p>
+<p><strong>Why it's bad</strong>: 
+- Security risk (SQL injection, data exposure)
+- LLMs aren't reliable SQL generators
+- No way to enforce access control</p>
+<p><strong>Instead</strong>: Create purpose-specific tools (<code>get_customer_orders</code>, <code>search_products</code>)</p>
+</details>
+<details class="warning">
+<summary>Too Many Similar Tools</summary>
+<p><strong>Anti-Pattern</strong>: <code>get_active_orders</code>, <code>get_pending_orders</code>, <code>get_completed_orders</code>, <code>get_cancelled_orders</code></p>
+<p><strong>Why it's bad</strong>: Increases tool count, confuses LLMs</p>
+<p><strong>Instead</strong>: <code>get_orders(status: enum)</code> - Use parameters for variations</p>
+</details>
+<details class="warning">
+<summary>Returning Unstructured Text</summary>
+<p><strong>Anti-Pattern</strong>: Returning HTML, markdown, or verbose prose</p>
+<p><strong>Why it's bad</strong>: Agents can't extract structured data reliably</p>
+<p><strong>Instead</strong>: Return JSON with clear fields the agent can reference</p>
+</details>
+<details class="warning">
+<summary>No Rate Limiting or Quotas</summary>
+<p><strong>Anti-Pattern</strong>: Allowing unlimited tool invocations</p>
+<p><strong>Why it's bad</strong>: Agents can trigger runaway loops or exhaust backend resources</p>
+<p><strong>Instead</strong>: Implement rate limits per user/client in Azure APIM</p>
+</details>
+<hr>
+<h2 id="schema-design">Schema Design<a class="headerlink" href="#schema-design" title="Permanent link">¶</a></h2>
+<p>Schemas are how you communicate with the LLM about what your tool needs and what it returns. Well-designed schemas help the LLM understand exactly what parameters to provide and what to expect back. Poorly designed schemas lead to validation errors, confused agents, and failed invocations.</p>
+<p>Think of schemas as the contract between your tool and the agent using it.</p>
+<h3 id="input-schema-required">Input Schema (Required)<a class="headerlink" href="#input-schema-required" title="Permanent link">¶</a></h3>
+<p>Every tool <strong>must</strong> define an <code>inputSchema</code> using JSON Schema. This tells the LLM what parameters the tool expects and how to use them correctly.</p>
+<p><strong>MCP Requirements</strong>:</p>
+<ul>
+<li><code>inputSchema</code> is <strong>required</strong> and must be a valid JSON Schema object (not <code>null</code>)</li>
+<li>Defaults to JSON Schema 2020-12 if no <code>$schema</code> field is present</li>
+<li>For tools with no parameters, use: <code>{"type": "object", "additionalProperties": false}</code></li>
+<li>Tool names should be 1-128 characters, case-sensitive, using only: <code>A-Z</code>, <code>a-z</code>, <code>0-9</code>, <code>_</code>, <code>-</code>, <code>.</code></li>
+</ul>
+<p><strong>Key principle</strong>: Keep schemas simple and self-documenting. Rich descriptions help the LLM understand not just <em>what</em> parameters exist, but <em>when</em> and <em>how</em> to use them.</p>
+<details class="example">
+<summary>Good Input Schema</summary>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"customer_email"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customer's email address for communication and ticket tracking"</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"issue_type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"billing"</span><span class="p">,</span><span class="w"> </span><span class="s2">"technical"</span><span class="p">,</span><span class="w"> </span><span class="s2">"account"</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Category of the support request. Use 'billing' for payment issues, 'technical' for product problems, 'account' for login or access issues."</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"priority"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"low"</span><span class="p">,</span><span class="w"> </span><span class="s2">"normal"</span><span class="p">,</span><span class="w"> </span><span class="s2">"high"</span><span class="p">,</span><span class="w"> </span><span class="s2">"urgent"</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"normal"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Urgency level. Use 'urgent' only for system outages affecting multiple users. Default is 'normal' for standard requests."</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Detailed description of the issue in the customer's own words. Include relevant error messages or symptoms."</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"customer_email"</span><span class="p">,</span><span class="w"> </span><span class="s2">"issue_type"</span><span class="p">,</span><span class="w"> </span><span class="s2">"description"</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>What makes this effective</strong>:</p>
+<ul>
+<li><strong>Enums constrain choices</strong>: Prevents invalid values and helps LLM select the right category</li>
+<li><strong>Rich descriptions</strong>: Explains when and how to use each option with specific examples</li>
+<li><strong>Required fields</strong>: Clearly marked so LLM knows what must be provided</li>
+<li><strong>Sensible defaults</strong>: Reduces decision burden for common cases</li>
+<li><strong>Helpful context</strong>: Descriptions guide the LLM toward correct usage</li>
+</ul>
+</details>
+<h3 id="output-schema-optional">Output Schema (Optional)<a class="headerlink" href="#output-schema-optional" title="Permanent link">¶</a></h3>
+<p>Tools may optionally define an <code>outputSchema</code> to validate structured results. Think of this as documentation for the LLM about what to expect back, plus a validation layer to catch issues early.</p>
+<p><strong>When provided</strong>:</p>
+<ul>
+<li>Servers <strong>must</strong> return structured results conforming to this schema</li>
+<li>Clients <strong>should</strong> validate results against the schema</li>
+<li>Results can include both <code>content</code> (unstructured) and <code>structuredContent</code> (structured) fields</li>
+</ul>
+<p><strong>Why use output schemas?</strong>: They enable strict validation, provide type information for better integration, and help LLMs understand how to parse and use your tool's responses.</p>
+<h3 id="output-content-guidelines">Output Content Guidelines<a class="headerlink" href="#output-content-guidelines" title="Permanent link">¶</a></h3>
+<p>Structure matters. The way you format responses directly affects whether agents can extract and use the information correctly.</p>
+<p><strong>The golden rule</strong>: Return structured data that agents can reason about, not HTML or verbose text that requires parsing.</p>
+<p>Most tools should return simple JSON with clear, extractable fields. For specialized use cases, MCP supports additional content types like base64-encoded images or resource links, but start with structured JSON unless you have a specific need for richer content.</p>
+<p>❌ <strong>Avoid</strong>: Unstructured responses that bury information in prose
+</p><div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ticket #12345 created successfully. Assigned to IT team. Customer will be notified via email."</span>
+<span class="p">}</span>
+</code></pre></div><p></p>
+<p>✅ <strong>Prefer</strong>: Structured responses with clear, extractable fields
+</p><div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"ticket_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"open"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"assigned_team"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IT"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"estimated_response_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 hours"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"next_steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">"Customer notified via email"</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"IT team alerted"</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"Agent will follow up if no response in 2 hours"</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div><p></p>
+<p><strong>Why this matters</strong>: The second format lets the agent extract specific values (<code>ticket_id</code>, <code>status</code>) and reason about next steps. The first format requires parsing prose, which is error-prone and unreliable.</p>
+<hr>
+<h2 id="error-handling">Error Handling<a class="headerlink" href="#error-handling" title="Permanent link">¶</a></h2>
+<p>Errors are inevitable, but how you handle them determines whether an agent can recover or gets stuck. The difference between a frustrating failure and a successful retry often comes down to how clearly you communicate what went wrong and what to do about it.</p>
+<p>Think of error messages as teaching moments for the LLM. A good error message doesn't just say "something failed"—it explains the problem, provides context, and suggests a path forward.</p>
+<h3 id="two-types-of-errors">Two Types of Errors<a class="headerlink" href="#two-types-of-errors" title="Permanent link">¶</a></h3>
+<p>MCP distinguishes between errors that the agent can potentially fix and errors that indicate deeper problems:</p>
+<p><strong>Tool Execution Errors</strong> (<code>isError: true</code>) are for problems the LLM can understand and correct:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User lacks permission to approve expenses over $5000. Required role: Finance.Approver. Your roles: Employee. Suggested action: Request approval from finance team."</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"isError"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Why this works</strong>: The error explains what failed (permission check), what was expected (Finance.Approver role), what the user has (Employee role), and what to do next (request approval). The LLM can use this information to adjust its approach or inform the user.</p>
+<p><strong>Protocol Errors</strong> (JSON-RPC) are for structural problems like malformed requests or unknown tools. These indicate issues the LLM is unlikely to fix, such as calling a tool that doesn't exist or passing invalid JSON.</p>
+<h3 id="writing-effective-error-messages">Writing Effective Error Messages<a class="headerlink" href="#writing-effective-error-messages" title="Permanent link">¶</a></h3>
+<p>The best error messages follow a simple pattern: <strong>What happened</strong> → <strong>Why it happened</strong> → <strong>What to do next</strong></p>
+<details class="example">
+<summary>Good Error Messages</summary>
+<p><strong>Rate Limit</strong>:
+</p><div class="highlight"><pre><span></span><code>"Rate limit exceeded: 100 requests per minute. Current usage: 103 requests. 
+Wait 45 seconds before retrying or reduce request frequency."
+</code></pre></div><p></p>
+<p><strong>Validation Error</strong>:
+</p><div class="highlight"><pre><span></span><code>"Invalid date format in 'start_date' field. Received: '2024/12/23'. 
+Expected format: YYYY-MM-DD (e.g., '2024-12-23')."
+</code></pre></div><p></p>
+<p><strong>Permission Error</strong>:
+</p><div class="highlight"><pre><span></span><code>"Insufficient permissions to delete customer records. Required role: Admin. 
+Your roles: Viewer, Editor. Contact your administrator to request Admin access."
+</code></pre></div><p></p>
+<p><strong>Resource Not Found</strong>:
+</p><div class="highlight"><pre><span></span><code>"Order #12345 not found. Verify the order ID is correct. 
+Recent orders: #12344, #12346, #12347."
+</code></pre></div><p></p>
+<p><strong>What makes these effective</strong>:
+- State the problem clearly
+- Provide specific context (what was received, what was expected)
+- Offer actionable next steps
+- Include helpful details (like similar valid values)</p>
+</details>
+<details class="example">
+<summary>Poor Error Messages</summary>
+<p>❌ <code>"Error"</code><br>
+❌ <code>"Invalid input"</code><br>
+❌ <code>"Permission denied"</code><br>
+❌ <code>"Not found"</code></p>
+<p><strong>Why these fail</strong>: No context about what went wrong, no guidance on how to fix it. The agent has no path forward.</p>
+</details>
+<h3 id="security-considerations">Security Considerations<a class="headerlink" href="#security-considerations" title="Permanent link">¶</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Balance Helpfulness with Information Disclosure</p>
+<p>Error messages should help agents recover <strong>without exposing sensitive system details</strong>. Always ask: "Could an attacker use this information?"</p>
+<p><strong>Never expose in error messages</strong>:</p>
+<ul>
+<li>Internal file paths, stack traces, or database schemas</li>
+<li>Other users' data (emails, names, account details)</li>
+<li>Whether specific resources exist (prevents enumeration attacks)</li>
+<li>API keys, connection strings, or credentials</li>
+<li>Detailed system architecture or service names</li>
+</ul>
+<p><strong>Safe to include</strong>:</p>
+<ul>
+<li>What operation failed ("refund request", "ticket creation")</li>
+<li>Why it failed at a business logic level ("insufficient permissions", "invalid date format")</li>
+<li>What the agent should do next ("wait 45 seconds", "request approval")</li>
+<li>Request/correlation IDs for support teams (sanitized)</li>
+</ul>
+<p><strong>Pattern</strong>: Log detailed errors server-side for debugging, but return sanitized, actionable messages to agents.</p>
+</div>
+<details class="example">
+<summary>Secure vs Insecure Error Messages</summary>
+<p>❌ <strong>Information Disclosure</strong>:
+</p><div class="highlight"><pre><span></span><code>"User john.doe@company.com does not exist in database table 'users' 
+(connection: sql-prod-eastus.database.windows.net)"
+</code></pre></div>
+<strong>Problems</strong>: Reveals database schema, connection string, confirms which users don't exist (enumeration)<p></p>
+<p>✅ <strong>Secure Alternative</strong>:
+</p><div class="highlight"><pre><span></span><code>"Unable to process request. Verify the email address and try again. 
+Request ID: req-abc-123"
+</code></pre></div>
+<strong>Why it works</strong>: Doesn't confirm whether user exists, provides support reference, no internal details<p></p>
+<hr>
+<p>❌ <strong>Excessive Technical Detail</strong>:
+</p><div class="highlight"><pre><span></span><code>"NullReferenceException at OrderService.cs:142 in GetCustomerOrders(). 
+Stack trace: [...]"
+</code></pre></div>
+<strong>Problems</strong>: Exposes code structure, file paths, implementation details<p></p>
+<p>✅ <strong>Secure Alternative</strong>:
+</p><div class="highlight"><pre><span></span><code>"Unable to retrieve orders at this time. Please try again or contact support. 
+Request ID: req-xyz-789"
+</code></pre></div>
+<strong>Why it works</strong>: Acknowledges failure, provides path forward, includes support reference<p></p>
+</details>
+<h3 id="include-tracing-information">Include Tracing Information<a class="headerlink" href="#include-tracing-information" title="Permanent link">¶</a></h3>
+<p>For operations teams debugging issues, include <strong>sanitized</strong> request IDs or correlation tokens:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unable to create ticket due to temporary service issue. Request ID: req-abc-123. Please retry in a few moments."</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"isError"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Log detailed context <strong>server-side only</strong> (stack traces, input parameters, user identity, internal service names). Keep error messages to agents focused on what they need to recover, not what you need to debug.</p>
+<hr>
+<h2 id="testing-mcp-servers">Testing MCP Servers<a class="headerlink" href="#testing-mcp-servers" title="Permanent link">¶</a></h2>
+<p>Testing MCP servers is fundamentally different from testing traditional APIs. With REST APIs, you verify that endpoints return correct responses for given inputs. With MCP servers, you also need to verify that LLMs can <strong>understand</strong> and <strong>correctly use</strong> your tools. This means testing not just functionality, but discoverability, clarity, and agent behavior.</p>
+<p>A tool that works perfectly in isolation can still fail if its description is ambiguous, its schema is unclear, or the LLM chooses it at the wrong time. Effective MCP testing validates the entire interaction chain: from tool discovery, through parameter selection, to result interpretation.</p>
+<h3 id="three-layers-of-testing">Three Layers of Testing<a class="headerlink" href="#three-layers-of-testing" title="Permanent link">¶</a></h3>
+<p>Think of MCP testing as a pyramid with three layers, each testing different aspects of your implementation:</p>
+<div class="highlight"><pre><span></span><code>                    ┌─────────────────────────────────┐
+                    │    🎯 AGENT TESTS               │
+                    │  Validate LLM Behavior          │
+                    │  • Real-world scenarios         │
+                    │  • Tool selection &amp; workflows   │
+                    │  • Slowest, most valuable       │
+                    └─────────────────────────────────┘
+                             ▲
+                             │
+          ┌──────────────────────────────────────────────┐
+          │        ⚙️  PROTOCOL TESTS                    │
+          │     Verify MCP Compliance                    │
+          │     • Tool discovery &amp; invocation            │
+          │     • Response format &amp; error handling       │
+          │     • Moderate speed                         │
+          └──────────────────────────────────────────────┘
+                             ▲
+                             │
+     ┌────────────────────────────────────────────────────────┐
+     │              🔧 UNIT TESTS                             │
+     │           Test Tool Logic                              │
+     │           • Business rules &amp; validation                │
+     │           • Input/output correctness                   │
+     │           • Fast, deterministic                        │
+     └────────────────────────────────────────────────────────┘
+</code></pre></div>
+<p><strong>Layer 1: Unit Tests</strong> verify your tool logic works correctly<br>
+<strong>Layer 2: Protocol Tests</strong> verify you implement MCP correctly<br>
+<strong>Layer 3: Agent Tests</strong> verify LLMs can successfully use your tools</p>
+<p>Each layer builds on the previous one. Skip unit tests and you'll waste time debugging agent failures caused by basic logic errors. Skip agent tests and you'll ship tools that work in theory but fail in practice.</p>
+<h3 id="unit-tests-tool-logic">Unit Tests: Tool Logic<a class="headerlink" href="#unit-tests-tool-logic" title="Permanent link">¶</a></h3>
+<p>At this layer, test your tool implementation as pure functions. Mock external dependencies (databases, APIs) and verify that given specific inputs, you get expected outputs.</p>
+<p><strong>What to test</strong>:</p>
+<ul>
+<li><strong>Input validation</strong>: Required fields are enforced, invalid values rejected, edge cases handled</li>
+<li><strong>Business logic</strong>: Rules execute correctly (refund limits, permission checks, data transformations)</li>
+<li><strong>Output structure</strong>: Results match your schema, include all required fields</li>
+<li><strong>Error conditions</strong>: Graceful handling of failures (network errors, missing resources, rate limits)</li>
+</ul>
+<p><strong>Why this matters</strong>: Unit tests are fast and deterministic. They catch logic bugs before you even start the server, saving time in later testing stages.</p>
+<details class="example">
+<summary>Unit Test Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">test_file_support_request_creates_ticket</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""Test basic ticket creation flow"""</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">file_support_request</span><span class="p">(</span>
+        <span class="n">customer_email</span><span class="o">=</span><span class="s2">"test@example.com"</span><span class="p">,</span>
+        <span class="n">issue_type</span><span class="o">=</span><span class="s2">"billing"</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"Charged twice"</span>
+    <span class="p">)</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="p">[</span><span class="s2">"ticket_id"</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="p">[</span><span class="s2">"assigned_team"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Finance"</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="p">[</span><span class="s2">"status"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"open"</span>
+
+<span class="k">def</span> <span class="nf">test_file_support_request_validates_email</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""Test input validation"""</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">match</span><span class="o">=</span><span class="s2">"Invalid email format"</span><span class="p">):</span>
+        <span class="n">file_support_request</span><span class="p">(</span>
+            <span class="n">customer_email</span><span class="o">=</span><span class="s2">"not-an-email"</span><span class="p">,</span>
+            <span class="n">issue_type</span><span class="o">=</span><span class="s2">"billing"</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Issue"</span>
+        <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test_file_support_request_handles_api_timeout</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""Test error handling"""</span>
+    <span class="k">with</span> <span class="n">mock</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="s1">'ticketing_api.create'</span><span class="p">,</span> <span class="n">side_effect</span><span class="o">=</span><span class="ne">TimeoutError</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">file_support_request</span><span class="p">(</span>
+            <span class="n">customer_email</span><span class="o">=</span><span class="s2">"test@example.com"</span><span class="p">,</span>
+            <span class="n">issue_type</span><span class="o">=</span><span class="s2">"technical"</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Can't login"</span>
+        <span class="p">)</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="p">[</span><span class="s2">"isError"</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">True</span>
+        <span class="k">assert</span> <span class="s2">"retry"</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">"text"</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</code></pre></div>
+</details>
+<h3 id="protocol-tests-mcp-compliance">Protocol Tests: MCP Compliance<a class="headerlink" href="#protocol-tests-mcp-compliance" title="Permanent link">¶</a></h3>
+<p>At this layer, test that your server correctly implements the MCP specification. This includes proper JSON-RPC message handling, correct tool schema format, and conformance to protocol requirements.</p>
+<p><strong>What to test</strong>:</p>
+<ul>
+<li><strong>Tool discovery</strong>: <code>tools/list</code> returns correctly formatted tool definitions with valid schemas</li>
+<li><strong>Tool invocation</strong>: <code>tools/call</code> accepts requests, executes tools, returns proper response format</li>
+<li><strong>Error responses</strong>: Protocol errors use correct JSON-RPC error codes and structure</li>
+<li><strong>Authentication</strong>: JWT validation, unauthorized requests rejected, user context propagated</li>
+</ul>
+<p><strong>Why this matters</strong>: Protocol compliance ensures your server works with any MCP client. These tests catch structural issues like malformed JSON schemas or incorrect response formats that would cause client-side failures.</p>
+<details class="example">
+<summary>Protocol Test Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">test_tools_list_returns_valid_schemas</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""Verify tool definitions conform to MCP spec"""</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">"tools/list"</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="s2">"tools"</span> <span class="ow">in</span> <span class="n">response</span>
+
+    <span class="k">for</span> <span class="n">tool</span> <span class="ow">in</span> <span class="n">response</span><span class="p">[</span><span class="s2">"tools"</span><span class="p">]:</span>
+        <span class="k">assert</span> <span class="s2">"name"</span> <span class="ow">in</span> <span class="n">tool</span>
+        <span class="k">assert</span> <span class="s2">"description"</span> <span class="ow">in</span> <span class="n">tool</span>
+        <span class="k">assert</span> <span class="s2">"inputSchema"</span> <span class="ow">in</span> <span class="n">tool</span>
+
+        <span class="c1"># Verify schema is valid JSON Schema</span>
+        <span class="n">validate_json_schema</span><span class="p">(</span><span class="n">tool</span><span class="p">[</span><span class="s2">"inputSchema"</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">test_tools_call_returns_correct_format</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""Verify tool invocation returns proper structure"""</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">call_tool</span><span class="p">(</span>
+        <span class="s2">"file_support_request"</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s2">"customer_email"</span><span class="p">:</span> <span class="s2">"test@example.com"</span><span class="p">,</span>
+            <span class="s2">"issue_type"</span><span class="p">:</span> <span class="s2">"billing"</span><span class="p">,</span>
+            <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Issue"</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+
+    <span class="k">assert</span> <span class="s2">"content"</span> <span class="ow">in</span> <span class="n">response</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s2">"content"</span><span class="p">],</span> <span class="nb">list</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="s2">"type"</span> <span class="ow">in</span> <span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">response</span><span class="p">[</span><span class="s2">"content"</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">test_unauthorized_request_rejected</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""Verify authentication is enforced"""</span>
+    <span class="n">client_no_auth</span> <span class="o">=</span> <span class="n">MCPClient</span><span class="p">(</span><span class="n">server_url</span><span class="p">,</span> <span class="n">auth_token</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="n">ProtocolError</span><span class="p">,</span> <span class="n">match</span><span class="o">=</span><span class="s2">"401"</span><span class="p">):</span>
+        <span class="n">client_no_auth</span><span class="o">.</span><span class="n">call_tool</span><span class="p">(</span><span class="s2">"file_support_request"</span><span class="p">,</span> <span class="p">{</span><span class="o">...</span><span class="p">})</span>
+</code></pre></div>
+<p><strong>Tools for protocol testing</strong>:</p>
+<ul>
+<li><strong>MCP Inspector</strong>: Visual tool for testing MCP servers interactively</li>
+<li><strong>MCP SDK test utilities</strong>: Built-in helpers for protocol conformance testing</li>
+<li><strong>JSON Schema validators</strong>: Verify your tool schemas are valid</li>
+</ul>
+</details>
+<h3 id="agent-tests-real-world-usage">Agent Tests: Real-World Usage<a class="headerlink" href="#agent-tests-real-world-usage" title="Permanent link">¶</a></h3>
+<p>At this layer, test with actual LLM agents to validate that your tools work in practice. This is where you discover if tool descriptions are clear, if the LLM chooses the right tools, and if multi-step workflows succeed.</p>
+<p><strong>What to test</strong>:</p>
+<ul>
+<li><strong>Tool selection</strong>: Given a user request, does the agent choose the right tool?</li>
+<li><strong>Parameter extraction</strong>: Does the agent correctly extract parameters from user input?</li>
+<li><strong>Multi-step workflows</strong>: Can the agent chain multiple tool calls to complete complex tasks?</li>
+<li><strong>Error recovery</strong>: When a tool fails, does the agent retry appropriately or inform the user?</li>
+</ul>
+<p><strong>Why this matters</strong>: This is the only way to validate the <strong>user experience</strong>. A tool can be technically correct but unusable if the LLM misunderstands when to call it or how to interpret results.</p>
+<details class="example">
+<summary>Agent Test Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">test_agent_files_billing_complaint</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""Test end-to-end ticket creation from user request"""</span>
+    <span class="n">agent</span> <span class="o">=</span> <span class="n">create_test_agent</span><span class="p">(</span><span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="s2">"file_support_request"</span><span class="p">])</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">process</span><span class="p">(</span>
+        <span class="s2">"Customer jane@example.com was charged twice for order #5678"</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Verify agent called the right tool</span>
+    <span class="k">assert</span> <span class="s2">"file_support_request"</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">tool_calls</span>
+
+    <span class="c1"># Verify parameters extracted correctly</span>
+    <span class="n">call</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">tool_calls</span><span class="p">[</span><span class="s2">"file_support_request"</span><span class="p">]</span>
+    <span class="k">assert</span> <span class="n">call</span><span class="p">[</span><span class="s2">"customer_email"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"jane@example.com"</span>
+    <span class="k">assert</span> <span class="n">call</span><span class="p">[</span><span class="s2">"issue_type"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"billing"</span>
+    <span class="k">assert</span> <span class="s2">"charged twice"</span> <span class="ow">in</span> <span class="n">call</span><span class="p">[</span><span class="s2">"description"</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">test_agent_handles_ambiguous_request</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""Test how agent handles unclear user input"""</span>
+    <span class="n">agent</span> <span class="o">=</span> <span class="n">create_test_agent</span><span class="p">(</span><span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="s2">"file_support_request"</span><span class="p">])</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="s2">"I need help"</span><span class="p">)</span>
+
+    <span class="c1"># Agent should ask clarifying questions, not make assumptions</span>
+    <span class="k">assert</span> <span class="nb">any</span><span class="p">(</span>
+        <span class="n">keyword</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> 
+        <span class="k">for</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"what"</span><span class="p">,</span> <span class="s2">"which"</span><span class="p">,</span> <span class="s2">"tell me more"</span><span class="p">]</span>
+    <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test_agent_recovers_from_rate_limit</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""Test error recovery behavior"""</span>
+    <span class="n">agent</span> <span class="o">=</span> <span class="n">create_test_agent</span><span class="p">(</span><span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="s2">"lookup_order"</span><span class="p">])</span>
+
+    <span class="c1"># First call succeeds, second hits rate limit, third succeeds</span>
+    <span class="k">with</span> <span class="n">mock_rate_limiting</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">process</span><span class="p">(</span>
+            <span class="s2">"Look up order #1234, then order #5678"</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Verify agent retried after delay</span>
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">success</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">tool_calls</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>  <span class="c1"># Initial + retry + second order</span>
+</code></pre></div>
+<p><strong>Example test scenarios</strong>:</p>
+<ul>
+<li><strong>Happy path</strong>: "File a billing issue for customer@example.com who was charged twice"</li>
+<li><strong>Ambiguous input</strong>: "I have a problem" (does agent ask clarifying questions?)</li>
+<li><strong>Multi-step task</strong>: "Find all open tickets assigned to IT and summarize common issues"</li>
+<li><strong>Error handling</strong>: "Create a ticket for invalid-email" (does agent handle validation errors?)</li>
+<li><strong>Edge cases</strong>: "File an urgent ticket for a system-wide outage affecting all users"</li>
+</ul>
+</details>
+<h3 id="testing-strategy">Testing Strategy<a class="headerlink" href="#testing-strategy" title="Permanent link">¶</a></h3>
+<div class="admonition tip">
+<p class="admonition-title">Build Quality Layer by Layer</p>
+<p><strong>🔧 Start with unit tests</strong> to ensure tool logic is solid</p>
+<ul>
+<li>Fast and catch basic bugs early</li>
+<li>Test business rules, validation, error handling</li>
+<li>Run on every commit</li>
+</ul>
+<p><strong>⚙️ Add protocol tests</strong> once tools work individually</p>
+<ul>
+<li>Verify MCP compliance and catch integration issues</li>
+<li>Test tool discovery, invocation, response format</li>
+<li>Run on every commit</li>
+</ul>
+<p><strong>🎯 Finish with agent tests</strong> to validate real-world usage</p>
+<ul>
+<li>Slower and more complex, but catch usability issues</li>
+<li>Test tool selection, parameter extraction, workflows</li>
+<li>Run on pull requests or nightly builds</li>
+</ul>
+</div>
+<p><strong>Debugging workflow</strong>: If agent tests fail, first check if unit and protocol tests pass. If they do, the problem is likely with tool descriptions, schema clarity, or the number of tools (LLM overwhelmed by choices). If lower-layer tests fail, fix those first before returning to agent tests.</p>
+<hr>
+<h2 id="reference-documentation">Reference Documentation<a class="headerlink" href="#reference-documentation" title="Permanent link">¶</a></h2>
+<h3 id="mcp-specification">MCP Specification<a class="headerlink" href="#mcp-specification" title="Permanent link">¶</a></h3>
+<ul>
+<li><a href="https://modelcontextprotocol.io/specification/2025-06-18/schema">MCP Schema Design</a> - Official JSON Schema usage guidelines for tools</li>
+<li><a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">Tools Specification</a> - Complete reference for tool definitions, schemas, and error handling</li>
+<li><a href="https://modelcontextprotocol.io/specification/2025-11-25/server">Server Implementation</a> - Core server features and capabilities</li>
+<li><a href="https://modelcontextprotocol.io/specification/2025-11-25/server/resources">Resources</a> - How to return resource links and embedded resources from tools</li>
+</ul>
+<h3 id="tool-design-best-practices">Tool Design Best Practices<a class="headerlink" href="#tool-design-best-practices" title="Permanent link">¶</a></h3>
+<ul>
+<li><a href="https://www.anthropic.com/engineering/writing-tools-for-agents">Anthropic: Writing Tools for Agents</a> - Comprehensive guide on designing effective tools for LLM agents</li>
+</ul>
+<hr>
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">¶</a></h2>
+<ul>
+<li><strong>Deciding what to build?</strong> → <a href="../when-to-use-mcp/">When to Use MCP</a> for decision framework</li>
+<li><strong>Wrapping existing APIs?</strong> → <a href="../migration-guidance/">Migration Guidance</a> for adapter patterns</li>
+<li><strong>Ready to deploy?</strong> → <a href="../deployment-architecture/">Deployment Patterns</a> for infrastructure strategies</li>
+<li><strong>Need governance controls?</strong> → <a href="../enterprise-patterns/">Enterprise Patterns</a> for organizational guidance</li>
+<li><strong>Securing your implementation?</strong> → <a href="../../#owasp-mcp-top-10">OWASP MCP Top 10</a> for security best practices</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://microsoft.github.io/mcp-azure-security-guide/" target="_blank" rel="noopener" title="microsoft.github.io" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M351.9 280H161c2.9 64.5 17.2 123.9 37.5 167.4 11.4 24.5 23.7 41.8 35.1 52.4 11.2 10.5 18.9 12.2 22.9 12.2s11.7-1.7 22.9-12.2c11.4-10.6 23.7-28 35.1-52.4 20.3-43.5 34.6-102.9 37.5-167.4zm-191-48h190.9c-2.8-64.5-17.1-123.9-37.4-167.4-11.4-24.4-23.7-41.8-35.1-52.4C268.1 1.7 260.4 0 256.4 0s-11.7 1.7-22.9 12.2c-11.4 10.6-23.7 28-35.1 52.4-20.3 43.5-34.6 102.9-37.5 167.4m-48 0c3.5-85.6 25.6-165.1 57.9-217.3C78.7 47.3 10.9 131.2 1.5 232zM1.5 280c9.4 100.8 77.2 184.7 169.3 217.3-32.3-52.2-54.4-131.7-57.9-217.3zm398.4 0c-3.5 85.6-25.6 165.1-57.9 217.3 92.1-32.7 159.9-116.5 169.3-217.3zm111.4-48C501.9 131.2 434.1 47.3 342 14.7c32.3 52.2 54.4 131.7 57.9 217.3z"></path></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "content.code.copy", "search.highlight"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
