@@ -6,9 +6,9 @@ Most organizations already have APIs, microservices, and integration endpoints. 
 
 This page provides practical patterns for migrating or wrapping existing APIs to support MCP-based AI agent workflows.
 
-> **Key Principle**: MCP as an Adapter, Not a Replacement
->
-> Think of MCP as a translation layer that makes existing APIs consumable by AI agents. Your REST APIs, GraphQL endpoints, and microservices continue to operate as they do today. MCP servers sit in front of them, translating agent requests into API calls and responses back into agent-friendly formats.
+!!! tip "Key Principle: MCP as an Adapter, Not a Replacement"
+
+    Think of MCP as a translation layer that makes existing APIs consumable by AI agents. Your REST APIs, GraphQL endpoints, and microservices continue to operate as they do today. MCP servers sit in front of them, translating agent requests into API calls and responses back into agent-friendly formats.
 
 ---
 

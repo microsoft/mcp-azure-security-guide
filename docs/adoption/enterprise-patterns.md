@@ -4,9 +4,11 @@
 
 The Model Context Protocol is moving from experimental technology to enterprise adoption. This page captures emerging patterns, common mistakes, and hard-won lessons from organizations deploying MCP at scale.
 
-> **Key Insight**: We're seeing early adopters treat MCP like an API gateway challenge—but it's really an **identity and governance challenge**.
->
-> Successful companies are layering controls: gateway + capability + data + audit. Security is now "full lifecycle"—from install to runtime.
+!!! tip "Key Insight: Identity and Governance Challenge"
+
+    We're seeing early adopters treat MCP like an API gateway challenge—but it's really an **identity and governance challenge**.
+    
+    Successful companies are layering controls: gateway + capability + data + audit. Security is now "full lifecycle"—from install to runtime.
 
 ---
 

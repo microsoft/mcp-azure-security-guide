@@ -4,11 +4,11 @@
 
 The Model Context Protocol (MCP) is a powerful standard, but it's not the right choice for every API or integration. This page helps you decide when MCP adds value, and when traditional APIs or other approaches are more appropriate.
 
-> **Think of it like this**: MCP is the "AI Integration Layer"
->
-> Just as REST APIs standardized how applications communicate with each other, MCP standardizes how AI systems discover, understand, and interact with tools and data sources. But standardization has a cost: added complexity, new security considerations, and governance overhead.
->
-> The key question: **Does the solution need to dynamically discover and reason about this capability, or is it better to hardcode the integration?**
+!!! tip "MCP is the AI Integration Layer"
+
+    Just as REST APIs standardized how applications communicate with each other, MCP standardizes how AI systems discover, understand, and interact with tools and data sources. But standardization has a cost: added complexity, new security considerations, and governance overhead.
+    
+    The key question: **Does the solution need to dynamically discover and reason about this capability, or is it better to hardcode the integration?**
 
 ## Decision Framework
 

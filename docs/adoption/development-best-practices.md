@@ -661,6 +661,16 @@ At this layer, test with actual LLM agents to validate that your tools work in p
 
 ---
 
+## Related Security Topics
+
+- [MCP03 - Tool Poisoning](../mcp/mcp03-tool-poisoning.md) - Malicious tool definitions and descriptions
+- [MCP05 - Command Injection](../mcp/mcp05-command-injection.md) - Unsafe tool parameter handling
+- [MCP06 - Prompt Injection](../mcp/mcp06-prompt-injection.md) - Manipulating agent behavior via tool responses
+- [MCP08 - Lack of Audit & Telemetry](../mcp/mcp08-telemetry.md) - Monitoring and logging best practices
+- [MCP10 - Context Oversharing](../mcp/mcp10-context-oversharing.md) - Information disclosure in tool outputs
+
+---
+
 ## Next Steps
 
 - **Deciding what to build?** → [When to Use MCP](when-to-use-mcp.md) for decision framework
