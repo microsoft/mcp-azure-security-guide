@@ -1289,10 +1289,10 @@
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">¶</a></h2>
 <p>Most organizations already have APIs, microservices, and integration endpoints. The question isn't whether to replace them with MCP—it's <strong>when and how to expose existing capabilities through MCP</strong> while maintaining existing integrations.</p>
 <p>This page provides practical patterns for migrating or wrapping existing APIs to support MCP-based AI agent workflows.</p>
-<blockquote>
-<p><strong>Key Principle</strong>: MCP as an Adapter, Not a Replacement</p>
+<div class="admonition tip">
+<p class="admonition-title">Key Principle: MCP as an Adapter, Not a Replacement</p>
 <p>Think of MCP as a translation layer that makes existing APIs consumable by AI agents. Your REST APIs, GraphQL endpoints, and microservices continue to operate as they do today. MCP servers sit in front of them, translating agent requests into API calls and responses back into agent-friendly formats.</p>
-</blockquote>
+</div>
 <hr>
 <h2 id="migration-scenarios">Migration Scenarios<a class="headerlink" href="#migration-scenarios" title="Permanent link">¶</a></h2>
 <p>Different starting points require different approaches. The table below maps your current state to a recommended migration pattern.</p>
