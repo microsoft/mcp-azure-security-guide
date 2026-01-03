@@ -4,11 +4,11 @@
 
 ![MCP04 Scenario](../images/mcp04-scenario.png)
 
-> **Real-World Scenario**: The Compromised Dependency
->
-> Your team builds an MCP server using popular open-source libraries. One of those libraries is a small utility package with thousands of weekly downloads that is maintained by a single developer. An attacker compromises that developers’s npm account and publishes a new version containing malicious code that runs during installation. The code silently copies environment variables (including your Azure credentials) to an external server. Within hours, attackers are using your credentials to spin up cryptocurrency miners in your Azure subscription.
->
-> **Think of it like**: Building a house where one of the suppliers was secretly compromised. The lumber looks fine, the nails look fine, but unknown to you, the electrical wiring has been tampered with. The house appears to work normally until one day it catches fire.
+!!! tip "Real-World Scenario: The Compromised Dependency"
+
+    Your team builds an MCP server using popular open-source libraries. One of those libraries is a small utility package with thousands of weekly downloads that is maintained by a single developer. An attacker compromises that developers’s npm account and publishes a new version containing malicious code that runs during installation. The code silently copies environment variables (including your Azure credentials) to an external server. Within hours, attackers are using your credentials to spin up cryptocurrency miners in your Azure subscription.
+
+    **Think of it like**: Building a house where one of the suppliers was secretly compromised. The lumber looks fine, the nails look fine, but unknown to you, the electrical wiring has been tampered with. The house appears to work normally until one day it catches fire.
 
 ## Understanding the Risk
 

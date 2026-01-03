@@ -295,15 +295,15 @@ When migrating existing APIs to MCP on Azure, these four areas require special a
 
 ## Migration Checklist
 
-- [ ] **Assess current API quality**: Is it well-documented? Consistent? Secure?
-- [ ] **Identify AI-safe operations**: Which endpoints are read-only or low-risk?
-- [ ] **Choose migration pattern**: OpenAPI wrapper, selective exposure, or MCP-first?
-- [ ] **Implement authentication**: Integrate with Microsoft Entra ID
-- [ ] **Add governance controls**: Rate limiting, monitoring, approval workflows
-- [ ] **Test with sample agents**: Validate tool descriptions and behavior
-- [ ] **Deploy incrementally**: Start with 1-2 tools, expand based on feedback
-- [ ] **Monitor and iterate**: Use Application Insights to track usage and errors
-- [ ] **Document for developers**: Explain what's available and how to use it
+  :material-check: **Assess current API quality**: Is it well-documented? Consistent? Secure?  
+  :material-check: **Identify AI-safe operations**: Which endpoints are read-only or low-risk?  
+  :material-check: **Choose migration pattern**: OpenAPI wrapper, selective exposure, or MCP-first?  
+  :material-check: **Implement authentication**: Integrate with Microsoft Entra ID  
+  :material-check: **Add governance controls**: Rate limiting, monitoring, approval workflows  
+  :material-check: **Test with sample agents**: Validate tool descriptions and behavior  
+  :material-check: **Deploy incrementally**: Start with 1-2 tools, expand based on feedback  
+  :material-check: **Monitor and iterate**: Use Application Insights to track usage and errors  
+  :material-check: **Document for developers**: Explain what's available and how to use it  
 
 ---
 

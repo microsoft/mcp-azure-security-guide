@@ -4,17 +4,17 @@
 
 ![MCP01 Token Management Scenario](../images/mcp01-scenario.png)
 
-> **Real-World Scenario**: The Accidental GitHub Leak
->
-> Nelson is a developer building an MCP server that connects to his company’s customer database. To test quickly, he hardcodes the database password directly in his code:
->
-> ``` connection_string = ‘Server=prod;Password=SuperSecret123’ ```
->
-> He commits the code to GitHub. Within hours, automated bots scanning public repositories find the credential. By morning, attackers have downloaded the entire customer database with names, emails and purchase history, and are demanding ransom.
->
-> What began as a temporary shortcut results in a full compromise of sensitive customer data (way to go, Nelson).
->
-> **Think of it like**: Leaving your house key under the doormat. Sure, it’s convenient when you forget your key, but it’s the first place a burglar looks. Hardcoded credentials are the digital equivalent as they are discoverable and dangerous.
+!!! tip "Real-World Scenario: The Accidental GitHub Leak"
+
+    Nelson is a developer building an MCP server that connects to his company's customer database. To test quickly, he hardcodes the database password directly in his code:
+
+    ``` connection_string = 'Server=prod;Password=SuperSecret123' ```
+
+    He commits the code to GitHub. Within hours, automated bots scanning public repositories find the credential. By morning, attackers have downloaded the entire customer database with names, emails and purchase history, and are demanding ransom.
+
+    What began as a temporary shortcut results in a full compromise of sensitive customer data (way to go, Nelson).
+
+    **Think of it like:** Leaving your house key under the doormat. Sure, it's convenient when you forget your key, but it's the first place a burglar looks. Hardcoded credentials are the digital equivalent as they are discoverable and dangerous.
 
 ## Understanding the Risk
 

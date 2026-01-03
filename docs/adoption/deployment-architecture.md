@@ -45,18 +45,18 @@ According to [Astrix Security's State of MCP report](https://astrix.security/lea
 
 **Use stdio for**:
 
-✅ Prototyping and learning  
-✅ Local filesystem operations  
-✅ IDE integrations (no network calls)  
-✅ Personal tools with no org data  
+:material-check: Prototyping and learning  
+:material-check: Local filesystem operations  
+:material-check: IDE integrations (no network calls)  
+:material-check: Personal tools with no org data  
 
 **Use HTTP for**:
 
-✅ Production deployments  
-✅ Network API access  
-✅ Organizational data access  
-✅ Multi-user scenarios  
-✅ Compliance requirements  
+:material-check: Production deployments  
+:material-check: Network API access  
+:material-check: Organizational data access  
+:material-check: Multi-user scenarios  
+:material-check: Compliance requirements  
 
 ---
 

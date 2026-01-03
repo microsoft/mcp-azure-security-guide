@@ -4,11 +4,11 @@
 
 ![MCP07 Scenario](../images/mcp07-scenario.png)
 
-> **Real-World Scenario**: The Wrong Audience
->
-> A company runs two MCP servers: one for HR (with access to employee data) and one for Finance (with access to accounting systems). Both use OAuth tokens from the same identity provider. An attacker obtains a valid token intended for the HR server through social engineering. They then present this token to the Finance server. Because the Finance server only checks that the token is valid, and not that it was issued specifically for Finance, the attacker gains unauthorized access to financial data using an HR credential.
->
-> **Think of it like**: A concert ticket that only says “VALID TICKET” without specifying which concert. You could use a ticket for last week’s jazz concert to get into tonight’s rock show because nobody checks which event the ticket was for.
+!!! tip "Real-World Scenario: The Wrong Audience"
+
+    A company runs two MCP servers: one for HR (with access to employee data) and one for Finance (with access to accounting systems). Both use OAuth tokens from the same identity provider. An attacker obtains a valid token intended for the HR server through social engineering. They then present this token to the Finance server. Because the Finance server only checks that the token is valid, and not that it was issued specifically for Finance, the attacker gains unauthorized access to financial data using an HR credential.
+
+    **Think of it like**: A concert ticket that only says “VALID TICKET” without specifying which concert. You could use a ticket for last week’s jazz concert to get into tonight’s rock show because nobody checks which event the ticket was for.
 
 ## Understanding the Risk
 

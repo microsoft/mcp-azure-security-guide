@@ -12,11 +12,11 @@ Before diving into security, let’s understand what we’re protecting.
 
 The Model Context Protocol (MCP) is a standardized way for AI assistants (Like VS Code, Claude, ChatGPT or custom AI Agents) to connect to tools and data sources. Think of MCP as a translator that lets AI systems and applications talk to databases, APIs, file systems, and other services in a consistent, predictable way.
 
-> A Simple Example
->
-> Imagine you ask an assistant: “Create a customer-ready summary of this incident.” With MCP, the assistant doesn’t need built-in knowledge of your systems. Instead, it discovers and invokes a set of MCP servers: one to retrieve incident logs, another to pull the related ticket, and a third to generate a formatted summary. Each capability is exposed as a discrete, governed tool with a clear contract. The assistant decides when to use a tool, but the tool strictly controls what it can do.
->
-> Think of it like: MCP is like a profession interpreter at a business meeting. The interpreter (MCP) knows exactly how to translate requests between the executive (AI) and the various department heads (databases, APIs, tools), ensuring everyone communicates clearly and securely.
+!!! tip "A Simple Example"
+
+    **Imagine you ask an assistant:** "Create a customer-ready summary of this incident." With MCP, the assistant doesn't need built-in knowledge of your systems. Instead, it discovers and invokes a set of MCP servers: one to retrieve incident logs, another to pull the related ticket, and a third to generate a formatted summary. Each capability is exposed as a discrete, governed tool with a clear contract. The assistant decides when to use a tool, but the tool strictly controls what it can do.
+
+    **Think of it like:** MCP is like a professional interpreter at a business meeting. The interpreter (MCP) knows exactly how to translate requests between the executive (AI) and the various department heads (databases, APIs, tools), ensuring everyone communicates clearly and securely.
 
 ## Why Security Matters
 

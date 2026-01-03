@@ -4,15 +4,15 @@
 
 ![MCP02 Scenario](../images/mcp02-scenario.png)
 
-> **Real-World Scenario**: The Feature That Never Left
->
-> Noah’s team builds an MCP server to help developers check code quality. Initially, it only needs read-only access to GitHub repositories. Six months later, a new feature requires write access to update README files. A developer grants write permissions, the feature launches, and the team moves on.
->
-> A year later, the README feature is deprecated but the write permissions remain. When a developer’s credentials are later compromised through a phishing attack, the attacker inherits the MCP server’s accumulated permissions. What began as a read-only tool can now read and modify production repositories, inject malicious code, and alter build pipelines.
->
-> The permissions didn’t change suddenly. They quietly grew and were never reduced.
->
-> **Think of it like**: Giving a house-sitter the keys to every room, the safe, and your car even though they only need access to the kitchen to feed your cat, Spike. Over time, you forget what access you’ve granted. If someone steals those keys, they have access to everything, not just what was necessary.
+!!! tip "Real-World Scenario: The Feature That Never Left"
+
+    Madeline's team builds an MCP server to help developers check code quality. Initially, it only needs read-only access to GitHub repositories. Six months later, a new feature requires write access to update README files. A developer grants write permissions, the feature launches, and the team moves on.
+
+    A year later, the README feature is deprecated but the write permissions remain. When a developer’s credentials are later compromised through a phishing attack, the attacker inherits the MCP server’s accumulated permissions. What began as a read-only tool can now read and modify production repositories, inject malicious code, and alter build pipelines.
+
+    The permissions didn’t change suddenly. They quietly grew and were never reduced.
+
+    **Think of it like**: Giving a house-sitter the keys to every room, the safe, and your car even though they only need access to the kitchen to feed your cat, Spike. Over time, you forget what access you’ve granted. If someone steals those keys, they have access to everything, not just what was necessary.
 
 ## Understanding the Risk
 
@@ -38,7 +38,9 @@ Azure API Management can validate that incoming requests contain *only* the scop
 **Protect administrative access**  
 Privileged Identity Management (PIM) requires administrators to explicitly activate elevated permissions for a limited time, creating audit trails and reducing standing privilege.
 
-> Warning: Azure doesn’t automatically reduce permissions based on actual usage. You’ll need to implement recurring access reviews and manually audit which permissions are being used versus which are just sitting unused.
+!!! warning
+
+    Azure doesn't automatically reduce permissions based on actual usage. You'll need to implement recurring access reviews and manually audit which permissions are being used versus which are just sitting unused.
 
 **Key Takeaways**:
 

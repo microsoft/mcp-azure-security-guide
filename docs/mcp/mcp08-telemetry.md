@@ -4,11 +4,11 @@
 
 ![MCP08 Scenario](../images/mcp08-scenario.png)
 
-> **Real-World Scenario**: The Invisible Breach
->
-> An attacker compromises an MCP server and spends three weeks quietly exfiltrating customer data. When the breach is finally discovered through an external report, the security team scrambles to understand what happened. But there are no logs showing which tools were called, what data was accessed, or which users were affected. They can't determine the scope of the breach, can't notify the right customers, and can't prove to regulators that they've contained the incident. The lack of visibility turns a manageable breach into a catastrophic one.
->
-> **Think of it like**: A bank vault with no security cameras and no visitor log. Even if you eventually discover money is missing, you have no way to know when it happened, who took it, or how much is gone.
+!!! tip "Real-World Scenario: The Invisible Breach"
+
+    An attacker compromises an MCP server and spends three weeks quietly exfiltrating customer data. When the breach is finally discovered through an external report, the security team scrambles to understand what happened. But there are no logs showing which tools were called, what data was accessed, or which users were affected. They can't determine the scope of the breach, can't notify the right customers, and can't prove to regulators that they've contained the incident. The lack of visibility turns a manageable breach into a catastrophic one.
+
+    **Think of it like**: A bank vault with no security cameras and no visitor log. Even if you eventually discover money is missing, you have no way to know when it happened, who took it, or how much is gone.
 
 ## Understanding the Risk
 
