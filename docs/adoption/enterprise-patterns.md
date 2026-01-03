@@ -199,7 +199,9 @@ We're seeing four primary architectural patterns emerge from early enterprise de
 
     **Why**: Enables discovery for agents and developers while maintaining governance. Only vetted, secure servers are listed.
 
-    > **Note**: This is an evolving area. Standards for MCP server discovery and cataloging are still emerging. The patterns below reflect early approaches organizations are exploring.
+    !!! note
+
+        This is an evolving area. Standards for MCP server discovery and cataloging are still emerging. The patterns below reflect early approaches organizations are exploring.
 
     **Azure Implementation Options**:
 
