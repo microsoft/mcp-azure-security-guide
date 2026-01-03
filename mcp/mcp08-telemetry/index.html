@@ -1020,11 +1020,11 @@
 <h1 id="mcp08-lack-of-audit-and-telemetry">MCP08: Lack of Audit and Telemetry<a class="headerlink" href="#mcp08-lack-of-audit-and-telemetry" title="Permanent link">¶</a></h1>
 <h3 id="azure-implementation-full">Azure Implementation: FULL<a class="headerlink" href="#azure-implementation-full" title="Permanent link">¶</a></h3>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/mcp08-scenario.png" data-desc-position="bottom"><img alt="MCP08 Scenario" src="../../images/mcp08-scenario.png"></a></p>
-<blockquote>
-<p><strong>Real-World Scenario</strong>: The Invisible Breach</p>
+<div class="admonition tip">
+<p class="admonition-title">Real-World Scenario: The Invisible Breach</p>
 <p>An attacker compromises an MCP server and spends three weeks quietly exfiltrating customer data. When the breach is finally discovered through an external report, the security team scrambles to understand what happened. But there are no logs showing which tools were called, what data was accessed, or which users were affected. They can't determine the scope of the breach, can't notify the right customers, and can't prove to regulators that they've contained the incident. The lack of visibility turns a manageable breach into a catastrophic one.</p>
 <p><strong>Think of it like</strong>: A bank vault with no security cameras and no visitor log. Even if you eventually discover money is missing, you have no way to know when it happened, who took it, or how much is gone.</p>
-</blockquote>
+</div>
 <h2 id="understanding-the-risk">Understanding the Risk<a class="headerlink" href="#understanding-the-risk" title="Permanent link">¶</a></h2>
 <p>Without comprehensive audit and telemetry, MCP systems operate blindly. Security teams cannot detect attacks in progress, investigate incidents after they occur, demonstrate compliance to auditors, or establish baselines for normal behavior. The MCP specification emphasizes logging tool invocations, resource access, and sampling requests because these signals are essential for understanding <em>who did what, when, and why</em> in an MCP environment.</p>
 <h2 id="the-azure-solution">The Azure Solution<a class="headerlink" href="#the-azure-solution" title="Permanent link">¶</a></h2>

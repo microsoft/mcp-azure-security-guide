@@ -1042,12 +1042,12 @@
 <h1 id="mcp09-shadow-mcp-servers">MCP09: Shadow MCP Servers<a class="headerlink" href="#mcp09-shadow-mcp-servers" title="Permanent link">¶</a></h1>
 <h3 id="azure-implementation-new-guidance">Azure Implementation: NEW GUIDANCE<a class="headerlink" href="#azure-implementation-new-guidance" title="Permanent link">¶</a></h3>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/mcp09-scenario.png" data-desc-position="bottom"><img alt="MCP09 Scenario" src="../../images/mcp09-scenario.png"></a></p>
-<blockquote>
-<p><strong>Real-World Scenario</strong>: The Feature That Never Left</p>
+<div class="admonition tip">
+<p class="admonition-title">Real-World Scenario: The Forgotten Demo</p>
 <p>The data science team needs to demo an AI Agent at a conference next week. Under time pressure, they spin up a Container App running an MCP server with minimal configuration: no authentication, public internet access, and an admin password of <code>conference123</code>. The demo goes well, everyone moves on to other projects, and the server is forgotten.</p>
 <p>Three months later, an external researcher doing internet scans finds this server, gains access, and discovers it has database credentials for internal systems. The ‘temporary’ demo server has been quietly exposing the company’s infrastructure for months.</p>
 <p><strong>Think of it like</strong>: A side door open with a brick ‘just for the day’ during a furniture delivery. Weeks later, no one remembers the delivery, but the door is still propped open, and anyone walking by can walk in.</p>
-</blockquote>
+</div>
 <h2 id="understanding-the-risk">Understanding the Risk<a class="headerlink" href="#understanding-the-risk" title="Permanent link">¶</a></h2>
 <p>Shadow IT has always been a security challenge, but shadow MCP servers are particularly dangerous. They often have access to sensitive data and tools, they're deployed quickly without security review, and they're easily forgotten. Unlike a forgotten file share, a forgotten MCP server is an active service that attackers can interact with.</p>
 <h2 id="the-azure-solution">The Azure Solution<a class="headerlink" href="#the-azure-solution" title="Permanent link">¶</a></h2>

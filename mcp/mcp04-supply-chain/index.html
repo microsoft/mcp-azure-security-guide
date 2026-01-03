@@ -1020,11 +1020,11 @@
 <h1 id="mcp04-supply-chain-attacks">MCP04: Supply Chain Attacks<a class="headerlink" href="#mcp04-supply-chain-attacks" title="Permanent link">¶</a></h1>
 <h3 id="azure-implementation-new-guidance">Azure Implementation: NEW GUIDANCE<a class="headerlink" href="#azure-implementation-new-guidance" title="Permanent link">¶</a></h3>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/mcp04-scenario.png" data-desc-position="bottom"><img alt="MCP04 Scenario" src="../../images/mcp04-scenario.png"></a></p>
-<blockquote>
-<p><strong>Real-World Scenario</strong>: The Compromised Dependency</p>
+<div class="admonition tip">
+<p class="admonition-title">Real-World Scenario: The Compromised Dependency</p>
 <p>Your team builds an MCP server using popular open-source libraries. One of those libraries is a small utility package with thousands of weekly downloads that is maintained by a single developer. An attacker compromises that developers’s npm account and publishes a new version containing malicious code that runs during installation. The code silently copies environment variables (including your Azure credentials) to an external server. Within hours, attackers are using your credentials to spin up cryptocurrency miners in your Azure subscription.</p>
 <p><strong>Think of it like</strong>: Building a house where one of the suppliers was secretly compromised. The lumber looks fine, the nails look fine, but unknown to you, the electrical wiring has been tampered with. The house appears to work normally until one day it catches fire.</p>
-</blockquote>
+</div>
 <h2 id="understanding-the-risk">Understanding the Risk<a class="headerlink" href="#understanding-the-risk" title="Permanent link">¶</a></h2>
 <p>Modern software relies on hundreds of open-source packages. Each package has its own dependencies, which have their own dependencies, creating a “dependency tree”. A vulnerability or malicious code anywhere in this tree affects your application.</p>
 <h2 id="the-azure-solution">The Azure Solution<a class="headerlink" href="#the-azure-solution" title="Permanent link">¶</a></h2>

@@ -1020,14 +1020,14 @@
 <h1 id="mcp01-token-mismanagement-secret-exposure">MCP01: Token Mismanagement &amp; Secret Exposure<a class="headerlink" href="#mcp01-token-mismanagement-secret-exposure" title="Permanent link">¶</a></h1>
 <h3 id="azure-implementation-full">Azure Implementation: FULL<a class="headerlink" href="#azure-implementation-full" title="Permanent link">¶</a></h3>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/mcp01-scenario.png" data-desc-position="bottom"><img alt="MCP01 Token Management Scenario" src="../../images/mcp01-scenario.png"></a></p>
-<blockquote>
-<p><strong>Real-World Scenario</strong>: The Accidental GitHub Leak</p>
-<p>Nelson is a developer building an MCP server that connects to his company’s customer database. To test quickly, he hardcodes the database password directly in his code:</p>
-<p><code>connection_string = ‘Server=prod;Password=SuperSecret123’</code></p>
+<div class="admonition tip">
+<p class="admonition-title">Real-World Scenario: The Accidental GitHub Leak</p>
+<p>Nelson is a developer building an MCP server that connects to his company's customer database. To test quickly, he hardcodes the database password directly in his code:</p>
+<p><code>connection_string = 'Server=prod;Password=SuperSecret123'</code></p>
 <p>He commits the code to GitHub. Within hours, automated bots scanning public repositories find the credential. By morning, attackers have downloaded the entire customer database with names, emails and purchase history, and are demanding ransom.</p>
 <p>What began as a temporary shortcut results in a full compromise of sensitive customer data (way to go, Nelson).</p>
-<p><strong>Think of it like</strong>: Leaving your house key under the doormat. Sure, it’s convenient when you forget your key, but it’s the first place a burglar looks. Hardcoded credentials are the digital equivalent as they are discoverable and dangerous.</p>
-</blockquote>
+<p><strong>Think of it like:</strong> Leaving your house key under the doormat. Sure, it's convenient when you forget your key, but it's the first place a burglar looks. Hardcoded credentials are the digital equivalent as they are discoverable and dangerous.</p>
+</div>
 <h2 id="understanding-the-risk">Understanding the Risk<a class="headerlink" href="#understanding-the-risk" title="Permanent link">¶</a></h2>
 <p>MCP servers require credentials to access databases, APIs, and downstream services. When these secrets are stored improperly in source code, configuration files, environment variables, or logs, they become easy targets for attackers.</p>
 <p>This risk is amplified in MCP systems. MCP servers often act as high-privilege aggregation points, accessing multiple tools and services on behalf of users. A single exposed credential can unlock far more than a single system, dramatically increasing blast radius.</p>

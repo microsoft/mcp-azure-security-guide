@@ -1018,19 +1018,20 @@
 <h1 id="mcp10-context-injection-over-sharing">MCP10: Context Injection &amp; Over-Sharing<a class="headerlink" href="#mcp10-context-injection-over-sharing" title="Permanent link">¶</a></h1>
 <h3 id="azure-implementation-partial">Azure Implementation: PARTIAL<a class="headerlink" href="#azure-implementation-partial" title="Permanent link">¶</a></h3>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/mcp10-scenario.png" data-desc-position="bottom"><img alt="MCP10 Scenario" src="../../images/mcp10-scenario.png"></a></p>
-<blockquote>
-<p><strong>Real-World Scenario</strong>: The Cross-Tenant Leak</p>
+<div class="admonition tip">
+<p class="admonition-title">Real-World Scenario: The Cross-Tenant Leak</p>
 <p>A SaaS company operates a multi-tenant MCP server where multiple customers share the same infrastructure. A sales representative from Company A requests a summary of their sales pipeline. Due to a flaw in session handling, Company A’s context—including customer names, deal sizes, and pricing—is mistakenly associated with Company B’s session ID.</p>
 <p>Later, when an employee from Company B submits an unrelated request, the MCP server retrieves and returns Company A’s confidential sales data in the response. A single session management error results in a cross-tenant data breach, exposing sensitive information across organizational boundaries.</p>
 <p><strong>Think of it like</strong>: A hotel where electronic room keys occasionally get mixed up. You swipe your card and, instead of entering your room, you walk into a stranger’s room with all their belongings visible. The system believes you belong there, so it grants full access.</p>
-</blockquote>
+</div>
 <h2 id="understanding-the-risk">Understanding the Risk<a class="headerlink" href="#understanding-the-risk" title="Permanent link">¶</a></h2>
 <p>MCP servers maintain <em>context</em> as working memory that includes conversation history, retrieved data, tool outputs, and intermediate results. When context isolation fails, information from one user, session, or tenant can be returned to another. In multi-tenant MCP systems, this failure can expose customer data, PII, intellectual property, or confidential business information and often without any malicious intent or external attack.</p>
 <h2 id="the-azure-solution">The Azure Solution<a class="headerlink" href="#the-azure-solution" title="Permanent link">¶</a></h2>
 <p>Preventing cross-tenant context leakage requires strong isolation at every layer where context is stored or processed. Detection alone is insufficient.</p>
-<blockquote>
-<p><strong>Important</strong>: Azure does not provide built-in semantic understanding of who data belongs to. Preventing cross-tenant leakage is primarily an architecture responsibility</p>
-</blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Important</p>
+<p>Azure does not provide built-in semantic understanding of who data belongs to. Preventing cross-tenant leakage is primarily an architecture responsibility.</p>
+</div>
 <p><strong>Response inspection as a safety net</strong><br>
 Azure AI Content Safety PII detection can be used as a last-resort signal to identify and redact sensitive data before responses are returned. This helps limit impact but must not be relied on as the primary protection.</p>
 <p><strong>Session and context isolation</strong><br>

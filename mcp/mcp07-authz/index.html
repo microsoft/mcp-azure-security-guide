@@ -1020,11 +1020,11 @@
 <h1 id="mcp07-insufficient-authentication-authorization">MCP07: Insufficient Authentication &amp; Authorization<a class="headerlink" href="#mcp07-insufficient-authentication-authorization" title="Permanent link">¶</a></h1>
 <h3 id="azure-implementation-full">Azure Implementation: FULL<a class="headerlink" href="#azure-implementation-full" title="Permanent link">¶</a></h3>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/mcp07-scenario.png" data-desc-position="bottom"><img alt="MCP07 Scenario" src="../../images/mcp07-scenario.png"></a></p>
-<blockquote>
-<p><strong>Real-World Scenario</strong>: The Wrong Audience</p>
+<div class="admonition tip">
+<p class="admonition-title">Real-World Scenario: The Wrong Audience</p>
 <p>A company runs two MCP servers: one for HR (with access to employee data) and one for Finance (with access to accounting systems). Both use OAuth tokens from the same identity provider. An attacker obtains a valid token intended for the HR server through social engineering. They then present this token to the Finance server. Because the Finance server only checks that the token is valid, and not that it was issued specifically for Finance, the attacker gains unauthorized access to financial data using an HR credential.</p>
 <p><strong>Think of it like</strong>: A concert ticket that only says “VALID TICKET” without specifying which concert. You could use a ticket for last week’s jazz concert to get into tonight’s rock show because nobody checks which event the ticket was for.</p>
-</blockquote>
+</div>
 <h2 id="understanding-the-risk">Understanding the Risk<a class="headerlink" href="#understanding-the-risk" title="Permanent link">¶</a></h2>
 <p>The MCP specification requires OAuth 2.1 with Resource Indicators (RFC 8707). This means tokens must be issued for a specific “audience” (the intended MCP server), and servers must validate that tokens were issued for them. MCP servers are peers, not interchangeable resources. Without proper audience validation, tokens issued for one MCP server can be replayed against another, resulting in unauthorized access across trust boundaries.</p>
 <h2 id="the-azure-solution">The Azure Solution<a class="headerlink" href="#the-azure-solution" title="Permanent link">¶</a></h2>

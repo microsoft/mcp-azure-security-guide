@@ -1270,16 +1270,16 @@
 <p>According to <a href="https://astrix.security/learn/blog/state-of-mcp-server-security-2025/">Astrix Security's State of MCP report</a>, 88% of MCP servers require credentials, and 53% rely on long-lived static secrets, which makes stdio inappropriate for most enterprise scenarios.</p>
 <h3 id="when-to-use-each-transport">When to Use Each Transport<a class="headerlink" href="#when-to-use-each-transport" title="Permanent link">¶</a></h3>
 <p><strong>Use stdio for</strong>:</p>
-<p>✅ Prototyping and learning<br>
-✅ Local filesystem operations<br>
-✅ IDE integrations (no network calls)<br>
-✅ Personal tools with no org data  </p>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span> Prototyping and learning<br>
+<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span> Local filesystem operations<br>
+<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span> IDE integrations (no network calls)<br>
+<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span> Personal tools with no org data  </p>
 <p><strong>Use HTTP for</strong>:</p>
-<p>✅ Production deployments<br>
-✅ Network API access<br>
-✅ Organizational data access<br>
-✅ Multi-user scenarios<br>
-✅ Compliance requirements  </p>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span> Production deployments<br>
+<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span> Network API access<br>
+<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span> Organizational data access<br>
+<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span> Multi-user scenarios<br>
+<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span> Compliance requirements  </p>
 <hr>
 <h2 id="remote-mcp-architecture">Remote MCP Architecture<a class="headerlink" href="#remote-mcp-architecture" title="Permanent link">¶</a></h2>
 <p>Remote MCP servers run as Azure services behind a gateway that handles authentication, policy, and routing:</p>
