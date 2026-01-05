@@ -51,6 +51,7 @@ nav:
       - 8 - Lack of Audit & Telemetry: mcp/mcp08-telemetry.md
       - 9 - Shadow MCP Servers: mcp/mcp09-shadow-servers.md
       - 10 - Context Injection & Over-Sharing: mcp/mcp10-context-oversharing.md
+  - MCP Security Workshop: workshop.md
 
 plugins:
   - search
