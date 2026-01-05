@@ -10,28 +10,26 @@
       
       
       
-        <link rel="prev" href="../mcp09-shadow-servers/">
+        <link rel="prev" href="../mcp/mcp10-context-oversharing/">
       
-      
-        <link rel="next" href="../../workshop/">
       
       
         
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
     
     
       
-        <title>10 - Context Injection &amp; Over-Sharing - OWASP MCP Top 10 Security Guidance for Azure</title>
+        <title>MCP Security Workshop - OWASP MCP Top 10 Security Guidance for Azure</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.618322db.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -50,7 +48,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -75,7 +73,7 @@
   <meta property="twitter:description" content="Practical security guidance for implementing Model Context Protocol (MCP) systems on Azure, aligned with the OWASP MCP Top 10.">
   <meta property="twitter:image" content="https://microsoft.github.io/mcp-azure-security-guide/images/owasp-mcp-guide.png">
 
-  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
             html.glightbox-open { overflow: initial; height: 100%; }
             .gslide-title { margin-top: 0px; user-select: text; }
             .gslide-desc { color: #666; user-select: text; }
@@ -104,7 +102,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#mcp10-context-injection-over-sharing" class="md-skip">
+        <a href="#mcp-security-summit-workshop" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +118,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="OWASP MCP Top 10 Security Guidance for Azure" class="md-header__button md-logo" aria-label="OWASP MCP Top 10 Security Guidance for Azure" data-md-component="logo">
+    <a href=".." title="OWASP MCP Top 10 Security Guidance for Azure" class="md-header__button md-logo" aria-label="OWASP MCP Top 10 Security Guidance for Azure" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m10 17-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9m-6-8L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5z"></path></svg>
@@ -140,7 +138,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              10 - Context Injection &amp; Over-Sharing
+              MCP Security Workshop
             
           </span>
         </div>
@@ -256,7 +254,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="OWASP MCP Top 10 Security Guidance for Azure" class="md-nav__button md-logo" aria-label="OWASP MCP Top 10 Security Guidance for Azure" data-md-component="logo">
+    <a href=".." title="OWASP MCP Top 10 Security Guidance for Azure" class="md-nav__button md-logo" aria-label="OWASP MCP Top 10 Security Guidance for Azure" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m10 17-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9m-6-8L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5z"></path></svg>
@@ -286,7 +284,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -360,7 +358,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../adoption/when-to-use-mcp/" class="md-nav__link">
+      <a href="../adoption/when-to-use-mcp/" class="md-nav__link">
         
   
   
@@ -388,7 +386,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../adoption/migration-guidance/" class="md-nav__link">
+      <a href="../adoption/migration-guidance/" class="md-nav__link">
         
   
   
@@ -416,7 +414,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../adoption/development-best-practices/" class="md-nav__link">
+      <a href="../adoption/development-best-practices/" class="md-nav__link">
         
   
   
@@ -444,7 +442,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../adoption/deployment-architecture/" class="md-nav__link">
+      <a href="../adoption/deployment-architecture/" class="md-nav__link">
         
   
   
@@ -472,7 +470,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../adoption/enterprise-patterns/" class="md-nav__link">
+      <a href="../adoption/enterprise-patterns/" class="md-nav__link">
         
   
   
@@ -504,20 +502,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -538,7 +534,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -556,7 +552,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mcp01-token-mismanagement/" class="md-nav__link">
+      <a href="../mcp/mcp01-token-mismanagement/" class="md-nav__link">
         
   
   
@@ -584,7 +580,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mcp02-privilege-escalation/" class="md-nav__link">
+      <a href="../mcp/mcp02-privilege-escalation/" class="md-nav__link">
         
   
   
@@ -612,7 +608,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mcp03-tool-poisoning/" class="md-nav__link">
+      <a href="../mcp/mcp03-tool-poisoning/" class="md-nav__link">
         
   
   
@@ -640,7 +636,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mcp04-supply-chain/" class="md-nav__link">
+      <a href="../mcp/mcp04-supply-chain/" class="md-nav__link">
         
   
   
@@ -668,7 +664,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mcp05-command-injection/" class="md-nav__link">
+      <a href="../mcp/mcp05-command-injection/" class="md-nav__link">
         
   
   
@@ -696,7 +692,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mcp06-prompt-injection/" class="md-nav__link">
+      <a href="../mcp/mcp06-prompt-injection/" class="md-nav__link">
         
   
   
@@ -724,7 +720,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mcp07-authz/" class="md-nav__link">
+      <a href="../mcp/mcp07-authz/" class="md-nav__link">
         
   
   
@@ -752,7 +748,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mcp08-telemetry/" class="md-nav__link">
+      <a href="../mcp/mcp08-telemetry/" class="md-nav__link">
         
   
   
@@ -780,7 +776,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mcp09-shadow-servers/" class="md-nav__link">
+      <a href="../mcp/mcp09-shadow-servers/" class="md-nav__link">
         
   
   
@@ -805,6 +801,41 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../mcp/mcp10-context-oversharing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 - Context Injection &amp; Over-Sharing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -824,7 +855,7 @@
   <span class="md-ellipsis">
     
   
-    10 - Context Injection &amp; Over-Sharing
+    MCP Security Workshop
   
 
     
@@ -842,7 +873,7 @@
   <span class="md-ellipsis">
     
   
-    10 - Context Injection &amp; Over-Sharing
+    MCP Security Workshop
   
 
     
@@ -868,10 +899,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#azure-implementation-partial" class="md-nav__link">
+  <a href="#workshop-overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Azure Implementation: PARTIAL
+        Workshop Overview
       
     </span>
   </a>
@@ -879,10 +910,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#understanding-the-risk" class="md-nav__link">
+  <a href="#what-youll-learn" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Understanding the Risk
+        What You'll Learn
       
     </span>
   </a>
@@ -890,10 +921,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-azure-solution" class="md-nav__link">
+  <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Azure Solution
+        Prerequisites
       
     </span>
   </a>
@@ -901,10 +932,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#next-steps" class="md-nav__link">
+  <a href="#getting-started" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Next Steps
+        Getting Started
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#feedback-and-contributions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Feedback and Contributions
       
     </span>
   </a>
@@ -915,41 +957,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../workshop/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    MCP Security Workshop
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -981,10 +988,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#azure-implementation-partial" class="md-nav__link">
+  <a href="#workshop-overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Azure Implementation: PARTIAL
+        Workshop Overview
       
     </span>
   </a>
@@ -992,10 +999,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#understanding-the-risk" class="md-nav__link">
+  <a href="#what-youll-learn" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Understanding the Risk
+        What You'll Learn
       
     </span>
   </a>
@@ -1003,10 +1010,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-azure-solution" class="md-nav__link">
+  <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Azure Solution
+        Prerequisites
       
     </span>
   </a>
@@ -1014,10 +1021,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#next-steps" class="md-nav__link">
+  <a href="#getting-started" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Next Steps
+        Getting Started
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#feedback-and-contributions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Feedback and Contributions
       
     </span>
   </a>
@@ -1044,53 +1062,55 @@
   
 
 
-<h1 id="mcp10-context-injection-over-sharing">MCP10: Context Injection &amp; Over-Sharing<a class="headerlink" href="#mcp10-context-injection-over-sharing" title="Permanent link">¶</a></h1>
-<h3 id="azure-implementation-partial">Azure Implementation: PARTIAL<a class="headerlink" href="#azure-implementation-partial" title="Permanent link">¶</a></h3>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/mcp10-scenario.png" data-desc-position="bottom"><img alt="MCP10 Scenario" src="../../images/mcp10-scenario.png"></a></p>
-<div class="admonition tip">
-<p class="admonition-title">Real-World Scenario: The Cross-Tenant Leak</p>
-<p>A SaaS company operates a multi-tenant MCP server where multiple customers share the same infrastructure. A sales representative from Company A requests a summary of their sales pipeline. Due to a flaw in session handling, Company A’s context—including customer names, deal sizes, and pricing—is mistakenly associated with Company B’s session ID.</p>
-<p>Later, when an employee from Company B submits an unrelated request, the MCP server retrieves and returns Company A’s confidential sales data in the response. A single session management error results in a cross-tenant data breach, exposing sensitive information across organizational boundaries.</p>
-<p><strong>Think of it like</strong>: A hotel where electronic room keys occasionally get mixed up. You swipe your card and, instead of entering your room, you walk into a stranger’s room with all their belongings visible. The system believes you belong there, so it grants full access.</p>
-</div>
-<h2 id="understanding-the-risk">Understanding the Risk<a class="headerlink" href="#understanding-the-risk" title="Permanent link">¶</a></h2>
-<p>MCP servers maintain <em>context</em> as working memory that includes conversation history, retrieved data, tool outputs, and intermediate results. When context isolation fails, information from one user, session, or tenant can be returned to another. In multi-tenant MCP systems, this failure can expose customer data, PII, intellectual property, or confidential business information and often without any malicious intent or external attack.</p>
-<h2 id="the-azure-solution">The Azure Solution<a class="headerlink" href="#the-azure-solution" title="Permanent link">¶</a></h2>
-<p>Preventing cross-tenant context leakage requires strong isolation at every layer where context is stored or processed. Detection alone is insufficient.</p>
-<div class="admonition warning">
-<p class="admonition-title">Important</p>
-<p>Azure does not provide built-in semantic understanding of who data belongs to. Preventing cross-tenant leakage is primarily an architecture responsibility.</p>
-</div>
-<p><strong>Response inspection as a safety net</strong><br>
-Azure AI Content Safety PII detection can be used as a last-resort signal to identify and redact sensitive data before responses are returned. This helps limit impact but must not be relied on as the primary protection.</p>
-<p><strong>Session and context isolation</strong><br>
-Azure Cache for Redis should use strict key prefixes (for example, {tenantId}:{userId}:{sessionId}:*) and short TTLs (such as 30 minutes) to prevent stale or shared context from persisting across sessions.</p>
-<p><strong>Storage-level tenant separation</strong><br>
-Azure Cosmos DB partitioning with hierarchical partition keys (for example, /tenantId/userId/sessionId) enforces isolation at the data layer, ensuring context from different tenants cannot be co-mingled or queried together.</p>
-<p><strong>Gateway-level tenant identification</strong><br>
-API Management subscription keys or tokens can be used to reliably associate incoming requests with a specific tenant, ensuring tenant identity is consistently propagated through the system.</p>
-<p><strong>Network isolation for high-assurance environments</strong><br>
-For workloads with strict isolation requirements:</p>
+<h1 id="mcp-security-summit-workshop">MCP Security Summit Workshop<a class="headerlink" href="#mcp-security-summit-workshop" title="Permanent link">¶</a></h1>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17z"></path></svg></span> <strong><a href="https://azure-samples.github.io/sherpa/">Launch MCP Security Workshop</a></strong></p>
+<p>Ready to put the OWASP MCP Top 10 security guidance into practice? The <strong>MCP Security Workshop</strong> provides hands-on labs and exercises that walk through implementing secure MCP servers on Azure.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="https://azure-samples.github.io/sherpa/images/sherpa-mcp-workshop.png" data-desc-position="bottom"><img alt="MCP Security Workshop" src="https://azure-samples.github.io/sherpa/images/sherpa-mcp-workshop.png"></a></p>
+<p>The workshop is open source and designed for both individual learning and team training sessions.</p>
+<h2 id="workshop-overview">Workshop Overview<a class="headerlink" href="#workshop-overview" title="Permanent link">¶</a></h2>
+<p>The workshop covers:</p>
 <ul>
-<li>Deploy separate VNets per tenant</li>
-<li>Use Private Endpoints per tenant for services such as Cosmos DB and Redis</li>
-<li>Consider Azure Dedicated Host for regulated industries requiring physical isolation</li>
+<li><strong>Practical Implementation</strong>: Step-by-step guidance for building secure MCP servers using Azure services</li>
+<li><strong>Security Controls</strong>: Hands-on exercises implementing the security patterns described in this guide</li>
+<li><strong>Real-World Scenarios</strong>: Labs based on common enterprise deployment patterns</li>
+<li><strong>Azure Integration</strong>: Deep-dive on Azure services like Managed Identity, Key Vault, API Management, and more</li>
 </ul>
-<p><strong>Key Takeaways</strong>:</p>
+<h2 id="what-youll-learn">What You'll Learn<a class="headerlink" href="#what-youll-learn" title="Permanent link">¶</a></h2>
+<p>The workshop reinforces the security concepts from this guide through practical implementation:</p>
 <ul>
-<li>Design for strict context isolation across tenants, users, and sessions</li>
-<li>Treat PII detection as a safety net, not a primary control</li>
-<li>Use tenant-scoped keys and TTLs for all session and context storage</li>
-<li>Enforce tenant isolation at the storage and network layers</li>
-<li>Assume application bugs will happen and design isolation accordingly</li>
+<li>Setting up secure authentication with Managed Identity</li>
+<li>Implementing proper secret management with Key Vault</li>
+<li>Configuring network isolation with VNets and Private Endpoints</li>
+<li>Adding telemetry and monitoring with Application Insights</li>
+<li>Implementing authorization and access controls</li>
+<li>Testing for MCP-specific security threats</li>
+</ul>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">¶</a></h2>
+<p>To complete the workshop exercises, you'll need:</p>
+<ul>
+<li>An Azure subscription </li>
+<li>Basic familiarity with Azure concepts</li>
+<li>Understanding of the OWASP MCP Top 10 (covered in this guide)</li>
+</ul>
+<h2 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">¶</a></h2>
+<ol>
+<li><strong>Read the Guide</strong>: Review the <a href="../#owasp-mcp-top-10">OWASP MCP Top 10</a> sections relevant to the labs you want to complete</li>
+<li><strong>Access the Workshop</strong>: Visit <a href="https://azure-samples.github.io/sherpa/">azure-samples.github.io/sherpa</a></li>
+<li><strong>Follow the Labs</strong>: Complete the hands-on exercises at your own pace</li>
+<li><strong>Apply to Production</strong>: Use the patterns and code from the workshop as templates for your own MCP deployments</li>
+</ol>
+<h2 id="feedback-and-contributions">Feedback and Contributions<a class="headerlink" href="#feedback-and-contributions" title="Permanent link">¶</a></h2>
+<p>The workshop is continuously evolving based on community feedback and emerging patterns. If you have suggestions or want to contribute new labs:</p>
+<ul>
+<li><strong>Workshop Repository</strong>: Contributions welcome on GitHub</li>
+<li><strong>Issues and Discussions</strong>: Share your experience and help improve the content</li>
 </ul>
 <hr>
-<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">¶</a></h2>
+<p><strong>Next Steps:</strong></p>
 <ul>
-<li><strong>Related risks</strong>: <a href="../mcp01-token-mismanagement/">MCP01: Token Mismanagement</a> | <a href="../mcp02-privilege-escalation/">MCP02: Privilege Escalation</a></li>
-<li><strong>Monitoring</strong>: <a href="../mcp08-telemetry/">MCP08: Lack of Audit &amp; Telemetry</a> to detect context boundary violations</li>
-<li><strong>Strategic guidance</strong>: <a href="../../adoption/enterprise-patterns/">Enterprise Patterns &amp; Lessons Learned</a> for data classification practices</li>
-<li><strong>Back to</strong>: <a href="../../#owasp-mcp-top-10">OWASP MCP Top 10</a></li>
+<li><strong>Start the Workshop</strong>: <a href="https://azure-samples.github.io/sherpa/">azure-samples.github.io/sherpa</a></li>
+<li><strong>Review Security Patterns</strong>: <a href="../adoption/enterprise-patterns/">Enterprise Patterns &amp; Lessons Learned</a></li>
+<li><strong>Back to Home</strong>: <a href="../">OWASP MCP Top 10 Guide</a></li>
 </ul>
 
 
@@ -1163,10 +1183,10 @@ For workloads with strict isolation requirements:</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "content.code.copy", "search.highlight"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.top", "content.code.copy", "search.highlight"], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      <script src="../assets/javascripts/bundle.e71a0d61.min.js"></script>
       
     
   
