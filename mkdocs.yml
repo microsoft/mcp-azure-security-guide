@@ -58,6 +58,9 @@ plugins:
   - glightbox
 
 extra:
+  analytics:
+    provider: google
+    property: G-830273XQ9E
   social:
     - icon: fontawesome/solid/globe
       link: https://microsoft.github.io/mcp-azure-security-guide/
