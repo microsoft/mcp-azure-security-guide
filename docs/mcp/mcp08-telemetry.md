@@ -30,6 +30,9 @@ Azure Monitor Workbooks provide dashboards that surface tool usage patterns, aut
 **Detection and alerting**  
 Alert rules trigger notifications for high-risk patterns such as tools executed outside business hours, repeated authentication failures, unusual parameter values, or sudden spikes in data access. Alerts turn raw telemetry into actionable signals.
 
+**Tamper-evident log storage**  
+Use Azure Storage immutability policies (WORM) or Log Analytics data export to append-only storage to protect audit trails from modification. Restrict log deletion and retention changes with RBAC and require dual authorization. This ensures logs remain trustworthy for incident investigation and regulatory compliance.
+
 **Network telemetry as a corroborating signal**  
 NSG Flow Logs and Traffic Analytics capture network-level behavior, including outbound connections, lateral movement, and unexpected traffic patterns. When correlated with application and identity logs, network telemetry helps confirm exfiltration paths and attacker behavior.
 
@@ -40,6 +43,7 @@ NSG Flow Logs and Traffic Analytics capture network-level behavior, including ou
 - Instrument MCP servers with OpenTelemetry and MCP-specific context
 - Capture redacted summaries, correlation IDs, tool names, and authz decisions rather than raw secret-bearing payloads by default
 - Enable NSG Flow Logs and Traffic Analytics for network visibility
+- Store audit logs in tamper-evident, append-only storage with restricted deletion access
 - Create alerts for suspicious patterns such as off-hours access, auth failures, and anonymous tool usage
 
 ---
