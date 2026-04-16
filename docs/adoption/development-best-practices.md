@@ -4,6 +4,17 @@
 
 Building effective MCP servers requires different thinking than traditional API development. This page provides practical guidance for designing, implementing, and testing MCP tools that agents can successfully use.
 
+!!! tip "Quick-start checklist"
+
+    Read this page after you've decided MCP is a good fit and before you build your first server.
+
+    - Keep tool sets small and focused
+    - Use task-oriented names and descriptions
+    - Define clear JSON Schemas for tool inputs
+    - Return structured, decision-ready data
+    - Validate rules server-side instead of relying on the model
+    - Test at the unit, protocol, and agent levels
+
 ---
 
 ## Tool Design Principles
@@ -665,9 +676,9 @@ At this layer, test with actual LLM agents to validate that your tools work in p
 
 - [MCP03 - Tool Poisoning](../mcp/mcp03-tool-poisoning.md) - Malicious tool definitions and descriptions
 - [MCP05 - Command Injection](../mcp/mcp05-command-injection.md) - Unsafe tool parameter handling
-- [MCP06 - Prompt Injection](../mcp/mcp06-prompt-injection.md) - Manipulating agent behavior via tool responses
+- [MCP06 - Intent Flow Subversion](../mcp/mcp06-prompt-injection.md) - Manipulating agent behavior through untrusted context
 - [MCP08 - Lack of Audit & Telemetry](../mcp/mcp08-telemetry.md) - Monitoring and logging best practices
-- [MCP10 - Context Oversharing](../mcp/mcp10-context-oversharing.md) - Information disclosure in tool outputs
+- [MCP10 - Context Injection & Over-Sharing](../mcp/mcp10-context-oversharing.md) - Information disclosure in tool outputs and shared context
 
 ---
 

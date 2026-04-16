@@ -16,13 +16,13 @@
 
 ## Understanding the Risk
 
-MCP tools are defined by natural-language descriptions that assistants read to understand what each tool does and how it should be used. Because these descriptions act as instructions, an attacker can embed malicious behavior directly into tool metadata. The assistant may execute these hidden instructions without realizing they are harmful.
+MCP tools are defined by manifests, schemas, metadata, and natural-language descriptions that assistants read to understand what each tool does and how it should be used. Tool poisoning occurs when an attacker tampers with those definitions or with the tool outputs that agents rely on, causing the assistant to take unsafe or unintended actions.
 
-This makes MCP tool poisoning a software supply chain risk. Just as applications trust third-party libraries or containers, assistants trust MCP tools that are presented as valid and helpful. Once a poisoned tool is introduced, malicious behavior can propagate quietly into otherwise secure environments. This is particularly dangerous because:
+This makes MCP tool poisoning a software supply chain risk. Just as applications trust third-party libraries or containers, assistants trust MCP servers, manifests, and tool responses that appear valid and helpful. Once a poisoned tool is introduced, malicious behavior can propagate quietly into otherwise secure environments. This is particularly dangerous because:
 
-- Users can’t see, or may not inspect, tool descriptions when they just see the tool working
-- Hidden instructions can be obfuscated using creative techniques like Base64 encoding or using unusual characters
-- The tool appears to work correctly while secretly performing malicious actions
+- Users may never inspect tool manifests, descriptions, or output contracts when the tool appears to work
+- Hidden instructions or unsafe behavior can be embedded in manifests, schemas, descriptions, or returned content
+- The tool may appear to function correctly while still influencing planning, exfiltrating data, or triggering unsafe follow-on actions
 
 ## The Azure Solution
 
@@ -30,8 +30,8 @@ Tool poisoning is an emerging threat, and there is no single Azure service dedic
 
 ![MCP03 Tool Poisoning](../diagrams/mcp03.png)
 
-**Pre-deployment Inspection**
-Use with model-assisted analysis to review MCP tool descriptions before they are approved for use. A review process can prompt a model to identify hidden instructions, obfuscated content, or indicators of data exfiltration embedded in tool metadata.
+**Pre-deployment inspection and change review**
+Use structured review to inspect MCP manifests, schemas, descriptions, and server behavior before approval. Model-assisted analysis can help flag hidden instructions, obfuscated content, or suspicious patterns, but approval should also include source verification, version review, and change control.
 
 **Tool Registry and Governance**
 Maintain an internal tool registry that tracks approved MCP servers, versions, and changes over time. Only tools explicitly approved in the registry should be allowed in production environments. Any modifications to a tool’s description or behavior should trigger a review.
@@ -48,17 +48,17 @@ Use Application Insights and Azure Monitor to observe tool behavior at runtime. 
 
 **Key Takeaways**:
 
-- Scan all tool descriptions using model-assisted analysis before deployment
-- Maintain a registry of approved tools, consider checksums or signatures to verify integrity
+- Scan manifests, schemas, descriptions, and representative outputs before deployment
+- Maintain a registry of approved tools, and consider checksums or signatures to verify integrity
 - Control egress traffic and only allow connections to known, approved destinations
-- Never user ‘latest’ tags and pin tools to specific, verified versions
+- Never use 'latest' tags; pin tools to specific, verified versions
 - Monitor runtime behavior for unexpected network calls or data access patterns
 
 ---
 
 ## Next Steps
 
-- **Related risks**: [MCP04: Supply Chain Attacks](mcp04-supply-chain.md) | [MCP06: Prompt Injection](mcp06-prompt-injection.md)
+- **Related risks**: [MCP04: Software Supply Chain Attacks & Dependency Tampering](mcp04-supply-chain.md) | [MCP06: Intent Flow Subversion](mcp06-prompt-injection.md)
 - **Monitoring**: [MCP08: Lack of Audit & Telemetry](mcp08-telemetry.md) to detect suspicious tool behavior
 - **Strategic guidance**: [Enterprise Patterns & Lessons Learned](../adoption/enterprise-patterns.md#internal-mcp-catalog) for maintaining an internal tool registry
 - **Back to**: [OWASP MCP Top 10](../index.md#owasp-mcp-top-10)

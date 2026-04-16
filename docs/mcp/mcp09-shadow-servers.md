@@ -18,13 +18,15 @@ Shadow IT has always been a security challenge, but shadow MCP servers are parti
 
 ## The Azure Solution
 
-## Preventing shadow MCP servers requires governance, discovery, and containment, not just runtime security.
+Preventing shadow MCP servers requires governance, discovery, and containment, not just runtime security.
+
+Shadow MCP risk includes not only internet-exposed deployments, but also unapproved internal servers or client-connected servers that bypass normal review and ownership processes.
 
 **Prevent unauthorized deployments**  
 Azure Policy enforces organizational standards at deployment time. Require mandatory tags such as *mcp-server-approved*, *owner*, and *security-review-date* on all compute resources. Use *deny* effects to block deployments that bypass approval.
 
 **Discover existing shadow servers**  
-Microsoft Defender for Cloud continuously discovers running containers and services across subscriptions, surfacing misconfigurations, exposed endpoints, and ungoverned workloads. Azure Resource Graph queries can further identify resources that match MCP patterns but lack approval or ownership metadata.
+Microsoft Defender for Cloud continuously discovers running containers and services across subscriptions, surfacing misconfigurations, exposed endpoints, and ungoverned workloads. Azure Resource Graph queries can further help identify likely MCP-related resources that lack approval or ownership metadata.
 
 **Enforce ownership and lifecycle controls**  
 Automated compliance workflows using Logic Apps can trigger on new deployments. Resources without required tags or approvals generate alerts, assign ownership, and initiate review or shutdown processes. This ensures every MCP server has an accountable owner and a defined lifecycle.
@@ -47,7 +49,7 @@ Network policies act as a final backstop:
 
 ## Next Steps
 
-- **Related risks**: [MCP04: Supply Chain Attacks](mcp04-supply-chain.md) | [MCP03: Tool Poisoning](mcp03-tool-poisoning.md)
+- **Related risks**: [MCP04: Software Supply Chain Attacks & Dependency Tampering](mcp04-supply-chain.md) | [MCP03: Tool Poisoning](mcp03-tool-poisoning.md)
 - **Monitoring**: [MCP08: Lack of Audit & Telemetry](mcp08-telemetry.md) to detect unauthorized deployments
 - **Strategic guidance**: [Enterprise Patterns & Lessons Learned](../adoption/enterprise-patterns.md#internal-mcp-catalog) for governance and approval processes
 - **Back to**: [OWASP MCP Top 10](../index.md#owasp-mcp-top-10)
