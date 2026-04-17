@@ -75,8 +75,8 @@ The ten most critical security risks for MCP implementations, with Azure-specifi
 - [MCP04: Software Supply Chain Attacks & Dependency Tampering](mcp/mcp04-supply-chain.md)
 - [MCP05: Command Injection & Execution](mcp/mcp05-command-injection.md)
 - [MCP06: Intent Flow Subversion](mcp/mcp06-prompt-injection.md)
-- [MCP07: Insufficient Authentication and Authorization](mcp/mcp07-authz.md)
-- [MCP08: Lack of Audit and Telemetry](mcp/mcp08-telemetry.md)
+- [MCP07: Insufficient Authentication & Authorization](mcp/mcp07-authz.md)
+- [MCP08: Lack of Audit & Telemetry](mcp/mcp08-telemetry.md)
 - [MCP09: Shadow MCP Servers](mcp/mcp09-shadow-servers.md)
 - [MCP10: Context Injection & Over-Sharing](mcp/mcp10-context-oversharing.md)
 

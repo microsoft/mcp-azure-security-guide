@@ -675,7 +675,7 @@ At this layer, test with actual LLM agents to validate that your tools work in p
 ## Related Security Topics
 
 - [MCP03 - Tool Poisoning](../mcp/mcp03-tool-poisoning.md) - Malicious tool definitions and descriptions
-- [MCP05 - Command Injection](../mcp/mcp05-command-injection.md) - Unsafe tool parameter handling
+- [MCP05 - Command Injection & Execution](../mcp/mcp05-command-injection.md) - Unsafe tool parameter handling
 - [MCP06 - Intent Flow Subversion](../mcp/mcp06-prompt-injection.md) - Manipulating agent behavior through untrusted context
 - [MCP08 - Lack of Audit & Telemetry](../mcp/mcp08-telemetry.md) - Monitoring and logging best practices
 - [MCP10 - Context Injection & Over-Sharing](../mcp/mcp10-context-oversharing.md) - Information disclosure in tool outputs and shared context
