@@ -60,5 +60,5 @@ Use Application Insights and Azure Monitor to observe tool behavior at runtime. 
 
 - **Related risks**: [MCP04: Software Supply Chain Attacks & Dependency Tampering](mcp04-supply-chain.md) | [MCP06: Intent Flow Subversion](mcp06-prompt-injection.md)
 - **Monitoring**: [MCP08: Lack of Audit & Telemetry](mcp08-telemetry.md) to detect suspicious tool behavior
-- **Strategic guidance**: [Enterprise Patterns & Lessons Learned](../adoption/enterprise-patterns.md#internal-mcp-catalog) for maintaining an internal tool registry
+- **Strategic guidance**: [Enterprise Patterns & Lessons Learned](../adoption/enterprise-patterns.md#emerging-adoption-patterns) for maintaining an internal tool registry
 - **Back to**: [OWASP MCP Top 10](../index.md#owasp-mcp-top-10)

@@ -51,5 +51,5 @@ Network policies act as a final backstop:
 
 - **Related risks**: [MCP04: Software Supply Chain Attacks & Dependency Tampering](mcp04-supply-chain.md) | [MCP03: Tool Poisoning](mcp03-tool-poisoning.md)
 - **Monitoring**: [MCP08: Lack of Audit & Telemetry](mcp08-telemetry.md) to detect unauthorized deployments
-- **Strategic guidance**: [Enterprise Patterns & Lessons Learned](../adoption/enterprise-patterns.md#internal-mcp-catalog) for governance and approval processes
+- **Strategic guidance**: [Enterprise Patterns & Lessons Learned](../adoption/enterprise-patterns.md#emerging-adoption-patterns) for governance and approval processes
 - **Back to**: [OWASP MCP Top 10](../index.md#owasp-mcp-top-10)
