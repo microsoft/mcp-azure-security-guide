@@ -1,4 +1,4 @@
-# MCP04: Supply Chain Attacks
+# MCP04: Software Supply Chain Attacks & Dependency Tampering
 
 ### Azure Implementation: NEW GUIDANCE
 
@@ -12,7 +12,9 @@
 
 ## Understanding the Risk
 
-Modern software relies on hundreds of open-source packages. Each package has its own dependencies, which have their own dependencies, creating a “dependency tree”. A vulnerability or malicious code anywhere in this tree affects your application.
+Modern software relies on hundreds of open-source packages, SDKs, base images, and build-time components. Each dependency can bring its own transitive dependencies, creating a broad software supply chain. A vulnerability, tampering event, or malicious package anywhere in that chain can affect your MCP server.
+
+In MCP environments, this risk also includes compromised connectors, poisoned server images, modified manifests, and dependency confusion attacks that change what code or tooling is actually deployed.
 
 ## The Azure Solution
 
@@ -31,15 +33,16 @@ Generating an SBOM using Microsoft’s SBOM tooling creates a complete inventory
 Even with strong build controls, assume compromise is possible. MCP servers should run with Managed Identity and least-privilege access so that compromised code cannot access unrelated Azure resources. Limiting permissions and enforcing network egress controls reduces the impact of stolen credentials or malicious runtime behavior.
 
 **Automated dependency updates**  
-Tools such as Dependabot or Renovate automatically propose dependency updates across GitHub-based workflows. Auto-merge policies for low-risk updates reduce exposure windows without slowing delivery.
+Tools such as Dependabot or Renovate automatically propose dependency updates across GitHub-based workflows. Consider auto-merge only for low-risk, well-tested patch updates; require review for runtime-critical or security-sensitive dependencies.
 
 **Key Takeaways**:
 
 - Run npm audit / pip-audit in your CI/CD pipeline and fail builds on high-severity issues
-- Generate SBOM for every deployment to track all components
-- Use private Azure Artifacts feeds for vetted packages
+- Generate an SBOM for every deployment to track all components
+- Use private Azure Artifacts feeds for vetted packages and base images
+- Verify provenance, signatures, or checksums for critical dependencies and artifacts
 - Enable Defender for Cloud DevOps Security on all repositories
-- Set up automated dependency updates with security-focused auto-merge policies
+- Set up automated dependency updates with human review for sensitive changes
 
 ---
 

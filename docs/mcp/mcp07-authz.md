@@ -12,7 +12,7 @@
 
 ## Understanding the Risk
 
-The MCP specification requires OAuth 2.1 with Resource Indicators (RFC 8707). This means tokens must be issued for a specific “audience” (the intended MCP server), and servers must validate that tokens were issued for them. MCP servers are peers, not interchangeable resources. Without proper audience validation, tokens issued for one MCP server can be replayed against another, resulting in unauthorized access across trust boundaries.
+For remote MCP deployments, use OAuth 2.1 with Resource Indicators (RFC 8707) so tokens are issued for a specific “audience” (the intended MCP server), and servers validate that tokens were issued for them. MCP servers are peers, not interchangeable resources. Without proper audience validation, tokens issued for one MCP server can be replayed against another, resulting in unauthorized access across trust boundaries.
 
 ## The Azure Solution
 
@@ -25,7 +25,7 @@ Each MCP server must have its own Entra ID App Registration with a unique Applic
 Azure API Management validates the aud (audience) claim on every request. Tokens issued for the HR MCP server are rejected by the Finance MCP server because the audience does not match.
 
 **Defense-in-depth token validation**  
-Audience validation must occur in both APIM (first layer) and within the MCP server code (second layer). If the gateway is misconfigured or bypassed, the server still enforces authorization correctly.
+Audience validation must occur in both APIM (first layer) and within the MCP server code (second layer). If the gateway is misconfigured or bypassed, the server still enforces authorization correctly. Authorization must also be enforced per tool or operation, not just at the server boundary.
 
 **Protected Resource Metadata**  
 MCP servers publish OAuth metadata at /.well-known/oauth-protected-resource (RFC 9728), clearly advertising required audiences and scopes. This ensures clients request correctly scoped tokens and reduces accidental misconfiguration.

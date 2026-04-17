@@ -4,6 +4,10 @@
 
 The Model Context Protocol is moving from experimental technology to enterprise adoption. This page captures emerging patterns, common mistakes, and hard-won lessons from organizations deploying MCP at scale.
 
+!!! tip "Phase 1 starter pattern"
+
+    If you're early in adoption, start with read-only servers, maintain an approved server list, preserve user identity end-to-end, and add human approval before introducing high-impact write actions.
+
 !!! tip "Key Insight: Identity and Governance Challenge"
 
     We're seeing early adopters treat MCP like an API gateway challenge—but it's really an **identity and governance challenge**.
@@ -280,7 +284,7 @@ Early adopters have identified common pitfalls when moving MCP to production and
     3. Database has no access controls
     ```
 
-    **Related Security Risks**: [MCP07: Insufficient Authorization](../mcp/mcp07-authz.md), [MCP02: Privilege Escalation](../mcp/mcp02-privilege-escalation.md)
+    **Related Security Risks**: [MCP07: Insufficient Authentication & Authorization](../mcp/mcp07-authz.md), [MCP02: Privilege Escalation](../mcp/mcp02-privilege-escalation.md)
 
 ??? tip "Apply Least Privilege from Day One"
 
@@ -320,7 +324,7 @@ Early adopters have identified common pitfalls when moving MCP to production and
     - [ ] Verify app registrations don't have admin consent to Graph APIs they don't need
     - [ ] Audit who can grant permissions to app registrations
 
-    **Related Security Risks**: [MCP02: Privilege Escalation](../mcp/mcp02-privilege-escalation.md), [MCP07: Insufficient Authorization](../mcp/mcp07-authz.md)
+    **Related Security Risks**: [MCP02: Privilege Escalation](../mcp/mcp02-privilege-escalation.md), [MCP07: Insufficient Authentication & Authorization](../mcp/mcp07-authz.md)
 
 ??? tip "Maintain User Context Throughout"
 
@@ -386,7 +390,7 @@ Early adopters have identified common pitfalls when moving MCP to production and
     - Sentinel can detect: "User accessed 100 customer records in 1 minute" (unusual behavior)
     - Compliance reports show exact user who initiated each action
 
-    **Related Security Risks**: [MCP08: Lack of Audit & Telemetry](../mcp/mcp08-telemetry.md), [MCP07: Insufficient Authorization](../mcp/mcp07-authz.md)
+    **Related Security Risks**: [MCP08: Lack of Audit & Telemetry](../mcp/mcp08-telemetry.md), [MCP07: Insufficient Authentication & Authorization](../mcp/mcp07-authz.md)
 
 ??? tip "Separate Read from Write Operations"
 
@@ -461,7 +465,7 @@ Early adopters have identified common pitfalls when moving MCP to production and
     | API key pattern | Block response | Alert Security |
     | Email address | Redact if external domain | Yes |
 
-    **Related Security Risks**: [MCP10: Context Oversharing](../mcp/mcp10-context-oversharing.md), [MCP06: Prompt Injection](../mcp/mcp06-prompt-injection.md)
+    **Related Security Risks**: [MCP10: Context Injection & Over-Sharing](../mcp/mcp10-context-oversharing.md), [MCP06: Intent Flow Subversion](../mcp/mcp06-prompt-injection.md)
 
 ??? tip "Curate Tools Intentionally"
 
@@ -526,7 +530,7 @@ Early adopters have identified common pitfalls when moving MCP to production and
     - Review and prune unused tools quarterly
     - Monitor for unexpected tool combinations (e.g., `list_all_users` + `export_data`)
 
-    **Related Security Risks**: [MCP02: Privilege Escalation](../mcp/mcp02-privilege-escalation.md), [MCP09: Shadow Servers](../mcp/mcp09-shadow-servers.md)
+    **Related Security Risks**: [MCP02: Privilege Escalation](../mcp/mcp02-privilege-escalation.md), [MCP09: Shadow MCP Servers](../mcp/mcp09-shadow-servers.md)
 
 ??? tip "Start Small, Expand Gradually"
 
@@ -553,7 +557,7 @@ Early adopters have identified common pitfalls when moving MCP to production and
     - ✅ Week 3: Add 2 more tools after monitoring shows no issues
     - ✅ Week 6: Introduce first write operation with human approval workflow
 
-    **Related Security Risks**: [MCP02: Privilege Escalation](../mcp/mcp02-privilege-escalation.md), [MCP07: Insufficient Authorization](../mcp/mcp07-authz.md)
+    **Related Security Risks**: [MCP02: Privilege Escalation](../mcp/mcp02-privilege-escalation.md), [MCP07: Insufficient Authentication & Authorization](../mcp/mcp07-authz.md)
 
 ??? tip "Make Audit Trails First-Class"
 
@@ -659,7 +663,7 @@ Early adopters have identified common pitfalls when moving MCP to production and
     - SOC 2: Evidence of access controls and monitoring
     - ISO 27001: Demonstration of security event logging
 
-    **Related Security Risks**: [MCP08: Lack of Audit & Telemetry](../mcp/mcp08-telemetry.md), [MCP07: Insufficient Authorization](../mcp/mcp07-authz.md)
+    **Related Security Risks**: [MCP08: Lack of Audit & Telemetry](../mcp/mcp08-telemetry.md), [MCP07: Insufficient Authentication & Authorization](../mcp/mcp07-authz.md)
 
 ??? tip "Test for MCP-Specific Threats"
 
@@ -691,7 +695,7 @@ Early adopters have identified common pitfalls when moving MCP to production and
     - Simulate compromised credentials, malicious prompts, and tool abuse
     - Verify that defense-in-depth controls work as expected
 
-    **Prompt Injection Testing**:
+    **Prompt/intent subversion testing**:
     
     Test adversarial prompts that attempt to:
     
@@ -753,7 +757,7 @@ Early adopters have identified common pitfalls when moving MCP to production and
     - **Defender for DevOps**: Scan IaC templates and code repositories
     - **Sentinel**: Create detection rules for MCP-specific attack patterns
 
-    **Related Security Risks**: [MCP06: Prompt Injection](../mcp/mcp06-prompt-injection.md), [MCP03: Tool Poisoning](../mcp/mcp03-tool-poisoning.md), [MCP02: Privilege Escalation](../mcp/mcp02-privilege-escalation.md)
+    **Related Security Risks**: [MCP06: Intent Flow Subversion](../mcp/mcp06-prompt-injection.md), [MCP03: Tool Poisoning](../mcp/mcp03-tool-poisoning.md), [MCP02: Privilege Escalation](../mcp/mcp02-privilege-escalation.md)
 
 ??? tip "Version Everything Like APIs"
 
@@ -781,7 +785,7 @@ Early adopters have identified common pitfalls when moving MCP to production and
     - Increment patch version for bug fixes
     - Provide migration guides for major version upgrades
 
-    **Related Security Risks**: [MCP04: Supply Chain Attacks](../mcp/mcp04-supply-chain.md)
+    **Related Security Risks**: [MCP04: Software Supply Chain Attacks & Dependency Tampering](../mcp/mcp04-supply-chain.md)
 
 ??? tip "Classify and Control by Sensitivity"
 
@@ -814,7 +818,7 @@ Early adopters have identified common pitfalls when moving MCP to production and
     | `get_customer_pii` | Confidential | Privileged role, logged |
     | `export_financial_data` | Restricted | Approval workflow, audit |
 
-    **Related Security Risks**: [MCP10: Context Oversharing](../mcp/mcp10-context-oversharing.md), [MCP08: Lack of Audit & Telemetry](../mcp/mcp08-telemetry.md)
+    **Related Security Risks**: [MCP10: Context Injection & Over-Sharing](../mcp/mcp10-context-oversharing.md), [MCP08: Lack of Audit & Telemetry](../mcp/mcp08-telemetry.md)
 
 ??? tip "Enforce Strict Network Boundaries"
 
@@ -856,7 +860,7 @@ Early adopters have identified common pitfalls when moving MCP to production and
       - Any blocked connection attempt
     ```
 
-    **Related Security Risks**: [MCP03: Tool Poisoning](../mcp/mcp03-tool-poisoning.md), [MCP06: Prompt Injection](../mcp/mcp06-prompt-injection.md)
+    **Related Security Risks**: [MCP03: Tool Poisoning](../mcp/mcp03-tool-poisoning.md), [MCP06: Intent Flow Subversion](../mcp/mcp06-prompt-injection.md)
 
 ---
 

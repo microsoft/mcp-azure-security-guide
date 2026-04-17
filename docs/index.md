@@ -1,6 +1,6 @@
 # OWASP MCP Top 10 Security Guidance for Azure
 
-Aligned with MCP Specification [2025-11-2025](https://modelcontextprotocol.io/specification/2025-11-25) | [OWASP MCP Top 10](https://owasp.org/www-project-mcp-top-10/)
+Aligned with the MCP Specification [2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25) | [OWASP MCP Top 10](https://owasp.org/www-project-mcp-top-10/)
 
 ![MCP05 Scenario](./images/owasp-mcp-guide.png)
 
@@ -10,7 +10,7 @@ This guide provides comprehensive security and adoption guidance for implementin
 
 Before diving into security, let’s understand what we’re protecting.
 
-The Model Context Protocol (MCP) is a standardized way for AI assistants (Like VS Code, Claude, ChatGPT or custom AI Agents) to connect to tools and data sources. Think of MCP as a translator that lets AI systems and applications talk to databases, APIs, file systems, and other services in a consistent, predictable way.
+The Model Context Protocol (MCP) is a standardized way for AI assistants (like VS Code, Claude, ChatGPT, or custom AI agents) to connect to tools and data sources. Think of MCP as a translator that lets AI systems and applications talk to databases, APIs, file systems, and other services in a consistent, predictable way.
 
 !!! tip "A Simple Example"
 
@@ -20,9 +20,20 @@ The Model Context Protocol (MCP) is a standardized way for AI assistants (Like V
 
 ## Why Security Matters
 
-MCP Servers often have access to sensitive resources: customer data, internal documents, financial systems, and more. A compromised MCP server could leak confidential information, execute unauthorized commands, or provide attackers with a backdoor into your organization.
+MCP servers often have access to sensitive resources: customer data, internal documents, financial systems, and more. A compromised MCP server could leak confidential information, execute unauthorized commands, or provide attackers with a backdoor into your organization.
 
 This guide covers the OWASP MCP Top 10 – the ten most critical security risks for MCP implementations and shows how to address each one using Azure services.
+
+## Minimum Safe Baseline for New MCP Deployments
+
+If you're new to MCP, start with these defaults before exposing any high-impact tools:
+
+- **Start read-only**: Prove the design with retrieval and reporting scenarios before enabling write, delete, or execution paths.
+- **Treat tool outputs and retrieved resources as untrusted input**: MCP resources, tool descriptions, and tool outputs should inform the model, not silently override the user's original goal.
+- **Use strong identity with least privilege**: Prefer Microsoft Entra ID, managed identities, short-lived scoped tokens, and per-server audience validation over shared secrets or long-lived credentials.
+- **Allow only approved servers and destinations**: Pin approved server versions, maintain an internal allowlist, and restrict egress to known destinations.
+- **Require approval for high-impact actions**: Route destructive, privileged, or externally visible operations through policy checks and, where appropriate, human approval.
+- **Log the full decision path**: Capture authentication decisions, tool invocations, context access, and approval outcomes so incidents can be investigated quickly.
 
 ## Reference Architecture
 
@@ -40,9 +51,9 @@ This guide provides Azure implementation guidance across three areas:
 
 | Coverage | Meaning | Which Risks |
 |----|----|----|
-| FULL | Production-ready Azure services available | MCP01 (Secrets), MCP05 (Commands), MCP06 (Prompts), MCP07 (Auth), MCP08 (Logging) |
-| PARTIAL | Core services available with custom work needed | MCP02 (Scope creep), MCP10 (Contexts sharing) |
-| NEW | Emerging patterns and custom solutions needed | MCP03 (Tool poisoning), MCP04 (Supply chain), MCP09 (Shadow servers) |
+| FULL | Production-ready Azure services available | MCP01 (Token Mismanagement and Secret Exposure), MCP05 (Command Injection & Execution), MCP06 (Intent Flow Subversion), MCP07 (Insufficient Authentication & Authorization), MCP08 (Lack of Audit & Telemetry) |
+| PARTIAL | Core services available with custom work needed | MCP02 (Privilege Escalation via Scope Creep), MCP10 (Context Injection & Over-Sharing) |
+| NEW | Emerging patterns and custom solutions needed | MCP03 (Tool Poisoning), MCP04 (Software Supply Chain Attacks & Dependency Tampering), MCP09 (Shadow MCP Servers) |
 
 ## MCP Adoption Strategy
 
@@ -50,6 +61,8 @@ Understanding when and how to adopt MCP helps you make informed architectural de
 
 - **[When to Use MCP](adoption/when-to-use-mcp.md)**: Decision framework for determining when MCP adds value vs. when traditional APIs are more appropriate
 - **[Migration Guidance](adoption/migration-guidance.md)**: Practical patterns for wrapping existing APIs and transitioning to MCP
+- **[Development Best Practices](adoption/development-best-practices.md)**: Practical design, schema, and testing guidance for building MCP servers that agents can use safely
+- **[Deployment Patterns](adoption/deployment-architecture.md)**: Recommended Azure deployment patterns for remote MCP servers, gateways, and production controls
 - **[Enterprise Patterns & Lessons Learned](adoption/enterprise-patterns.md)**: Real-world adoption patterns, common mistakes, and proven strategies from organizations deploying MCP at scale
 
 ## OWASP MCP Top 10
@@ -59,19 +72,19 @@ The ten most critical security risks for MCP implementations, with Azure-specifi
 - [MCP01: Token Mismanagement and Secret Exposure](mcp/mcp01-token-mismanagement.md)
 - [MCP02: Privilege Escalation via Scope Creep](mcp/mcp02-privilege-escalation.md)
 - [MCP03: Tool Poisoning](mcp/mcp03-tool-poisoning.md)
-- [MCP04: Supply Chain Attacks](mcp/mcp04-supply-chain.md)
-- [MCP05: Command Injection and Execution](mcp/mcp05-command-injection.md)
-- [MCP06: Prompt Injection via Contexts Payloads](mcp/mcp06-prompt-injection.md)
-- [MCP07: Insufficient Authentication and Authorization](mcp/mcp07-authz.md)
-- [MCP08: Lack of Audit and Telemetry](mcp/mcp08-telemetry.md)
+- [MCP04: Software Supply Chain Attacks & Dependency Tampering](mcp/mcp04-supply-chain.md)
+- [MCP05: Command Injection & Execution](mcp/mcp05-command-injection.md)
+- [MCP06: Intent Flow Subversion](mcp/mcp06-prompt-injection.md)
+- [MCP07: Insufficient Authentication & Authorization](mcp/mcp07-authz.md)
+- [MCP08: Lack of Audit & Telemetry](mcp/mcp08-telemetry.md)
 - [MCP09: Shadow MCP Servers](mcp/mcp09-shadow-servers.md)
-- [MCP10: Context Injection and Over-Sharing](mcp/mcp10-context-oversharing.md)
+- [MCP10: Context Injection & Over-Sharing](mcp/mcp10-context-oversharing.md)
 
 ## Putting It All Together
 
-Securing MCP deployments is not a one-time task and it’s an ongoing engineering practice. As the MCP specification evolves and new attack patterns emerge, these controls should be revisited and reinforced regularly. Effective MCP security is built on defense in depth: overlapping layers of protection designed so that when one control fails, others limit impact and preserve trust.
+Securing MCP deployments is not a one-time task; it’s an ongoing engineering practice. As the MCP specification evolves and new attack patterns emerge, these controls should be revisited and reinforced regularly. Effective MCP security is built on defense in depth: overlapping layers of protection designed so that when one control fails, others limit impact and preserve trust.
 
-Network isolation plays a foundational role in this model. It is the security layer that continues to work even when assumptions break, especially when authentication is bypassed, tokens are stolen, prompts are compromised, or bugs slip into production. Properly segmented VNETS, Private Endpoints, and strict network policies ensure that compromised components remain unreachable from outside the trusted boundary.
+Network isolation plays a foundational role in this model. It is the security layer that continues to work even when assumptions break, especially when authentication is bypassed, tokens are stolen, prompts are compromised, or bugs slip into production. Properly segmented VNets, Private Endpoints, and strict network policies ensure that compromised components remain unreachable from outside the trusted boundary.
 
 Security and usability are not opposing goals. Well-designed MCP security with clear identity boundaries, strong isolation, comprehensive telemetry, and automated guardrails, results in systems that are easier to operate, easier to audit, and easier to evolve safely. The same controls that protect against attackers also reduce operational risk and improve reliability.
 
@@ -82,3 +95,4 @@ In MCP systems, trust is built through architecture. When security is treated as
 This guide was created and maintained by:
 
 - [:fontawesome-brands-github: David Barkol](https://github.com/dbarkol) - Author
+- [:fontawesome-brands-github: Jitesh Thakur](https://github.com/Jitha-afk) - Co-author

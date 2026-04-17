@@ -14,7 +14,9 @@
 
 ## Understanding the Risk
 
-MCP servers maintain *context* as working memory that includes conversation history, retrieved data, tool outputs, and intermediate results. When context isolation fails, information from one user, session, or tenant can be returned to another. In multi-tenant MCP systems, this failure can expose customer data, PII, intellectual property, or confidential business information and often without any malicious intent or external attack.
+MCP servers maintain *context* as working memory that includes conversation history, retrieved data, tool outputs, and intermediate results. When context isolation fails, information from one user, session, or tenant can be returned to another. In multi-tenant MCP systems, this failure can expose customer data, PII, intellectual property, or confidential business information, often without any malicious intent or external attack.
+
+Context injection can make this worse by persisting malicious or misleading content in shared memory, but the primary risk here is over-sharing across boundaries that should remain isolated.
 
 ## The Azure Solution
 
@@ -34,7 +36,7 @@ Azure Cache for Redis should use strict key prefixes (for example, {tenantId}:{u
 Azure Cosmos DB partitioning with hierarchical partition keys (for example, /tenantId/userId/sessionId) enforces isolation at the data layer, ensuring context from different tenants cannot be co-mingled or queried together.
 
 **Gateway-level tenant identification**  
-API Management subscription keys or tokens can be used to reliably associate incoming requests with a specific tenant, ensuring tenant identity is consistently propagated through the system.
+API Management should propagate authenticated tenant identity from trusted claims or tokens through the request path, ensuring tenant identity is consistently enforced across the system.
 
 **Network isolation for high-assurance environments**  
 For workloads with strict isolation requirements:

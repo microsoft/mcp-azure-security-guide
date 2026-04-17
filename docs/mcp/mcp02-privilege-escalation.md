@@ -33,7 +33,7 @@ Azure Entra ID App Roles allow you to define fine-grained permissions aligned to
 Time-bound role assignments ensure elevated permissions automatically expire. This forces periodic review and prevents powerful access from lingering long after it’s needed.
 
 **Validate scopes at the gateway**  
-Azure API Management can validate that incoming requests contain *only* the scopes required for the operation being performed. Requests carrying excess permissions can be rejected, even if the token itself is valid.
+Azure API Management can validate that incoming requests present the expected audience, claims, and scopes for the operation being performed. Requests that do not meet those expectations can be rejected, even if the token itself is otherwise valid.
 
 **Protect administrative access**  
 Privileged Identity Management (PIM) requires administrators to explicitly activate elevated permissions for a limited time, creating audit trails and reducing standing privilege.
@@ -45,8 +45,8 @@ Privileged Identity Management (PIM) requires administrators to explicitly activ
 **Key Takeaways**:
 
 - Define specific App Roles for each MCP tool capability and avoid broad “admin” roles
-- Set maximum expiration period on all role assignments (consider 90-days)
-- Use APIM to validate token scopes match the specific operation being performed
+- Set maximum expiration periods on elevated role assignments
+- Use APIM to validate token scopes and claims match the specific operation being performed
 - Conduct routine access reviews using [Entra ID access reviews](https://learn.microsoft.com/en-us/entra/id-governance/access-reviews-overview)
 - Enable PIM for any administrative operations requiring elevated access
 ---

@@ -21,9 +21,13 @@ Before MCP-enabling an API or tool, ask:
 
 If you answer "yes" to most of these, MCP is likely a good fit. If most answers are "no," consider starting with a traditional API.
 
+!!! tip "Safe starting point"
+
+    If MCP looks like a good fit, start with a single read-only workflow first. Validate usability, telemetry, and governance before introducing write actions or broader tool exposure.
+
 ---
 
-## When to MCP-Enable APIs and Tools
+## When to Expose APIs and Tools Through MCP
 
 ??? success "1. Discoverable and Usable by AI Agents or Copilots"
 
@@ -109,7 +113,7 @@ If you answer "yes" to most of these, MCP is likely a good fit. If most answers 
 
 ---
 
-## When NOT to MCP-Enable APIs and Tools
+## When NOT to Expose APIs and Tools Through MCP
 
 ??? warning "1. Not Semantically Useful to an Agent"
 
@@ -135,7 +139,7 @@ If you answer "yes" to most of these, MCP is likely a good fit. If most answers 
 
     **Why?** MCP introduces complexity, security considerations, and governance overhead. Building an MCP server "just in case" wastes resources and increases attack surface.
 
-    **Instead**: Start with OpenAPI or REST. Wait until there's demonstrated demand from AI agents or Copilots. Then wrap the API with MCP.
+    **Instead**: Start with OpenAPI or REST. Wait until there's demonstrated demand from AI agents or copilots. Then expose the API through MCP.
 
     **Example**: An internal HR API that's only called by a single legacy application. Unless there's a plan to integrate it with an agent, there's no reason to MCP-enable it.
 
@@ -211,5 +215,7 @@ If you answer "yes" to most of these, MCP is likely a good fit. If most answers 
 ## Next Steps
 
 - **Ready to proceed?** → [Migration Guidance](migration-guidance.md) for practical implementation patterns
+- **Designing your first server?** → [Development Best Practices](development-best-practices.md) for tool, schema, and testing guidance
+- **Planning production deployment?** → [Deployment Patterns](deployment-architecture.md) for remote MCP guidance on Azure
 - **Want to learn from others?** → [Enterprise Patterns & Lessons Learned](enterprise-patterns.md) for real-world adoption strategies
 - **Need to secure your MCP servers?** → [OWASP MCP Top 10](../index.md#owasp-mcp-top-10) for comprehensive security guidance

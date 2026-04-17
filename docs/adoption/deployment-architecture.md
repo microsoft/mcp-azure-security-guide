@@ -4,11 +4,11 @@
 
 This page provides technical guidance for deploying MCP servers in enterprise Azure environments. We cover transport options, implementation patterns, and operational considerations to help you build secure, scalable, and governable MCP infrastructure.
 
-!!! tip "Deployment Recommendation: Use Remote HTTP-Based MCP Servers"
+!!! tip "Default production pattern: remote MCP servers over HTTP"
 
     While local stdio MCP servers are convenient for prototyping, they create credential sprawl, bypass enterprise identity and policy controls, and provide zero visibility. Remote MCP servers integrate with Microsoft Entra ID, enforce centralized policies via Azure API Management, and provide comprehensive monitoring.
     
-    **Reserve stdio servers only for prototyping or truly local operations** (filesystem access, IDE integrations). For production use cases involving network APIs or organizational data, deploy remote MCP servers.
+    **Use stdio by exception** for prototyping or truly local operations (filesystem access, IDE integrations). For production use cases involving network APIs or organizational data, deploy remote MCP servers over HTTP.
 
 For organizational patterns and governance approaches, see [Enterprise Patterns & Lessons Learned](./enterprise-patterns.md).
 
