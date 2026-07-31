@@ -15,6 +15,12 @@ If you're new to this guide, begin with these pages:
 - **[Deployment Patterns](https://microsoft.github.io/mcp-azure-security-guide/adoption/deployment-architecture/)**
 - **[OWASP MCP Top 10](https://microsoft.github.io/mcp-azure-security-guide/#owasp-mcp-top-10)**
 
+[![Try the MCP Implementation Security Review skill](docs/images/banner.gif)](skills/mcp-implementation-security-review/SKILL.md)
+
+> **New: Power your AI coding agent with the [MCP Implementation Security Review skill](skills/mcp-implementation-security-review/SKILL.md):**
+>
+> `npx skills add microsoft/mcp-azure-security-guide --skill mcp-implementation-security-review`
+
 This repository contains comprehensive security guidance covering:
 
 - **MCP01**: Token Mismanagement and Secret Exposure
