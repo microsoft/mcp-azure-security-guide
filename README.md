@@ -18,8 +18,10 @@ If you're new to this guide, begin with these pages:
 [![Try the MCP Implementation Security Review skill](docs/images/banner.gif)](skills/mcp-implementation-security-review/SKILL.md)
 
 > **New: Power your AI coding agent with the [MCP Implementation Security Review skill](skills/mcp-implementation-security-review/SKILL.md):**
->
-> `npx skills add microsoft/mcp-azure-security-guide --skill mcp-implementation-security-review`
+
+```bash
+npx skills add microsoft/mcp-azure-security-guide --skill mcp-implementation-security-review
+```
 
 This repository contains comprehensive security guidance covering:
 
